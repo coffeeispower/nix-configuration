@@ -56,7 +56,15 @@
     hashedPassword =
       "$y$j9T$x4wYgVWjLlUp43gVSTvj61$XX50fudyvMCLx0kvm/EHAplZ.ev1Lxj1ZrRoB4itEMA";
   };
-
+  programs.git.enable = true;
+  environment.systemPackages = with pkgs; [
+    alacritty
+    xfce.thunar
+    xfce.thunar-volman
+    xfce.thunar-archive-plugin
+    helix
+    lazygit
+  ];
   #  programs.gnupg.agent = {
   #    enable = true;
   #    enableSSHSupport = true;
