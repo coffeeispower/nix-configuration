@@ -142,7 +142,13 @@
   # ---------------------------------- Eww ------------------------------------
   programs.eww.enable = true;
   programs.eww.package = pkgs.eww-wayland;
-  programs.eww.configDir = ./eww-config;
+  programs.eww.configDir = (import ./eww-config.nix) {
+    inherit pkgs lib;
+    widgets-bg = "#57f287";
+    widgets-fg = "#000";
+    widgets-fg-light = "#FFF";
+    widgets-track = "#4e4e4e";
+  };
   # -------------------------------- Firefox ----------------------------------
   programs.firefox = {
   
