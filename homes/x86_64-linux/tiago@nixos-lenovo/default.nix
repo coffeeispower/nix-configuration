@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, pkgs, lib, ... }:
 
 {
   # ----------------------------- Rofi -----------------------------
@@ -13,6 +13,9 @@
   wayland.windowManager.hyprland = {
     enable = true;
     settings = {
+      exec = [
+        "eww open bar"
+      ];
       # Set mod key to super
       "$mod" = "SUPER";
 
@@ -62,7 +65,7 @@
   home.username = "tiago";
   home.homeDirectory = "/home/tiago";
   home.stateVersion = "23.11";
-  home.packages = with pkgs; [ nixfmt ];
+  home.packages = with pkgs; [ nixfmt pamixer ];
   # --------------------------- Allow unfree packages ---------------------------
   nixpkgs.config.allowUnfree = true;
   # -------------------------------- GTK Theme ----------------------------------
@@ -95,4 +98,8 @@
   # --------------------------------- Helix -----------------------------------
   programs.helix.enable = true;
   programs.helix.defaultEditor = true;
+  # ---------------------------------- Eww ------------------------------------
+  programs.eww.enable = true;
+  programs.eww.package = pkgs.eww-wayland;
+  programs.eww.configDir = ./eww-config;
 }
