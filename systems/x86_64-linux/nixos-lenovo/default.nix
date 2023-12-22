@@ -13,10 +13,14 @@
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
-
   networking.hostName = "nixos-lenovo";
   networking.networkmanager.enable = true;
-
+  fonts = {
+    fontDir.enable = true;
+    enableDefaultPackages = true;
+    fontconfig = { defaultFonts.monospace = [ "FiraCode" ]; };
+    packages = with pkgs; [ (nerdfonts.override { fonts = [ "FiraCode" ]; }) ipafont ];
+  };
   # Set your time zone.
   time.timeZone = "Europe/Lisbon";
 
@@ -32,13 +36,6 @@
     useXkbConfig = true;
   };
 
-  services.xserver.enable = true;
-  services.xserver.displayManager.lightdm.enable = true;
-  services.xserver.displayManager.lightdm.greeters.slick.enable = true;
-  services.xserver.displayManager.defaultSession = "hyprland";
-  programs.hyprland.enable = true;
-  services.xserver.layout = "pt";
-
   security.rtkit.enable = true;
   services.pipewire = {
     enable = true;
@@ -49,21 +46,20 @@
 
   # Enable touchpad support (enabled default in most desktopManager).
   services.xserver.libinput.enable = true;
-
+  programs.dconf.enable = true;
+  programs.git.enable = true;
   users.users.tiago = {
     isNormalUser = true;
     extraGroups = [ "wheel" ]; # Enable ‘sudo’ for the user.
     hashedPassword =
       "$y$j9T$x4wYgVWjLlUp43gVSTvj61$XX50fudyvMCLx0kvm/EHAplZ.ev1Lxj1ZrRoB4itEMA";
+    shell = pkgs.nushell;
   };
-  programs.git.enable = true;
   environment.systemPackages = with pkgs; [
-    alacritty
     xfce.thunar
     xfce.thunar-volman
     xfce.thunar-archive-plugin
-    helix
-    lazygit
+    firefox
   ];
   #  programs.gnupg.agent = {
   #    enable = true;

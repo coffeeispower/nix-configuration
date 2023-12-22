@@ -1,0 +1,2 @@
+#!/usr/bin/env bash
+nixos-rebuild $1 --flake .#nixos-lenovo
