@@ -159,7 +159,7 @@
   home.username = "tiago";
   home.homeDirectory = "/home/tiago";
   home.stateVersion = "23.11";
-  home.packages = with pkgs; [ nixfmt pamixer ];
+  home.packages = with pkgs; [ nixfmt pamixer libnotify ];
   # --------------------------- Allow unfree packages ---------------------------
   nixpkgs.config.allowUnfree = true;
   # -------------------------------- GTK Theme ----------------------------------
