@@ -15,6 +15,8 @@
     
     settings = {
       exec = [
+        "eww kill"
+        "eww daemon"
         "eww open bar"
       ];
       # Set mod key to super
