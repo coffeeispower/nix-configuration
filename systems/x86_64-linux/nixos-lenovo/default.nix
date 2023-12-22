@@ -59,7 +59,6 @@
     xfce.thunar
     xfce.thunar-volman
     xfce.thunar-archive-plugin
-    firefox
   ];
   #  programs.gnupg.agent = {
   #    enable = true;

@@ -1,4 +1,4 @@
-{ config, pkgs, lib, ... }:
+{ config, pkgs, lib, inputs, system, ... }:
 
 {
   # ----------------------------- Rofi -----------------------------
@@ -139,4 +139,18 @@
   programs.eww.enable = true;
   programs.eww.package = pkgs.eww-wayland;
   programs.eww.configDir = ./eww-config;
+  # -------------------------------- Firefox ----------------------------------
+  programs.firefox = {
+  
+    enable = true;
+    profiles.tiago = {
+     extensions = let 
+      firefox-ext = inputs.firefox-addons.packages.${system};
+     in [
+        firefox-ext.ublock-origin
+        firefox-ext.darkreader
+        firefox-ext."10ten-ja-reader"
+      ];
+    };
+  };
 }
