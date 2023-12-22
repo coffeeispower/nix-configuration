@@ -1,5 +1,6 @@
 * {
     all: unset; //Unsets everything so you can style everything from scratch
+    font-family: monospace;
 }
 
 //Global Styles
@@ -13,13 +14,13 @@
 
 .sidestuff slider {
     all: unset;
-    background-color: #57f287;
+    background-color: #bffcd2;
     color: #000;
 }
 
 .metric scale trough highlight {
     all: unset;
-    background-color: #D35D6E;
+    background-color: #57f287;
     color: #000000;
     border-radius: 10px;
 }
@@ -36,14 +37,14 @@
 
 .metric scale trough highlight {
     all: unset;
-    background-color: #D35D6E;
+    background-color: #000;
     color: #000000;
     border-radius: 10px;
 }
 
 .metric scale trough {
     all: unset;
-    background-color: #4e4e4e;
+    background-color: #bffcd2;
     border-radius: 50px;
     min-height: 3px;
     min-width: 50px;
@@ -68,4 +69,13 @@
     background-color: #57f287;
     border-radius: 10px;
     color: #000;
+}
+
+
+
+.volume, .disk_usage, .memory, .time {
+    background-color: #57f287;
+    border-radius: 10px;
+    color: #000;
+    padding: 0px 5px;
 }

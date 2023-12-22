@@ -5,17 +5,21 @@
     (sidestuff)))
 
 (defwidget sidestuff []
-  (box :class "sidestuff" :orientation "h" :space-evenly false :halign "end"
-    (metric :label "🔊"
-      :value volume
-    :onchange "pamixer --set-volume {}")
-    (metric :label ""
-      :value {EWW_RAM.used_mem_perc}
-    :onchange "")
-    (metric :label "💾"
-      :value {round((1 - (EWW_DISK["/"].free / EWW_DISK["/"].total)) * 100, 0)}
-    :onchange "")
-  time))
+  (box :class "sidestuff" :orientation "h" :space-evenly false :spacing 15 :halign "end"
+    (box :class "volume" :orientation "h" (
+        metric 
+        :label {(volume > 80 ? "󰕾" : (volume > 40 ? "󰖀" : (volume > 0 ? "󰕿" : "󰝟")))}
+        :value volume
+        :onchange "pamixer --set-volume {}"
+      )
+    )
+    (box :class "memory" :orientation "h" (metric :label "󰍛"
+        :value {EWW_RAM.used_mem_perc}
+      :onchange ""))
+    (box :class "disk_usage" :orientation "h" (metric :label "󰋊"
+        :value {round((1 - (EWW_DISK["/"].free / EWW_DISK["/"].total)) * 100, 0)}
+      :onchange ""))
+    (box :class "time" :orientation "h" time)))
 
 (defwidget workspaces []
   (box :class "workspaces"
@@ -56,10 +60,10 @@
 (deflisten music :initial ""
 "playerctl --follow metadata --format '{{ artist }} - {{ title }}' || true")
 
-(defpoll volume :interval "1s"
+(defpoll volume :interval "100ms"
 "/home/tiago/cartom-sd/nix-configuration/homes/x86_64-linux/tiago@nixos-lenovo/eww-config/get-volume.nu")
 
-(defpoll time :interval "10s"
+(defpoll time :interval "1s"
 "date '+%H:%M %b %d, %Y'")
 
 (defwindow bar
@@ -73,4 +77,4 @@
   :exclusive true
   :namespace "bar"
   :stacking "bottom"
-(bar))
+  (bar))
