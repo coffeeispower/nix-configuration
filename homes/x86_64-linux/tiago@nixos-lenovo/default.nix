@@ -39,7 +39,8 @@
     enable = true;
 
     settings = {
-      exec = [ "eww kill" "eww open bar" ];
+      exec = [ "eww --restart open bar" ];
+      exec-once = ["hypr"];
       # Set mod key to super
       "$mod" = "SUPER";
       bindm = [ "$mod,mouse:272,movewindow" "$mod,mouse:273,resizewindow" ];
@@ -63,6 +64,7 @@
         "$mod, left, workspace, e-1"
         "$mod, right, workspace, e+1"
 
+        "$mod, R, exec, eww --restart open bar"
         "$mod SHIFT, left, movetoworkspace, e-1"
         "$mod SHIFT, right, movetoworkspace, e+1"
       ] ++ (
