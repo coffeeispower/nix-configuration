@@ -44,6 +44,11 @@
       ];
       bind = [
         ", Print, exec, ${pkgs.grimblast}/bin/grimblast copy area"
+        "$mod, left, workspace, e-1"
+        "$mod, right, workspace, e+1"
+
+        "$mod SHIFT, left, movetoworkspace, e-1"
+        "$mod SHIFT, right, movetoworkspace, e+1"
       ] ++ (
         # Workspace keybind
         # $mod + {1..10} to workspace {1..10}
