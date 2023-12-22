@@ -116,6 +116,11 @@
   # --------------------------------- Lazygit -----------------------------------
   programs.lazygit = {
     enable = true;
+  };
+
+  # -------------------------------- Alacritty ----------------------------------
+  programs.alacritty = {
+    enable = true;
     settings = {
       colors = with config.colorScheme.colors; {
         bright = {
@@ -149,9 +154,6 @@
       };
     };
   };
-
-  # -------------------------------- Alacritty ----------------------------------
-  programs.alacritty.enable = true;
 
   # ------------------- Setup basic home manager settings -----------------------
   home.username = "tiago";
@@ -197,10 +199,10 @@
     inherit pkgs lib;
     widgets-bg = "#${config.colorScheme.colors.base01}";
     widgets-fg = "#${config.colorScheme.colors.base06}";
-    widgets-fg-light = "#${config.colorScheme.colors.base00}";
-    widgets-track = "#${config.colorScheme.colors.base0A}";
+    widgets-fg-dark = "#${config.colorScheme.colors.base04}";
+    widgets-track = "#${config.colorScheme.colors.base00}";
     low-battery-color = "#${config.colorScheme.colors.base08}";
-    charging-battery-color = "#${config.colorScheme.colors.base0D}";
+    charging-battery-color = "#${config.colorScheme.colors.base0A}";
   };
   # -------------------------------- Firefox ----------------------------------
   programs.firefox = {

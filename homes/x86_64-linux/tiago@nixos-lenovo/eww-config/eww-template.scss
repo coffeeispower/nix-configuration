@@ -12,12 +12,6 @@
 
 // Styles on classes (see eww.yuck for more information)
 
-.sidestuff slider {
-    all: unset;
-    background-color: $widgets-track;
-    color: #000;
-}
-
 .metric scale trough highlight {
     all: unset;
     background-color: $widgets-bg;
@@ -26,7 +20,7 @@
 
 .metric scale trough {
     all: unset;
-    background-color: $widgets-fg-light;
+    background-color: $widgets-track;
     border-radius: 50px;
     min-height: 5px;
     min-width: 50px;
@@ -81,19 +75,13 @@
     background-color: $low-battery-color;
 }
 
-.battery_charging {
-    border-radius: 10px;
-    color: $widgets-fg;
-    padding: 0px 10px;
+.battery_charging > .metric scale trough highlight{
     background-color: $charging-battery-color;
 }
 
-.battery_low>.metric scale trough highlight {
-    background-color: $widgets-fg;
-    color: $widgets-fg;
-}
-
-.battery_charging>.metric scale trough highlight {
-    background-color: $widgets-fg;
-    color: $widgets-fg;
+.battery_charging {
+    border-radius: 10px;
+    padding: 0px 10px;
+    background-color: $widgets-bg;
+    color: $charging-battery-color;
 }

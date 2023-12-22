@@ -1,11 +1,12 @@
-{ pkgs, lib, widgets-bg, widgets-fg, widgets-fg-light, widgets-track, low-battery-color, charging-battery-color }:
+{ pkgs, lib, widgets-bg, widgets-fg, widgets-fg-dark, widgets-track
+, low-battery-color, charging-battery-color }:
 pkgs.stdenv.mkDerivation {
   name = "eww-config";
   src = ./eww-config;
   buildPhase = ''
         echo '$widgets-bg: ${widgets-bg};
     $widgets-fg: ${widgets-fg};
-    $widgets-fg-light: ${widgets-fg-light};
+    $widgets-fg-dark: ${widgets-fg-dark};
     $widgets-track: ${widgets-track};
     $low-battery-color: ${low-battery-color};
     $charging-battery-color: ${charging-battery-color};' > variables.scss;
