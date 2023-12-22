@@ -46,11 +46,13 @@
     alsa.support32Bit = true;
     pulse.enable = true;
   };
-
+  services.xserver.enable = true;
   # Enable touchpad support (enabled default in most desktopManager).
   services.xserver.libinput.enable = true;
+  services.xserver.displayManager.gdm.enable = true;
   programs.dconf.enable = true;
   programs.git.enable = true;
+  programs.hyprland.enable = true;
   users.users.tiago = {
     isNormalUser = true;
     extraGroups = [ "wheel" ]; # Enable ‘sudo’ for the user.
@@ -69,5 +71,16 @@
   #  };
   #
   system.stateVersion = "unstable";
+  xdg.portal.extraPortals = with pkgs; [
+    xdg-desktop-portal-hyprland
+  ];
+  xdg.portal.config = {
+    common = {
+      default = [
+        "hyprland"
+      ];
+    };
+  };
+  xdg.portal.enable = true;
 }
 
