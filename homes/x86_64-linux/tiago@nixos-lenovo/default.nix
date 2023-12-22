@@ -213,6 +213,7 @@
         firefox-ext.ublock-origin
         firefox-ext.darkreader
         firefox-ext."10ten-ja-reader"
+        firefox-ext.proton-pass
       ];
     };
   };
