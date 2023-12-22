@@ -1,3 +1,8 @@
+$widgets-bg: #57f287;
+$widgets-fg: #000;
+$widgets-fg-light: #FFF;
+$widgets-track: #4e4e4e;
+
 * {
     all: unset; //Unsets everything so you can style everything from scratch
     font-family: monospace;
@@ -5,7 +10,7 @@
 
 //Global Styles
 .bar {
-    color: #b0b4bc;
+    color: $widgets-fg;
     margin-right: 20px;
     margin-left: 20px;
 }
@@ -14,20 +19,19 @@
 
 .sidestuff slider {
     all: unset;
-    background-color: #bffcd2;
+    background-color: $widgets-track;
     color: #000;
 }
 
 .metric scale trough highlight {
     all: unset;
-    background-color: #57f287;
-    color: #000000;
+    background-color: $widgets-bg;
     border-radius: 10px;
 }
 
 .metric scale trough {
     all: unset;
-    background-color: #4e4e4e;
+    background-color: $widgets-fg-light;
     border-radius: 50px;
     min-height: 3px;
     min-width: 50px;
@@ -37,8 +41,7 @@
 
 .metric scale trough highlight {
     all: unset;
-    background-color: #000;
-    color: #000000;
+    background-color: $widgets-fg;
     border-radius: 10px;
 }
 
@@ -48,31 +51,54 @@
 }
 
 .workspaces button:hover {
-    color: #57f287;
-    background-color: #000;
+    color: $widgets-bg;
+    background-color: $widgets-fg;
 }
+
 .workspaces button {
     padding: 5px 10px;
     margin: 5px;
     border-radius: 10px;
 }
+
 .workspaces {
-    background-color: #57f287;
+    background-color: $widgets-bg;
     border-radius: 10px;
-    color: #000;
 }
 
 
 
-.volume, .disk_usage, .memory, .time, .battery_normal {
-    background-color: #57f287;
+.volume,
+.disk_usage,
+.memory,
+.time,
+.battery_normal {
+    background-color: $widgets-bg;
     border-radius: 10px;
-    color: #000;
+    color: $widgets-fg;
     padding: 0px 10px;
 }
-.battery_low {    
+
+.battery_low {
     border-radius: 10px;
     color: #FFF;
     padding: 0px 10px;
     background-color: #ff0022;
+}
+
+.battery_charging {
+    border-radius: 10px;
+    color: $widgets-fg;
+    padding: 0px 10px;
+    background-color: rgb(255, 187, 0);
+}
+
+.battery_low>.metric scale trough highlight {
+    background-color: $widgets-fg;
+    color: $widgets-fg;
+}
+
+.battery_charging>.metric scale trough highlight {
+    background-color: $widgets-fg;
+    color: $widgets-fg;
 }

@@ -19,7 +19,7 @@
     (box :class "disk_usage" :orientation "h" (metric :label "󰋊"
         :value {round((1 - (EWW_DISK["/"].free / EWW_DISK["/"].total)) * 100, 0)}
       :onchange ""))
-    (box :class {EWW_BATTERY["BATT"].capacity > 40 ? "battery_normal" : "battery_low"}
+    (box :class "battery" :class {EWW_BATTERY["BATT"].status == "Charging" ? "battery_charging" : (EWW_BATTERY["BATT"].capacity > 40 ? "battery_normal" : "battery_low")}
       :orientation "h"
       (metric
         :label {
@@ -30,14 +30,14 @@
         ): "󰂄"
         }
         :value {EWW_BATTERY["BATT"].capacity}
-      :onchange ""))
+      :onchange "")
+    )
     (box :class "time" :orientation "h" time)
   ))
 
 (defwidget workspaces []
   (box :class "workspaces"
     :orientation "h"
-    :space-evenly true
     :halign "start"
     (button :onclick "hyprctl dispatch workspace 1" 1)
     (button :onclick "hyprctl dispatch workspace 2" 2)
@@ -47,7 +47,10 @@
     (button :onclick "hyprctl dispatch workspace 6" 6)
     (button :onclick "hyprctl dispatch workspace 7" 7)
     (button :onclick "hyprctl dispatch workspace 8" 8)
-    (button :onclick "hyprctl dispatch workspace 9" 9)))
+    (button :onclick "hyprctl dispatch workspace 9" 9)
+    (button :onclick "hyprctl dispatch workspace 10" 10)
+  )
+)
 
 (defwidget music []
   (box :class "music"
@@ -73,8 +76,7 @@
 (deflisten music :initial ""
 "playerctl --follow metadata --format '{{ artist }} - {{ title }}' || true")
 
-(defpoll volume :interval "100ms"
-"/home/tiago/cartom-sd/nix-configuration/homes/x86_64-linux/tiago@nixos-lenovo/eww-config/get-volume.nu")
+(defpoll volume :interval "100ms" "pamixer --get-volume")
 
 (defpoll time :interval "1s"
 "date '+%H:%M %b %d, %Y'")
