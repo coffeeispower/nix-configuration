@@ -12,6 +12,7 @@
   # --------------------------- Hyprland ---------------------------
   wayland.windowManager.hyprland = {
     enable = true;
+    
     settings = {
       exec = [
         "eww open bar"
@@ -53,8 +54,32 @@
   };
 
   # ----------------------------- VS Code config --------------------------------
-  programs.vscode.enable = true;
-
+  programs.vscode = {
+    enable = true;
+    mutableExtensionsDir = false;
+    extensions = with pkgs.vscode-extensions; [
+      jnoortheen.nix-ide
+    ] ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [
+      {
+        name = "yuck";
+        publisher = "eww-yuck";
+        version = "0.0.3";
+        sha256 = "sha256-DITgLedaO0Ifrttu+ZXkiaVA7Ua5RXc4jXQHPYLqrcM=";
+      }
+      {
+        name = "vscode-nushell-lang";
+        publisher = "thenuprojectcontributors";
+        version = "1.7.1";
+        sha256 = "sha256-JlkZ8rarwTdQpiR76RR1s4XgH+lOIXfa0rAwLxvoYUc=";
+      }
+      {
+        name = "intellij-idea-keybindings";
+        publisher = "k--kato";
+        version = "1.5.12";
+        sha256 = "sha256-khXO8zLwQcdqiJxFlgLQSQbVz2fNxFY6vGTuD1DBjlc=";
+      }
+    ];
+  };
   # --------------------------------- Lazygit -----------------------------------
   programs.lazygit.enable = true;
 
