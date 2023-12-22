@@ -28,7 +28,7 @@
         "$mod,mouse:273,resizewindow"
       ];
       bindr = [
-        "$mod, D, exec, pkill rofi || ${pkgs.rofi-wayland}/bin/rofi -show drun"
+        "$mod, D, exec, pkill rofi || ${pkgs.rofi-wayland}/bin/rofi -show drun -show-icons"
       ];
       input = {
         # Set keyboard layout to portuguese
