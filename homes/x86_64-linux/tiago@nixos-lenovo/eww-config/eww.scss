@@ -32,7 +32,7 @@
     min-height: 3px;
     min-width: 50px;
     margin-left: 10px;
-    margin-right: 20px;
+    margin-right: 10px;
 }
 
 .metric scale trough highlight {
@@ -42,15 +42,6 @@
     border-radius: 10px;
 }
 
-.metric scale trough {
-    all: unset;
-    background-color: #bffcd2;
-    border-radius: 50px;
-    min-height: 3px;
-    min-width: 50px;
-    margin-left: 10px;
-    margin-right: 20px;
-}
 
 .label-ram {
     font-size: large;
@@ -73,9 +64,15 @@
 
 
 
-.volume, .disk_usage, .memory, .time {
+.volume, .disk_usage, .memory, .time, .battery_normal {
     background-color: #57f287;
     border-radius: 10px;
     color: #000;
-    padding: 0px 5px;
+    padding: 0px 10px;
+}
+.battery_low {    
+    border-radius: 10px;
+    color: #FFF;
+    padding: 0px 10px;
+    background-color: #ff0022;
 }

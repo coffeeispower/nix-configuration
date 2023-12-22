@@ -7,7 +7,7 @@
 (defwidget sidestuff []
   (box :class "sidestuff" :orientation "h" :space-evenly false :spacing 15 :halign "end"
     (box :class "volume" :orientation "h" (
-        metric 
+        metric
         :label {(volume > 80 ? "󰕾" : (volume > 40 ? "󰖀" : (volume > 0 ? "󰕿" : "󰝟")))}
         :value volume
         :onchange "pamixer --set-volume {}"
@@ -19,7 +19,20 @@
     (box :class "disk_usage" :orientation "h" (metric :label "󰋊"
         :value {round((1 - (EWW_DISK["/"].free / EWW_DISK["/"].total)) * 100, 0)}
       :onchange ""))
-    (box :class "time" :orientation "h" time)))
+    (box :class {EWW_BATTERY["BATT"].capacity > 40 ? "battery_normal" : "battery_low"}
+      :orientation "h"
+      (metric
+        :label {
+        EWW_BATTERY["BATT"].status == "Discharging" ?
+        (
+          EWW_BATTERY["BATT"].capacity > 40 ?
+          "󰁹" : "󰂃"
+        ): "󰂄"
+        }
+        :value {EWW_BATTERY["BATT"].capacity}
+      :onchange ""))
+    (box :class "time" :orientation "h" time)
+  ))
 
 (defwidget workspaces []
   (box :class "workspaces"
