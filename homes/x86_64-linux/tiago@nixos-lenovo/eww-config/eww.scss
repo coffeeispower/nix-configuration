@@ -4,16 +4,17 @@
 
 //Global Styles
 .bar {
-    background-color: #3a3a3a;
     color: #b0b4bc;
-    padding: 10px;
+    margin-right: 20px;
+    margin-left: 20px;
 }
 
 // Styles on classes (see eww.yuck for more information)
 
 .sidestuff slider {
     all: unset;
-    color: #ffd5cd;
+    background-color: #57f287;
+    color: #000;
 }
 
 .metric scale trough highlight {
@@ -55,5 +56,16 @@
 }
 
 .workspaces button:hover {
-    color: #D35D6E;
+    color: #57f287;
+    background-color: #000;
+}
+.workspaces button {
+    padding: 5px 10px;
+    margin: 5px;
+    border-radius: 10px;
+}
+.workspaces {
+    background-color: #57f287;
+    border-radius: 10px;
+    color: #000;
 }
