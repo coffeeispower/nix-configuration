@@ -5,6 +5,8 @@
   programs.rofi = {
     enable = true;
     cycle = true;
+    # Install the wayland variant of rofi
+    package = pkgs.rofi-wayland;
     # Set terminal to alacritty
     terminal = "${pkgs.alacritty}/bin/alacritty";
   };
@@ -21,7 +23,13 @@
       ];
       # Set mod key to super
       "$mod" = "SUPER";
-
+      bindm = [
+        "$mod,mouse:272,movewindow"
+        "$mod,mouse:273,resizewindow"
+      ];
+      bindr = [
+        "$mod, D, exec, pkill rofi || ${pkgs.rofi-wayland}/bin/rofi -show drun"
+      ];
       input = {
         # Set keyboard layout to portuguese
         kb_layout = "pt";
@@ -30,9 +38,11 @@
       };
       # Enable workspace swipe
       gestures.workspace_swipe = "yes";
-
+      binde = [
+        ", XF86AudioLowerVolume, exec, ${pkgs.pamixer}/bin/pamixer --decrease 5"
+        ", XF86AudioRaiseVolume, exec, ${pkgs.pamixer}/bin/pamixer --increase 5"
+      ];
       bind = [
-        "$mod, D, exec, ${pkgs.rofi}/bin/rofi -show drun"
         ", Print, exec, ${pkgs.grimblast}/bin/grimblast copy area"
       ] ++ (
         # Workspace keybind
