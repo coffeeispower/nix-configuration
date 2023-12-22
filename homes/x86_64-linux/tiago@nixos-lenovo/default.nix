@@ -1,6 +1,29 @@
 { config, pkgs, lib, inputs, system, ... }:
 
 {
+  imports = [ inputs.nix-colors.homeManagerModules.default ];
+  # -------------------------- Nix Colors --------------------------
+  colorScheme = inputs.nix-colors.colorSchemes.gruvbox-dark-medium;
+  # ---------------------------- Dunst -----------------------------
+  services.dunst = {
+    enable = true;
+    settings = {
+      global = {
+        width = 300;
+        height = 300;
+        offset = "30x50";
+        origin = "top-right";
+        transparency = 10;
+        frame_color = "#${config.colorScheme.colors.base0E}";
+        font = "monospace";
+      };
+      urgency_normal = {
+        background = "#${config.colorScheme.colors.base01}";
+        foreground = "#${config.colorScheme.colors.base04}";
+        timeout = 10;
+      };
+    };
+  };
   # ----------------------------- Rofi -----------------------------
   programs.rofi = {
     enable = true;
@@ -14,18 +37,12 @@
   # --------------------------- Hyprland ---------------------------
   wayland.windowManager.hyprland = {
     enable = true;
-    
+
     settings = {
-      exec = [
-        "eww kill"
-        "eww open bar"
-      ];
+      exec = [ "eww kill" "eww open bar" ];
       # Set mod key to super
       "$mod" = "SUPER";
-      bindm = [
-        "$mod,mouse:272,movewindow"
-        "$mod,mouse:273,resizewindow"
-      ];
+      bindm = [ "$mod,mouse:272,movewindow" "$mod,mouse:273,resizewindow" ];
       bindr = [
         "$mod, D, exec, pkill rofi || ${pkgs.rofi-wayland}/bin/rofi -show drun -show-icons"
       ];
@@ -73,31 +90,65 @@
   programs.vscode = {
     enable = true;
     mutableExtensionsDir = false;
-    extensions = with pkgs.vscode-extensions; [
-      jnoortheen.nix-ide
-    ] ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [
-      {
-        name = "yuck";
-        publisher = "eww-yuck";
-        version = "0.0.3";
-        sha256 = "sha256-DITgLedaO0Ifrttu+ZXkiaVA7Ua5RXc4jXQHPYLqrcM=";
-      }
-      {
-        name = "vscode-nushell-lang";
-        publisher = "thenuprojectcontributors";
-        version = "1.7.1";
-        sha256 = "sha256-JlkZ8rarwTdQpiR76RR1s4XgH+lOIXfa0rAwLxvoYUc=";
-      }
-      {
-        name = "intellij-idea-keybindings";
-        publisher = "k--kato";
-        version = "1.5.12";
-        sha256 = "sha256-khXO8zLwQcdqiJxFlgLQSQbVz2fNxFY6vGTuD1DBjlc=";
-      }
-    ];
+    extensions = with pkgs.vscode-extensions;
+      [ jnoortheen.nix-ide ]
+      ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [
+        {
+          name = "yuck";
+          publisher = "eww-yuck";
+          version = "0.0.3";
+          sha256 = "sha256-DITgLedaO0Ifrttu+ZXkiaVA7Ua5RXc4jXQHPYLqrcM=";
+        }
+        {
+          name = "vscode-nushell-lang";
+          publisher = "thenuprojectcontributors";
+          version = "1.7.1";
+          sha256 = "sha256-JlkZ8rarwTdQpiR76RR1s4XgH+lOIXfa0rAwLxvoYUc=";
+        }
+        {
+          name = "intellij-idea-keybindings";
+          publisher = "k--kato";
+          version = "1.5.12";
+          sha256 = "sha256-khXO8zLwQcdqiJxFlgLQSQbVz2fNxFY6vGTuD1DBjlc=";
+        }
+      ];
   };
   # --------------------------------- Lazygit -----------------------------------
-  programs.lazygit.enable = true;
+  programs.lazygit = {
+    enable = true;
+    settings = {
+      colors = with config.colorScheme.colors; {
+        bright = {
+          black = "0x${base00}";
+          blue = "0x${base0D}";
+          cyan = "0x${base0C}";
+          green = "0x${base0B}";
+          magenta = "0x${base0E}";
+          red = "0x${base08}";
+          white = "0x${base06}";
+          yellow = "0x${base09}";
+        };
+        cursor = {
+          cursor = "0x${base06}";
+          text = "0x${base06}";
+        };
+        normal = {
+          black = "0x${base00}";
+          blue = "0x${base0D}";
+          cyan = "0x${base0C}";
+          green = "0x${base0B}";
+          magenta = "0x${base0E}";
+          red = "0x${base08}";
+          white = "0x${base06}";
+          yellow = "0x${base0A}";
+        };
+        primary = {
+          background = "0x${base00}";
+          foreground = "0x${base06}";
+        };
+      };
+    };
+  };
 
   # -------------------------------- Alacritty ----------------------------------
   programs.alacritty.enable = true;
@@ -144,19 +195,19 @@
   programs.eww.package = pkgs.eww-wayland;
   programs.eww.configDir = (import ./eww-config.nix) {
     inherit pkgs lib;
-    widgets-bg = "#57f287";
-    widgets-fg = "#000";
-    widgets-fg-light = "#FFF";
-    widgets-track = "#4e4e4e";
+    widgets-bg = "#${config.colorScheme.colors.base01}";
+    widgets-fg = "#${config.colorScheme.colors.base06}";
+    widgets-fg-light = "#${config.colorScheme.colors.base00}";
+    widgets-track = "#${config.colorScheme.colors.base0A}";
+    low-battery-color = "#${config.colorScheme.colors.base08}";
+    charging-battery-color = "#${config.colorScheme.colors.base0D}";
   };
   # -------------------------------- Firefox ----------------------------------
   programs.firefox = {
-  
     enable = true;
     profiles.tiago = {
-     extensions = let 
-      firefox-ext = inputs.firefox-addons.packages.${system};
-     in [
+      extensions = let firefox-ext = inputs.firefox-addons.packages.${system};
+      in [
         firefox-ext.ublock-origin
         firefox-ext.darkreader
         firefox-ext."10ten-ja-reader"

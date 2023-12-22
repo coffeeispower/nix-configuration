@@ -76,16 +76,16 @@
 
 .battery_low {
     border-radius: 10px;
-    color: #FFF;
+    color: $widgets-fg;
     padding: 0px 10px;
-    background-color: #ff0022;
+    background-color: $low-battery-color;
 }
 
 .battery_charging {
     border-radius: 10px;
     color: $widgets-fg;
     padding: 0px 10px;
-    background-color: rgb(255, 187, 0);
+    background-color: $charging-battery-color;
 }
 
 .battery_low>.metric scale trough highlight {

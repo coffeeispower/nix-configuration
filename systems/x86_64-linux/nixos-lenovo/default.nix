@@ -19,7 +19,10 @@
     fontDir.enable = true;
     enableDefaultPackages = true;
     fontconfig = { defaultFonts.monospace = [ "FiraCode" ]; };
-    packages = with pkgs; [ (nerdfonts.override { fonts = [ "FiraCode" ]; }) ipafont ];
+    packages = with pkgs; [
+      (nerdfonts.override { fonts = [ "FiraCode" ]; })
+      ipafont
+    ];
   };
   # Set your time zone.
   time.timeZone = "Europe/Lisbon";
