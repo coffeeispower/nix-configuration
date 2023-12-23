@@ -4,7 +4,7 @@
   imports = [ inputs.nix-colors.homeManagerModules.default ];
   home.file.".config/wallpapers/".source = ./wallpapers;
   # -------------------------- Nix Colors --------------------------
-  colorScheme = inputs.nix-colors.colorSchemes.dracula;
+  colorScheme = inputs.nix-colors.colorSchemes.windows-10;
   # ---------------------------- Dunst -----------------------------
   services.dunst = {
     enable = true;
@@ -199,7 +199,10 @@
 
     settings = {
       exec = [
-        "eww --restart open bar"
+        (pkgs.writeShellScript "reset-eww" ''
+            pkill eww
+            eww open bar
+          '')
         "${pkgs.hyprpaper}/bin/hyprpaper -c ${
           pkgs.writeText "hyprpaper.conf" ''
             preload=/home/tiago/.config/wallpapers/hackerman.jpg
@@ -230,7 +233,10 @@
         "$mod, left, workspace, e-1"
         "$mod, right, workspace, e+1"
 
-        "$mod, R, exec, eww --restart open bar"
+        "$mod, R, exec, ${pkgs.writeShellScript "reset-eww" ''
+            pkill eww
+            eww open bar
+          ''}"
         "$mod SHIFT, left, movetoworkspace, e-1"
         "$mod SHIFT, right, movetoworkspace, e+1"
       ] ++ (
