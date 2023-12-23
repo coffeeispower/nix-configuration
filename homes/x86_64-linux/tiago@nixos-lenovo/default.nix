@@ -198,12 +198,27 @@
     enable = true;
 
     settings = {
+      general = let inherit (config.colorScheme.colors) base00 base01 base0A;
+      in {
+        "col.active_border" = "rgba(${base01}ff) rgba(${base0A}ff) 45deg";
+        "col.inactive_border" = "rgba(${base00}ff)";
+        "border_size" = 2;
+      };
+      decoration = {
+        rounding = 10;
+        blur = {
+          enabled = true;
+          size = 3;
+          passes = 1;
+          vibrancy = 0.1696;
+        };
+      };
       exec = [
         # Start Eww on Startup, killing any previous instances to avoid 2 bars on top
         (pkgs.writeShellScript "reset-eww" ''
-            pkill eww
-            eww open bar
-          '')
+          pkill eww
+          eww open bar
+        '')
 
         # Start Hyprpaper with the beautiful hackerman wallpaper :sunglasses:
         "${pkgs.hyprpaper}/bin/hyprpaper -c ${
@@ -215,11 +230,10 @@
       ];
       # Set mod key to super
       "$mod" = "SUPER";
-      
+
       # Move apps with the mouse
       bindm = [ "$mod,mouse:272,movewindow" "$mod,mouse:273,resizewindow" ];
-      
-      
+
       input = {
         # Set keyboard layout to portuguese
         kb_layout = "pt";
@@ -242,22 +256,24 @@
         "CTRL ALT, right, workspace, e+1"
         "CTRL ALT SHIFT, left, movetoworkspace, e-1"
         "CTRL ALT SHIFT, right, movetoworkspace, e+1"
-        
+
         # Reload eww bind
-        "$mod, R, exec, ${pkgs.writeShellScript "reset-eww" ''
+        "$mod, R, exec, ${
+          pkgs.writeShellScript "reset-eww" ''
             pkill eww
             eww open bar
-          ''}"
-        
+          ''
+        }"
+
         # Start rofi app launcher
         "$mod, D, exec, ${pkgs.rofi-wayland}/bin/rofi -show drun -show-icons"
-        
+
         # Start alacritty
         "$mod, T, exec, ${pkgs.alacritty}/bin/alacritty"
-        
+
         # Close app
         "$mod, C, killactive"
-        
+
         # Move focus keybinds
         "$mod, left, movefocus, l"
         "$mod, right, movefocus, r"
@@ -355,7 +371,15 @@
   home.username = "tiago";
   home.homeDirectory = "/home/tiago";
   home.stateVersion = "23.11";
-  home.packages = with pkgs; [ nixfmt pamixer libnotify ];
+  home.packages = with pkgs; [
+    nixfmt
+    pamixer
+    libnotify
+    spotify
+    discord
+    cli-visualizer
+    pavucontrol
+  ];
   # --------------------------- Allow unfree packages ---------------------------
   nixpkgs.config.allowUnfree = true;
   # -------------------------------- GTK Theme ----------------------------------
@@ -532,52 +556,25 @@
       "ui.virtual.inlay-hint" = { fg = "base01"; };
       "ui.virtual.ruler" = { bg = "base01"; };
       "ui.window" = { bg = "base01"; };
-      palette = {
-        base00 = "#${config.colorScheme.colors.base00}"; # Default Background
-        base01 =
-          "#${config.colorScheme.colors.base01}"; # Lighter Background (Used for status bars, line number and folding marks)
-        base02 = "#${config.colorScheme.colors.base02}"; # Selection Background
-        base03 =
-          "#${config.colorScheme.colors.base03}"; # Comments, Invisibles, Line Highlighting
-        base04 =
-          "#${config.colorScheme.colors.base04}"; # Dark Foreground (Used for status bars)
-        base05 =
-          "#${config.colorScheme.colors.base05}"; # Default Foreground, Caret, Delimiters, Operators
-        base06 =
-          "#${config.colorScheme.colors.base06}"; # Light Foreground (Not often used)
-        base07 =
-          "#${config.colorScheme.colors.base07}"; # Light Background (Not often used)
-        base08 =
-          "#${config.colorScheme.colors.base08}"; # Variables, XML Tags, Markup Link Text, Markup Lists, Diff Deleted
-        base09 =
-          "#${config.colorScheme.colors.base09}"; # Integers, Boolean, Constants, XML Attributes, Markup Link Url
-        base0A =
-          "#${config.colorScheme.colors.base0A}"; # Classes, Markup Bold, Search Text Background
-        base0B =
-          "#${config.colorScheme.colors.base0B}"; # Strings, Inherited Class, Markup Code, Diff Inserted
-        base0C =
-          "#${config.colorScheme.colors.base0C}"; # Support, Regular Expressions, Escape Characters, Markup Quotes
-        base0D =
-          "#${config.colorScheme.colors.base0D}"; # Functions, Methods, Attribute IDs, Headings
-        base0E =
-          "#${config.colorScheme.colors.base0E}"; # Keywords, Storage, Selector, Markup Italic, Diff Changed
-        base0F =
-          "#${config.colorScheme.colors.base0F}"; # Deprecated, Opening/Closing Embedded Language Tags, e.g. <?php ?>
-      };
+      
+      palette = lib.attrsets.mapAttrs (name: value:  "#" + value) config.colorScheme.colors;
     };
   };
   # ---------------------------------- Eww ------------------------------------
   programs.eww.enable = true;
   programs.eww.package = pkgs.eww-wayland;
-  programs.eww.configDir = (import ./eww-config.nix) {
+  programs.eww.configDir = (import ./eww-config.nix) (let
+    inherit (config.colorScheme.colors)
+      base01 base06 base04 base00 base08 base0A;
+  in {
     inherit pkgs lib;
-    widgets-bg = "#${config.colorScheme.colors.base01}";
-    widgets-fg = "#${config.colorScheme.colors.base06}";
-    widgets-fg-dark = "#${config.colorScheme.colors.base04}";
-    widgets-track = "#${config.colorScheme.colors.base00}";
-    low-battery-color = "#${config.colorScheme.colors.base08}";
-    charging-battery-color = "#${config.colorScheme.colors.base0A}";
-  };
+    widgets-bg = "#${base01}";
+    widgets-fg = "#${base06}";
+    widgets-fg-dark = "#${base04}";
+    widgets-track = "#${base00}";
+    low-battery-color = "#${base08}";
+    charging-battery-color = "#${base0A}";
+  });
   # -------------------------------- Firefox ----------------------------------
   programs.firefox = {
     enable = true;
@@ -593,7 +590,5 @@
   };
 
   # -------------------------------- Github CLI -------------------------------
-  programs.gh = {
-    enable = true;
-  };
+  programs.gh = { enable = true; };
 }
