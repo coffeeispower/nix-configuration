@@ -199,10 +199,13 @@
 
     settings = {
       exec = [
+        # Start Eww on Startup, killing any previous instances to avoid 2 bars on top
         (pkgs.writeShellScript "reset-eww" ''
             pkill eww
             eww open bar
           '')
+
+        # Start Hyprpaper with the beautiful hackerman wallpaper :sunglasses:
         "${pkgs.hyprpaper}/bin/hyprpaper -c ${
           pkgs.writeText "hyprpaper.conf" ''
             preload=/home/tiago/.config/wallpapers/hackerman.jpg
@@ -212,7 +215,11 @@
       ];
       # Set mod key to super
       "$mod" = "SUPER";
+      
+      # Move apps with the mouse
       bindm = [ "$mod,mouse:272,movewindow" "$mod,mouse:273,resizewindow" ];
+      
+      
       input = {
         # Set keyboard layout to portuguese
         kb_layout = "pt";
@@ -222,22 +229,40 @@
       # Enable workspace swipe
       gestures.workspace_swipe = "yes";
       binde = [
+        # Volume Up and Down keybinds
         ", XF86AudioLowerVolume, exec, ${pkgs.pamixer}/bin/pamixer --decrease 5"
         ", XF86AudioRaiseVolume, exec, ${pkgs.pamixer}/bin/pamixer --increase 5"
       ];
       bind = [
+        # Screenshot keybind
         ", Print, exec, ${pkgs.grimblast}/bin/grimblast copy area"
-        "$mod, left, workspace, e-1"
-        "$mod, right, workspace, e+1"
 
+        # Binds to move between workspaces
+        "CTRL ALT, left, workspace, e-1"
+        "CTRL ALT, right, workspace, e+1"
+        "CTRL ALT SHIFT, left, movetoworkspace, e-1"
+        "CTRL ALT SHIFT, right, movetoworkspace, e+1"
+        
+        # Reload eww bind
         "$mod, R, exec, ${pkgs.writeShellScript "reset-eww" ''
             pkill eww
             eww open bar
           ''}"
-        "$mod SHIFT, left, movetoworkspace, e-1"
-        "$mod SHIFT, right, movetoworkspace, e+1"
+        
+        # Start rofi app launcher
         "$mod, D, exec, ${pkgs.rofi-wayland}/bin/rofi -show drun -show-icons"
+        
+        # Start alacritty
         "$mod, T, exec, ${pkgs.alacritty}/bin/alacritty"
+        
+        # Close app
+        "$mod, C, killactive"
+        
+        # Move focus keybinds
+        "$mod, left, movefocus, l"
+        "$mod, right, movefocus, r"
+        "$mod, up, movefocus, u"
+        "$mod, down, movefocus, d"
       ] ++ (
         # Workspace keybind
         # $mod + {1..10} to workspace {1..10}
