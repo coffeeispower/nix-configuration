@@ -2,6 +2,7 @@
 
 {
   imports = [ inputs.nix-colors.homeManagerModules.default ];
+  home.file.".config/wallpapers/".source = ./wallpapers;
   # -------------------------- Nix Colors --------------------------
   colorScheme = inputs.nix-colors.colorSchemes.dracula;
   # ---------------------------- Dunst -----------------------------
@@ -39,8 +40,14 @@
     enable = true;
 
     settings = {
-      exec = [ "eww --restart open bar" ];
-      exec-once = [ "hypr" ];
+      exec = [
+      "eww --restart open bar" 
+      "${pkgs.hyprpaper}/bin/hyprpaper -c ${pkgs.writeText "hyprpaper.conf"
+        ''
+          preload=/home/tiago/.config/wallpapers/hackerman.jpg
+          wallpaper=eDP-1,/home/tiago/.config/wallpapers/hackerman.jpg
+        ''
+      }" ];
       # Set mod key to super
       "$mod" = "SUPER";
       bindm = [ "$mod,mouse:272,movewindow" "$mod,mouse:273,resizewindow" ];

@@ -71,16 +71,8 @@
   #  };
   #
   system.stateVersion = "unstable";
-  xdg.portal.extraPortals = with pkgs; [
-    xdg-desktop-portal-hyprland
-  ];
-  xdg.portal.config = {
-    common = {
-      default = [
-        "hyprland"
-      ];
-    };
-  };
+  xdg.portal.extraPortals = with pkgs; [ xdg-desktop-portal-hyprland ];
+  xdg.portal.config = { common = { default = [ "hyprland" ]; }; };
   xdg.portal.enable = true;
 }
 
