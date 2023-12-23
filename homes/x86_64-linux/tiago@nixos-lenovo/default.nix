@@ -213,9 +213,6 @@
       # Set mod key to super
       "$mod" = "SUPER";
       bindm = [ "$mod,mouse:272,movewindow" "$mod,mouse:273,resizewindow" ];
-      bindr = [
-        "$mod, D, exec, pkill rofi || ${pkgs.rofi-wayland}/bin/rofi -show drun -show-icons"
-      ];
       input = {
         # Set keyboard layout to portuguese
         kb_layout = "pt";
@@ -239,6 +236,8 @@
           ''}"
         "$mod SHIFT, left, movetoworkspace, e-1"
         "$mod SHIFT, right, movetoworkspace, e+1"
+        "$mod, D, exec, ${pkgs.rofi-wayland}/bin/rofi -show drun -show-icons"
+        "$mod, T, exec, ${pkgs.alacritty}/bin/alacritty"
       ] ++ (
         # Workspace keybind
         # $mod + {1..10} to workspace {1..10}
