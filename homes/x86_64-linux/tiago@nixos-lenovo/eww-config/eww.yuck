@@ -34,21 +34,23 @@
     )
     (box :class "time" :orientation "h" time)
   ))
-
+(defwidget workspacebutton [number label]
+  (button :class {currentworkspace == number ? "current" : ""} :onclick {("hyprctl dispatch workspace ${number}")} label)
+)
 (defwidget workspaces []
   (box :class "workspaces"
     :orientation "h"
     :halign "start"
-    (button :onclick "hyprctl dispatch workspace 1" 1)
-    (button :onclick "hyprctl dispatch workspace 2" 2)
-    (button :onclick "hyprctl dispatch workspace 3" 3)
-    (button :onclick "hyprctl dispatch workspace 4" 4)
-    (button :onclick "hyprctl dispatch workspace 5" 5)
-    (button :onclick "hyprctl dispatch workspace 6" 6)
-    (button :onclick "hyprctl dispatch workspace 7" 7)
-    (button :onclick "hyprctl dispatch workspace 8" 8)
-    (button :onclick "hyprctl dispatch workspace 9" 9)
-    (button :onclick "hyprctl dispatch workspace 10" 10)
+    (workspacebutton :number 1 :label 1)
+    (workspacebutton :number 2 :label 2)
+    (workspacebutton :number 3 :label 3)
+    (workspacebutton :number 4 :label 4)
+    (workspacebutton :number 5 :label 5)
+    (workspacebutton :number 6 :label 6)
+    (workspacebutton :number 7 :label 7)
+    (workspacebutton :number 8 :label 8)
+    (workspacebutton :number 9 :label 9)
+    (workspacebutton :number 10 :label 10)
   )
 )
 
@@ -77,6 +79,7 @@
 "playerctl --follow metadata --format '{{ artist }} - {{ title }}' || true")
 
 (defpoll volume :interval "100ms" "pamixer --get-volume")
+(defpoll currentworkspace :interval "100ms" "nu -c 'hyprctl activeworkspace -j | from json | get id'")
 
 (defpoll time :interval "1s"
 "date '+%H:%M %b %d, %Y'")

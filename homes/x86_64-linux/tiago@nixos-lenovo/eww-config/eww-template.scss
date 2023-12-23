@@ -50,6 +50,10 @@
     border-radius: 10px;
 }
 
+.workspaces > .current {
+    color: $widgets-bg;
+    background-color: $widgets-fg;
+}
 .workspaces {
     background-color: $widgets-bg;
     border-radius: 10px;
