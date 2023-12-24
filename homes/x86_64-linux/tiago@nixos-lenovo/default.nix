@@ -379,6 +379,7 @@
     discord
     cli-visualizer
     pavucontrol
+    neofetch
   ];
   # --------------------------- Allow unfree packages ---------------------------
   nixpkgs.config.allowUnfree = true;
