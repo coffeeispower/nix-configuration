@@ -592,4 +592,7 @@
 
   # -------------------------------- Github CLI -------------------------------
   programs.gh = { enable = true; };
+  # -------------------------------- Enable DirEnv -------------------------------
+  programs.direnv.enable = true;
+  programs.direnv.nix-direnv.enable = true;
 }
