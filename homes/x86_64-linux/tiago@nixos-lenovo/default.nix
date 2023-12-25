@@ -305,7 +305,7 @@
     enable = true;
     mutableExtensionsDir = false;
     extensions = with pkgs.vscode-extensions;
-      [ jnoortheen.nix-ide ]
+      [ jnoortheen.nix-ide ms-vsliveshare.vsliveshare ]
       ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [
         {
           name = "yuck";
