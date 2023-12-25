@@ -4,7 +4,7 @@
   imports = [ inputs.nix-colors.homeManagerModules.default ];
   home.file.".config/wallpapers/".source = ./wallpapers;
   # -------------------------- Nix Colors --------------------------
-  colorScheme = inputs.nix-colors.colorSchemes.windows-10;
+  colorScheme = inputs.nix-colors.colorSchemes.material-darker;
   # ---------------------------- Dunst -----------------------------
   services.dunst = {
     enable = true;
