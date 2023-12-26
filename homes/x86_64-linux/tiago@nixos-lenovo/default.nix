@@ -305,13 +305,25 @@
     enable = true;
     mutableExtensionsDir = false;
     extensions = with pkgs.vscode-extensions;
-      [ jnoortheen.nix-ide ms-vsliveshare.vsliveshare ]
+      [ jnoortheen.nix-ide ]
       ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [
+        
         {
+          name = "svelte-vscode";
+          publisher = "svelte";
+          version = "108.1.0";
+          sha256 = "sha256-LCY8M77vfvzcNGOHWrDcuRkhxH1/LeUkI5r37sDuCuI=";
+        }        {
           name = "yuck";
           publisher = "eww-yuck";
           version = "0.0.3";
           sha256 = "sha256-DITgLedaO0Ifrttu+ZXkiaVA7Ua5RXc4jXQHPYLqrcM=";
+        }
+        {
+          name = "vsliveshare";
+          publisher = "MS-vsliveshare";
+          version = "1.0.5900";
+          sha256 = "sha256-syVW/aS2ppJjg4OZaenzGM3lczt+sLy7prwsYFTDl9s=";
         }
         {
           name = "vscode-nushell-lang";
