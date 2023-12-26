@@ -26,7 +26,8 @@
   };
   # Set your time zone.
   time.timeZone = "Europe/Lisbon";
-
+  virtualisation.docker.enable = true;
+  virtualisation.docker.storageDriver = "btrfs";
   # Configure network proxy if necessary
   # networking.proxy.default = "http://user:password@proxy:port/";
   # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
@@ -55,7 +56,7 @@
   programs.hyprland.enable = true;
   users.users.tiago = {
     isNormalUser = true;
-    extraGroups = [ "wheel" ]; # Enable ‘sudo’ for the user.
+    extraGroups = [ "wheel" "docker" ]; # Enable ‘sudo’ for the user.
     hashedPassword =
       "$y$j9T$x4wYgVWjLlUp43gVSTvj61$XX50fudyvMCLx0kvm/EHAplZ.ev1Lxj1ZrRoB4itEMA";
     shell = pkgs.nushell;
