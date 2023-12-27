@@ -3,6 +3,7 @@
 {
   imports = [ inputs.nix-colors.homeManagerModules.default ];
   home.file.".config/wallpapers/".source = ./wallpapers;
+  home.file.".config/fcitx5/".source = ./fcitx5;
   # -------------------------- Nix Colors --------------------------
   colorScheme = inputs.nix-colors.colorSchemes.material-darker;
   # ---------------------------- Dunst -----------------------------
@@ -204,6 +205,11 @@
         "col.inactive_border" = "rgba(${base00}ff)";
         "border_size" = 2;
       };
+      "device:at-translated-set-2-keyboard" = {
+        kb_layout = "pt,jp";
+        kb_variant = "anthy";
+        kb_options = "grp:win_space_toggle";
+      };
       decoration = {
         rounding = 10;
         blur = {
@@ -228,6 +234,9 @@
           ''
         }"
       ];
+      exec-once = [
+        "${pkgs.fcitx5}/bin/fcitx5 -d"
+      ];
       # Set mod key to super
       "$mod" = "SUPER";
 
@@ -235,8 +244,6 @@
       bindm = [ "$mod,mouse:272,movewindow" "$mod,mouse:273,resizewindow" ];
 
       input = {
-        # Set keyboard layout to portuguese
-        kb_layout = "pt";
         # Enable touchpad natural scroll
         touchpad.natural_scroll = "yes";
       };
@@ -256,7 +263,6 @@
         # Vsauce music keybind
         "$mod, V, exec, ${pkgs.sox}/bin/play ${./vsauce.mp3}"
         ''$mod, V, exec, ${pkgs.libnotify}/bin/notify-send "Or is it?"''
-        
         # Binds to move between workspaces
         "CTRL ALT, left, workspace, e-1"
         "CTRL ALT, right, workspace, e+1"

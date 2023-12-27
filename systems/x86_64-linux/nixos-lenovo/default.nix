@@ -84,6 +84,9 @@
     remotePlay.openFirewall = true; # Open ports in the firewall for Steam Remote Play
     dedicatedServer.openFirewall = true; # Open ports in the firewall for Source Dedicated Server
   };
-
+  # Enable japanese input with ibus
+ i18n.inputMethod = {
+  enabled = "fcitx5";
+  fcitx5.addons = [ pkgs.fcitx5-mozc ];
+ };
 }
-
