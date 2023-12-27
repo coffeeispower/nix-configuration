@@ -250,7 +250,8 @@
       bind = [
         # Screenshot keybind
         ", Print, exec, ${pkgs.grimblast}/bin/grimblast copy area"
-
+        "$mod, B, exec, ${pkgs.sox}/bin/play ${./vineboom.mp3}"
+        "$mod, B, exec, ${pkgs.libnotify}/bin/notify-send WTFFF"
         # Binds to move between workspaces
         "CTRL ALT, left, workspace, e-1"
         "CTRL ALT, right, workspace, e+1"
