@@ -5,6 +5,7 @@
 { config, pkgs, lib, ... }:
 
 {
+  services.gvfs.enable = true;
   imports = [ # Include the results of the hardware scan.
     ./hardware-configuration.nix
   ];
@@ -65,6 +66,8 @@
     xfce.thunar
     xfce.thunar-volman
     xfce.thunar-archive-plugin
+    btop
+    gnome.gnome-disk-utility
   ];
   #  programs.gnupg.agent = {
   #    enable = true;
@@ -85,8 +88,12 @@
     dedicatedServer.openFirewall = true; # Open ports in the firewall for Source Dedicated Server
   };
   # Enable japanese input with ibus
- i18n.inputMethod = {
-  enabled = "fcitx5";
-  fcitx5.addons = [ pkgs.fcitx5-mozc ];
- };
+  i18n.inputMethod = {
+    enabled = "fcitx5";
+    fcitx5.addons = [ pkgs.fcitx5-mozc ];
+  };
+  # Enable bluetooth
+  hardware.bluetooth.enable = true; # enables support for Bluetooth
+  hardware.bluetooth.powerOnBoot = true; # powers up the default Bluetooth controller on boot
+  services.blueman.enable = true;
 }
