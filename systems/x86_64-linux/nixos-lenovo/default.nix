@@ -68,6 +68,7 @@
     xfce.thunar-archive-plugin
     btop
     gnome.gnome-disk-utility
+    gnome.file-roller
   ];
   #  programs.gnupg.agent = {
   #    enable = true;
