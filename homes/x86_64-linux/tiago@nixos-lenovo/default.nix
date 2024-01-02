@@ -419,6 +419,7 @@ in
     feh
     vlc
     networkmanager_dmenu
+    playerctl
   ];
   # --------------------------- Allow unfree packages ---------------------------
   nixpkgs.config.allowUnfree = true;

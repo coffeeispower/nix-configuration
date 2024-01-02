@@ -71,7 +71,9 @@ $charging-battery-color: #{{base0A}};
 .disk_usage,
 .memory,
 .time,
-.battery_normal {
+.battery_normal,
+.wifi,
+.music {
     background-color: $widgets-bg;
     border-radius: 10px;
     color: $widgets-fg;

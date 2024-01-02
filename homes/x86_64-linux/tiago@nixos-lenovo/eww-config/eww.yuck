@@ -1,11 +1,11 @@
 (defwidget bar []
   (centerbox :orientation "h"
     (workspaces)
-    (music)
-    (sidestuff)))
+    (box)
+    (indicators)))
 
-(defwidget sidestuff []
-  (box :class "sidestuff" :orientation "h" :space-evenly false :spacing 15 :halign "end"
+(defwidget indicators []
+  (box :class "indicators" :orientation "h" :space-evenly false :spacing 15 :halign "end"
     (box :class "volume" :orientation "h" (
         metric
         :label {(volume > 80 ? "󰕾" : (volume > 40 ? "󰖀" : (volume > 0 ? "󰕿" : "󰝟")))}
@@ -19,6 +19,13 @@
     (box :class "disk_usage" :orientation "h" (metric :label "󰋊"
         :value {round((1 - (EWW_DISK["/"].free / EWW_DISK["/"].total)) * 100, 0)}
       :onchange ""))
+    (box :class "wifi" :orientation "h" 
+      (_network
+        :ssid net_ssid :strength net_strength
+        :offline "󰤮"
+        :excellent "󰤨" :good "󰤥" :okay "󰤢" :slow "󰤟"
+      )
+    )
     (box :class "battery" :class {EWW_BATTERY["BATT"].status == "Charging" ? "battery_charging" : (EWW_BATTERY["BATT"].capacity > 40 ? "battery_normal" : "battery_low")}
       :orientation "h"
       (metric
@@ -34,6 +41,24 @@
     )
     (box :class "time" :orientation "h" time)
   ))
+
+(defpoll net_strength :interval "100s"
+  :initial `N/A`
+  `LANG=en nmcli -t -f SIGNAL,ACTIVE device wifi \
+    | awk -F':' '{if($2=="yes")print$1}'`)
+(defpoll net_ssid :interval "100s"
+  :initial `N/A`
+  `LANG=en nmcli -t -f SSID,ACTIVE device wifi \
+    | awk -F':' '{if($2=="yes")print$1}'`)
+(defwidget _network [strength ssid offline excellent good okay slow]
+  (button :onclick "networkmanager_dmenu"
+    {("${strength == "" ? offline :
+      strength < 26 ? slow :
+        strength < 51 ? okay :
+        strength < 76 ? good : excellent} ${ssid == "" ? "Offline" : ssid}")}
+  )
+)
+  
 (defwidget workspacebutton [number label]
   (button :class {currentworkspace == number ? "current" : ""} :onclick {("hyprctl dispatch workspace ${number}")} label)
 )
@@ -59,7 +84,7 @@
     :orientation "h"
     :space-evenly false
     :halign "center"
-  {music != "" ? "🎵${music}" : ""}))
+  {music != "" ? " ${music}" : ""}))
 
 
 (defwidget metric [label value onchange]
