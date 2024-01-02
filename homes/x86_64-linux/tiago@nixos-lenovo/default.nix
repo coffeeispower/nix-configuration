@@ -260,10 +260,10 @@ in
         # Screenshot keybind
         ", Print, exec, ${pkgs.grimblast}/bin/grimblast copy area"
         # Vine boom sound effect keybind
-        "$mod, B, exec, ${pkgs.sox}/bin/play ${./vineboom.mp3}"
+        "$mod, B, exec, ${pkgs.sox}/bin/play ${./sound-effects/vineboom.mp3}"
         "$mod, B, exec, ${pkgs.libnotify}/bin/notify-send WTFFF"
         # Vsauce music keybind
-        "$mod, V, exec, ${pkgs.sox}/bin/play ${./vsauce.mp3}"
+        "$mod, V, exec, ${pkgs.sox}/bin/play ${./sound-effects/vsauce.mp3}"
         ''$mod, V, exec, ${pkgs.libnotify}/bin/notify-send "Or is it?"''
         # Binds to move between workspaces
         "CTRL ALT, left, workspace, e-1"
