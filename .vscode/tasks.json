@@ -6,7 +6,7 @@
         {
             "label": "Test Config",
             "type": "shell",
-            "command": "sudo ./apply test",
+            "command": "./apply test",
             "problemMatcher": [],
             "group": {
                 "kind": "build",
@@ -16,7 +16,7 @@
         {
             "label": "Switch to Config",
             "type": "shell",
-            "command": "sudo ./apply switch"
+            "command": "./apply switch"
         }
     ]
 }
