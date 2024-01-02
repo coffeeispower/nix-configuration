@@ -9,6 +9,7 @@
   imports = [ # Include the results of the hardware scan.
     ./hardware-configuration.nix
   ];
+  security.polkit.enable = true;
   hardware.opengl.enable = true;
   hardware.opengl.driSupport = true;
   # Use the systemd-boot EFI boot loader.
@@ -69,12 +70,8 @@
     btop
     gnome.gnome-disk-utility
     gnome.file-roller
+    pinentry-rofi
   ];
-  #  programs.gnupg.agent = {
-  #    enable = true;
-  #    enableSSHSupport = true;
-  #  };
-  #
   system.stateVersion = "unstable";
   xdg.portal.extraPortals = with pkgs; [ xdg-desktop-portal-hyprland ];
   xdg.portal.config = { common = { default = [ "hyprland" ]; }; };
@@ -97,4 +94,11 @@
   hardware.bluetooth.enable = true; # enables support for Bluetooth
   hardware.bluetooth.powerOnBoot = true; # powers up the default Bluetooth controller on boot
   services.blueman.enable = true;
+  programs.gnupg.agent = {
+    enable = true;
+    settings = {
+      pinentry-program = lib.mkForce "${pkgs.pinentry-rofi}/bin/pinentry-rofi";
+    };
+    enableSSHSupport = true;
+  };
 }

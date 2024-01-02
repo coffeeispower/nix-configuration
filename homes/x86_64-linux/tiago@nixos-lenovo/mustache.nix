@@ -3,7 +3,7 @@ pkgs.stdenv.mkDerivation {
 
   inherit name;
 
-  nativeBuildInpts = [ pkgs.mustache-go ];
+  nativeBuildInputs = [ pkgs.mustache-go ];
 
   # Pass Json as file to avoid escaping
   passAsFile = [ "jsonData" ];

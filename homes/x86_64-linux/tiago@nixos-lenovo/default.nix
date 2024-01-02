@@ -6,6 +6,15 @@ in
   imports = [ inputs.nix-colors.homeManagerModules.default ];
   home.file.".config/wallpapers/".source = ./wallpapers;
   home.file.".config/fcitx5/".source = ./fcitx5;
+  home.file.".config/networkmanager-dmenu/config.ini".source = 
+    template "nm-dmenu-config" ./networkmanager-dmenu/config.ini {
+      colors = config.colorScheme.colors;
+      commands = {
+        dmenu = "${pkgs.rofi}/bin/rofi -dmenu";
+        terminal = "${pkgs.alacritty}/bin/alacritty";
+      };
+    };
+
   # -------------------------- Nix Colors --------------------------
   colorScheme = inputs.nix-colors.colorSchemes.material-darker;
   # ---------------------------- Dunst -----------------------------
@@ -409,6 +418,7 @@ in
     neofetch
     feh
     vlc
+    networkmanager_dmenu
   ];
   # --------------------------- Allow unfree packages ---------------------------
   nixpkgs.config.allowUnfree = true;
@@ -630,5 +640,8 @@ in
     enable = true;
     associations.added = associations;
     defaultApplications = associations;
+  };
+  services.gpg-agent = {
+    enable = true;
   };
 }
