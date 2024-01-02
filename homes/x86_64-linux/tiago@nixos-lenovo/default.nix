@@ -405,6 +405,7 @@
     cli-visualizer
     pavucontrol
     neofetch
+    feh
   ];
   # --------------------------- Allow unfree packages ---------------------------
   nixpkgs.config.allowUnfree = true;
@@ -620,13 +621,22 @@
   # -------------------------------- Enable DirEnv -------------------------------
   programs.direnv.enable = true;
   programs.direnv.nix-direnv.enable = true;
-  xdg.mimeApps = {
+  xdg.mimeApps = let
+    associations = {
+      "inode/directory" = ["thunar.desktop"];
+      "image/png" = ["feh.desktop"];
+      "image/jpeg" = ["feh.desktop"];
+      "image/webp" = ["feh.desktop"];
+      "image/gif" = ["feh.desktop"];
+      "image/bmp" = ["feh.desktop"];
+      "image/svg+xml" = ["feh.desktop"];
+      "image/tiff" = ["feh.desktop"];
+      "image/apng" = ["feh.desktop"];
+    };
+  in
+  {
     enable = true;
-    associations.added = {
-      "inode/directory" = ["thunar.desktop"];
-    };
-    defaultApplications = {
-      "inode/directory" = ["thunar.desktop"];
-    };
+    associations.added = associations;
+    defaultApplications = associations;
   };
 }
