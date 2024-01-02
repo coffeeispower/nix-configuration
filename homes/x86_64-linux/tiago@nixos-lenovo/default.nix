@@ -1,5 +1,7 @@
 { config, pkgs, lib, inputs, system, ... }:
-
+let
+ template = (import ./mustache.nix) pkgs;
+in
 {
   imports = [ inputs.nix-colors.homeManagerModules.default ];
   home.file.".config/wallpapers/".source = ./wallpapers;
@@ -591,18 +593,7 @@
   # ---------------------------------- Eww ------------------------------------
   programs.eww.enable = true;
   programs.eww.package = pkgs.eww-wayland;
-  programs.eww.configDir = (import ./eww-config.nix) (let
-    inherit (config.colorScheme.colors)
-      base01 base06 base04 base00 base08 base0A;
-  in {
-    inherit pkgs lib;
-    widgets-bg = "#${base01}";
-    widgets-fg = "#${base06}";
-    widgets-fg-dark = "#${base04}";
-    widgets-track = "#${base00}";
-    low-battery-color = "#${base08}";
-    charging-battery-color = "#${base0A}";
-  });
+  programs.eww.configDir = import ./eww-config.nix { inherit pkgs config; };
   # -------------------------------- Firefox ----------------------------------
   programs.firefox = {
     enable = true;

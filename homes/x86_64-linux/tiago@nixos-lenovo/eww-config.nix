@@ -1,19 +1,13 @@
-{ pkgs, lib, widgets-bg, widgets-fg, widgets-fg-dark, widgets-track
-, low-battery-color, charging-battery-color }:
+{ pkgs, config }:
+let
+  template = (import ./mustache.nix) pkgs;
+in
 pkgs.stdenv.mkDerivation {
   name = "eww-config";
   src = ./eww-config;
-  buildPhase = ''
-        echo '$widgets-bg: ${widgets-bg};
-    $widgets-fg: ${widgets-fg};
-    $widgets-fg-dark: ${widgets-fg-dark};
-    $widgets-track: ${widgets-track};
-    $low-battery-color: ${low-battery-color};
-    $charging-battery-color: ${charging-battery-color};' > variables.scss;
-        cat variables.scss eww-template.scss > eww.scss
-  '';
   installPhase = ''
     mkdir -p $out
-    cp eww.scss eww.yuck $out/
+    cp ${template "eww-config" ./eww-config/eww.template.scss config.colorScheme.colors} $out/eww.scss
+    cp eww.yuck $out/eww.yuck
   '';
 }

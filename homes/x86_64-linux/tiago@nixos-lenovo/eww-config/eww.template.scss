@@ -1,3 +1,9 @@
+$widgets-bg: #{{base01}};
+$widgets-fg: #{{base06}};
+$widgets-fg-dark: #{{base04}};
+$widgets-track: #{{base00}};
+$low-battery-color: #{{base08}};
+$charging-battery-color: #{{base0A}};
 * {
     all: unset; //Unsets everything so you can style everything from scratch
     font-family: monospace;
