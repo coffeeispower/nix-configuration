@@ -406,6 +406,7 @@
     pavucontrol
     neofetch
     feh
+    vlc
   ];
   # --------------------------- Allow unfree packages ---------------------------
   nixpkgs.config.allowUnfree = true;
