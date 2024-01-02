@@ -620,4 +620,13 @@
   # -------------------------------- Enable DirEnv -------------------------------
   programs.direnv.enable = true;
   programs.direnv.nix-direnv.enable = true;
+  xdg.mimeApps = {
+    enable = true;
+    associations.added = {
+      "inode/directory" = ["thunar.desktop"];
+    };
+    defaultApplications = {
+      "inode/directory" = ["thunar.desktop"];
+    };
+  };
 }
