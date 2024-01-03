@@ -19,7 +19,7 @@
     (box :class "disk_usage" :orientation "h" (metric :label "󰋊"
         :value {round((1 - (EWW_DISK["/"].free / EWW_DISK["/"].total)) * 100, 0)}
       :onchange ""))
-    (box :class "wifi" :orientation "h" 
+    (box :class "wifi" :orientation "h"
       (_network
         :ssid net_ssid :strength net_strength
         :offline "󰤮"
@@ -45,20 +45,20 @@
 (defpoll net_strength :interval "100s"
   :initial `N/A`
   `LANG=en nmcli -t -f SIGNAL,ACTIVE device wifi \
-    | awk -F':' '{if($2=="yes")print$1}'`)
+  | awk -F':' '{if($2=="yes")print$1}'`)
 (defpoll net_ssid :interval "100s"
   :initial `N/A`
   `LANG=en nmcli -t -f SSID,ACTIVE device wifi \
-    | awk -F':' '{if($2=="yes")print$1}'`)
+  | awk -F':' '{if($2=="yes")print$1}'`)
 (defwidget _network [strength ssid offline excellent good okay slow]
   (button :onclick "networkmanager_dmenu"
     {("${strength == "" ? offline :
       strength < 26 ? slow :
-        strength < 51 ? okay :
-        strength < 76 ? good : excellent} ${ssid == "" ? "Offline" : ssid}")}
+      strength < 51 ? okay :
+    strength < 76 ? good : excellent} ${ssid == "" ? "Offline" : ssid}")}
   )
 )
-  
+
 (defwidget workspacebutton [number label]
   (button :class {currentworkspace == number ? "current" : ""} :onclick {("hyprctl dispatch workspace ${number}")} label)
 )
