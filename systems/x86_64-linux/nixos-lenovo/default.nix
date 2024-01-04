@@ -5,18 +5,41 @@
 { config, pkgs, lib, ... }:
 
 {
+  # Enable plymouth
+  boot.kernelParams = ["quiet" "splash"];
+  boot.initrd.systemd.enable = true;
+  boot.plymouth.enable = true;
+  # Enable GVFS to be able to mount and see removable devices in thunar
   services.gvfs.enable = true;
   imports = [ # Include the results of the hardware scan.
     ./hardware-configuration.nix
   ];
   security.polkit.enable = true;
+  systemd = {
+    user.services.polkit-gnome-authentication-agent-1 = {
+      description = "polkit-gnome-authentication-agent-1";
+      wantedBy = [ "graphical-session.target" ];
+      wants = [ "graphical-session.target" ];
+      after = [ "graphical-session.target" ];
+      serviceConfig = {
+          Type = "simple";
+          ExecStart = "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1";
+          Restart = "on-failure";
+          RestartSec = 1;
+          TimeoutStopSec = 10;
+        };
+    };
+  };
+
   hardware.opengl.enable = true;
   hardware.opengl.driSupport = true;
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
+  # Set hostname
   networking.hostName = "nixos-lenovo";
   networking.networkmanager.enable = true;
+  # Add soem fonts
   fonts = {
     fontDir.enable = true;
     enableDefaultPackages = true;
@@ -71,6 +94,7 @@
     gnome.gnome-disk-utility
     gnome.file-roller
     pinentry-rofi
+    plymouth
   ];
   system.stateVersion = "unstable";
   xdg.portal.extraPortals = with pkgs; [ xdg-desktop-portal-hyprland ];
