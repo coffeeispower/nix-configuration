@@ -8,6 +8,6 @@ pkgs.stdenv.mkDerivation {
   installPhase = ''
     mkdir -p $out
     cp ${template "eww-config" ./eww-config/eww.template.scss config.colorScheme.colors} $out/eww.scss
-    cp eww.yuck $out/eww.yuck
+    cp *.yuck $out/
   '';
 }

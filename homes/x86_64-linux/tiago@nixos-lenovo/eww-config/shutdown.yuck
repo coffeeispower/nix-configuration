@@ -1,0 +1,30 @@
+(defwidget tray-shutdown-button []
+  (button :class "tray-shutdown-button shutdown-button" :onclick "shutdown now" "󰐥")
+)
+(defwidget tray-reboot-button []
+  (button :class "tray-reboot-button shutdown-button" :onclick "reboot" "󰑓")
+)
+(defwidget tray-logout-button []
+  (button :class "tray-logout-button shutdown-button" :onclick "hyprctl dispatch exit" "󰍃")
+)
+(defwidget tray-suspend-button []
+  (button :class "tray-suspend-button shutdown-button" :onclick "systemctl suspend" "󰒲")
+)
+(defwidget shutdown-icons-tray []
+  (box :class "shutdown-icons-tray" :spacing 10 :orientation "horizontal" :halign "center" 
+    (tray-shutdown-button)
+    (tray-reboot-button)
+    (tray-logout-button)
+    (tray-suspend-button)
+  )
+)
+; A little shutdown popup at the center of the screen
+; with options to suspend, shutdown, logout or reboot
+(defwindow shutdown
+  :monitor 0
+  :geometry (geometry :anchor "center center")
+  :exclusive true
+  :stacking "fg"
+  (box :class "shutdown-box" :orientation "vertical" (label :style "font-size: 20px" :text "Shutdown") (shutdown-icons-tray))
+)
+

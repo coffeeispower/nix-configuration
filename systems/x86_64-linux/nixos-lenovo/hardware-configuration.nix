@@ -22,7 +22,11 @@
     device = "/dev/disk/by-label/BOOT";
     fsType = "vfat";
   };
-
+  fileSystems."/mnt/cartom-sd" = {
+    device = "/dev/mmcblk0p1";
+    fsType = "btrfs";
+    options = [ "nosuid" "nodev" "nofail" "noauto" "x-gvfs-show" ];
+  };
   boot.initrd.luks.devices."luks-32474ba5-cc83-490e-91c9-491899f34b20".device =
     "/dev/disk/by-uuid/32474ba5-cc83-490e-91c9-491899f34b20";
 
@@ -38,7 +42,7 @@
   # networking.interfaces.wlo1.useDHCP = lib.mkDefault true;
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
-  powerManagement.cpuFreqGovernor = lib.mkDefault "powersave";
+  powerManagement.cpuFreqGovernor = lib.mkDefault "performance";
   hardware.cpu.intel.updateMicrocode =
     lib.mkDefault config.hardware.enableRedistributableFirmware;
 }

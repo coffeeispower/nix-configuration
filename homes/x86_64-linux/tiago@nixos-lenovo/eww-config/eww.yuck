@@ -121,3 +121,4 @@
   :namespace "bar"
   :stacking "bottom"
   (bar))
+(include "./shutdown.yuck")

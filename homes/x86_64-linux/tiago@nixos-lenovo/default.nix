@@ -240,8 +240,8 @@ in
         # Start Hyprpaper with the beautiful hackerman wallpaper :sunglasses:
         "${pkgs.hyprpaper}/bin/hyprpaper -c ${
           pkgs.writeText "hyprpaper.conf" ''
-            preload=/home/tiago/.config/wallpapers/hackerman.jpg
-            wallpaper=eDP-1,/home/tiago/.config/wallpapers/hackerman.jpg
+            preload=/home/tiago/.config/wallpapers/dark-mountain.jpg
+            wallpaper=eDP-1,/home/tiago/.config/wallpapers/dark-mountain.jpg
           ''
         }"
       ];
@@ -266,6 +266,9 @@ in
         ", XF86AudioRaiseVolume, exec, ${pkgs.pamixer}/bin/pamixer --increase 5"
       ];
       bind = [
+        ''$mod, S, exec, hyprctl keyword bind ", Escape, exec, eww close shutdown"''
+        ''$mod, S, exec, hyprctl keyword bind ", Escape, exec, hyprctl keyword unbind ,Escape"''
+        "$mod, S, exec, eww open shutdown"
         # Screenshot keybind
         ", Print, exec, ${pkgs.grimblast}/bin/grimblast copy area"
         # Vine boom sound effect keybind
@@ -420,6 +423,10 @@ in
     vlc
     networkmanager_dmenu
     playerctl
+    prismlauncher
+    clang
+    wdisplays
+    beekeeper-studio
   ];
   # --------------------------- Allow unfree packages ---------------------------
   nixpkgs.config.allowUnfree = true;

@@ -4,6 +4,7 @@ $widgets-fg-dark: #{{base04}};
 $widgets-track: #{{base00}};
 $low-battery-color: #{{base08}};
 $charging-battery-color: #{{base0A}};
+
 * {
     all: unset; //Unsets everything so you can style everything from scratch
     font-family: monospace;
@@ -78,6 +79,7 @@ $charging-battery-color: #{{base0A}};
     border-radius: 10px;
     color: $widgets-fg;
     padding: 0px 10px;
+    
 }
 
 .battery_low {
@@ -96,4 +98,53 @@ $charging-battery-color: #{{base0A}};
     padding: 0px 10px;
     background-color: $widgets-bg;
     color: $charging-battery-color;
+}
+
+
+
+// Shutdown window related stuff
+.shutdown-box {
+    background-color: $widgets-bg;
+    padding: 5px;
+    border-radius: 10px;
+    border-style: solid;
+    border-color: lighten($widgets-bg, 10%);
+    border-width: 1px;
+}
+.shutdown-icons-tray {
+    font-size: 30px;
+}
+.shutdown-button {
+    padding-left: 10px;
+    padding-right: 10px;
+    border-radius: 10px;
+    &:hover {
+        color: $widgets-fg;
+    }
+}
+.shutdown-button.tray-reboot-button {
+    padding-left: 5px;
+    color: #AAFF22;
+    &:hover {
+        background-color: #AAFF22;
+        color: $widgets-bg;
+    }
+}
+.tray-shutdown-button {
+    padding-left: 8px;
+    color: #FF3333;
+    &:hover {
+        background-color: #FF3333;
+    }
+}
+.tray-suspend-button {
+    padding-left: 0px;
+    color: #00FFFF;
+    &:hover {
+        background-color: #0044FF;
+    }
+}
+.tray-logout-button:hover {
+    background-color: $widgets-fg;
+    color: $widgets-bg;
 }
