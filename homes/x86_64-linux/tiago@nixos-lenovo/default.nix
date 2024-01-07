@@ -652,4 +652,5 @@ in
   services.gpg-agent = {
     enable = true;
   };
+  programs.zellij.enable = true;
 }
