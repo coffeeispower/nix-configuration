@@ -372,6 +372,7 @@ in
   programs.alacritty = {
     enable = true;
     settings = {
+      window.opacity = 0.5;
       colors = with config.colorScheme.colors; {
         bright = {
           black = "0x${base00}";
@@ -519,15 +520,12 @@ in
       "diagnostic.warning" = { underline = { style = "curl"; }; };
       "diagnostic.error" = { underline = { style = "curl"; }; };
 
-      "ui.background" = { bg = "base00"; };
       "ui.bufferline.active" = {
         fg = "base00";
-        bg = "base03";
         modifiers = [ "bold" ];
       };
       "ui.bufferline" = {
         fg = "base04";
-        bg = "base00";
       };
       "ui.cursor" = {
         fg = "base0A";
@@ -535,7 +533,7 @@ in
       };
       "ui.cursor.insert" = {
         fg = "base0A";
-        modifiers = [ "revsered" ];
+        modifiers = [ "reversed" ];
       };
       "ui.cursorline.primary" = {
         fg = "base05";
@@ -552,60 +550,47 @@ in
       "ui.gutter" = { bg = "base00"; };
       "ui.help" = {
         fg = "base06";
-        bg = "base01";
       };
       "ui.linenr" = {
         fg = "base03";
-        bg = "base00";
       };
       "ui.linenr.selected" = {
         fg = "base04";
-        bg = "base01";
         modifiers = [ "bold" ];
       };
       "ui.menu" = {
         fg = "base05";
-        bg = "base01";
       };
       "ui.menu.scroll" = {
         fg = "base03";
-        bg = "base01";
       };
       "ui.menu.selected" = {
         fg = "base01";
-        bg = "base04";
       };
       "ui.popup" = { bg = "base01"; };
       "ui.selection" = { bg = "base02"; };
       "ui.selection.primary" = { bg = "base02"; };
       "ui.statusline" = {
         fg = "base04";
-        bg = "base01";
       };
       "ui.statusline.inactive" = {
-        bg = "base01";
         fg = "base03";
       };
       "ui.statusline.insert" = {
         fg = "base00";
-        bg = "base0B";
       };
       "ui.statusline.normal" = {
         fg = "base00";
-        bg = "base03";
       };
       "ui.statusline.select" = {
         fg = "base00";
-        bg = "base0F";
       };
       "ui.text" = "base05";
       "ui.text.focus" = "base05";
       "ui.virtual.indent-guide" = { fg = "base03"; };
       "ui.virtual.inlay-hint" = { fg = "base01"; };
-      "ui.virtual.ruler" = { bg = "base01"; };
-      "ui.window" = { bg = "base01"; };
       
-      palette = lib.attrsets.mapAttrs (name: value:  "#" + value) config.colorScheme.colors;
+      palette = (lib.attrsets.mapAttrs (name: value:  "#" + value) config.colorScheme.colors);
     };
   };
   # ---------------------------------- Eww ------------------------------------
