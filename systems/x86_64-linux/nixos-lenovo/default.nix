@@ -95,6 +95,7 @@
     gnome.file-roller
     pinentry-rofi
     plymouth
+    cifs-utils
   ];
   system.stateVersion = "unstable";
   xdg.portal.extraPortals = with pkgs; [ xdg-desktop-portal-hyprland ];
@@ -124,5 +125,14 @@
       pinentry-program = lib.mkForce "${pkgs.pinentry-rofi}/bin/pinentry-rofi";
     };
     enableSSHSupport = true;
+  };
+  services.samba-wsdd = {
+    # make shares visible for windows 10 clients
+    enable = true;
+    openFirewall = true;
+  };
+  services.samba = {
+    enable = true;
+    securityType = "user";
   };
 }
