@@ -411,6 +411,8 @@ in
   home.homeDirectory = "/home/tiago";
   home.stateVersion = "23.11";
   home.packages = with pkgs; [
+    libreoffice
+    evince
     lutris wine
     nixfmt
     pamixer
@@ -627,6 +629,7 @@ in
       "image/svg+xml" = ["feh.desktop"];
       "image/tiff" = ["feh.desktop"];
       "image/apng" = ["feh.desktop"];
+      "application/pdf" = ["org.gnome.Evince.desktop"];
     };
   in
   {
