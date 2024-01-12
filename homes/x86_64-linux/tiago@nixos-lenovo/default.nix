@@ -1,20 +1,29 @@
 { config, pkgs, lib, inputs, system, ... }:
-let
- template = (import ./mustache.nix) pkgs;
-in
-{
+let template = (import ./mustache.nix) pkgs;
+in {
   imports = [ inputs.nix-colors.homeManagerModules.default ];
-  home.file.".config/wallpapers/".source = ./wallpapers;
-  home.file.".config/fcitx5/".source = ./fcitx5;
-  home.file.".config/networkmanager-dmenu/config.ini".source = 
-    template "nm-dmenu-config" ./networkmanager-dmenu/config.ini {
+  home.file.".config/wallpapers/" = {
+    source = ./wallpapers;
+    recursive = true;
+  };
+  home.file.".config/fcitx5/" = {
+    source = ./fcitx5;
+    recursive = true;
+  };
+  home.file.".config/networkmanager-dmenu/config.ini" = {
+    source = template "nm-dmenu-config" ./networkmanager-dmenu/config.ini {
       colors = config.colorScheme.colors;
       commands = {
         dmenu = "${pkgs.rofi}/bin/rofi -dmenu";
         terminal = "${pkgs.alacritty}/bin/alacritty";
       };
     };
-
+    recursive = true;
+  };
+  home.file.".config/eww" = {
+    source = import ./eww-config.nix { inherit pkgs config; };
+    recursive = true;
+  };
   # -------------------------- Nix Colors --------------------------
   colorScheme = inputs.nix-colors.colorSchemes.material-darker;
   # ---------------------------- Dunst -----------------------------
@@ -245,9 +254,7 @@ in
           ''
         }"
       ];
-      exec-once = [
-        "${pkgs.fcitx5}/bin/fcitx5 -d"
-      ];
+      exec-once = [ "${pkgs.fcitx5}/bin/fcitx5 -d" ];
       # Set mod key to super
       "$mod" = "SUPER";
 
@@ -266,8 +273,10 @@ in
         ", XF86AudioRaiseVolume, exec, ${pkgs.pamixer}/bin/pamixer --increase 5"
       ];
       bind = [
-        ''$mod, S, exec, hyprctl keyword bind ", Escape, exec, eww close shutdown"''
-        ''$mod, S, exec, hyprctl keyword bind ", Escape, exec, hyprctl keyword unbind ,Escape"''
+        ''
+          $mod, S, exec, hyprctl keyword bind ", Escape, exec, eww close shutdown"''
+        ''
+          $mod, S, exec, hyprctl keyword bind ", Escape, exec, hyprctl keyword unbind ,Escape"''
         "$mod, S, exec, eww open shutdown"
         # Screenshot keybind
         ", Print, exec, ${pkgs.grimblast}/bin/grimblast copy area"
@@ -333,13 +342,14 @@ in
     extensions = with pkgs.vscode-extensions;
       [ jnoortheen.nix-ide ]
       ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [
-        
+
         {
           name = "svelte-vscode";
           publisher = "svelte";
           version = "108.1.0";
           sha256 = "sha256-LCY8M77vfvzcNGOHWrDcuRkhxH1/LeUkI5r37sDuCuI=";
-        }        {
+        }
+        {
           name = "yuck";
           publisher = "eww-yuck";
           version = "0.0.3";
@@ -411,9 +421,11 @@ in
   home.homeDirectory = "/home/tiago";
   home.stateVersion = "23.11";
   home.packages = with pkgs; [
+    eww-wayland
     libreoffice
     evince
-    lutris wine
+    lutris
+    wine
     nixfmt
     pamixer
     libnotify
@@ -526,9 +538,7 @@ in
         fg = "base00";
         modifiers = [ "bold" ];
       };
-      "ui.bufferline" = {
-        fg = "base04";
-      };
+      "ui.bufferline" = { fg = "base04"; };
       "ui.cursor" = {
         fg = "base0A";
         modifiers = [ "reversed" ];
@@ -550,55 +560,32 @@ in
         modifiers = [ "reversed" ];
       };
       "ui.gutter" = { bg = "base00"; };
-      "ui.help" = {
-        fg = "base06";
-      };
-      "ui.linenr" = {
-        fg = "base03";
-      };
+      "ui.help" = { fg = "base06"; };
+      "ui.linenr" = { fg = "base03"; };
       "ui.linenr.selected" = {
         fg = "base04";
         modifiers = [ "bold" ];
       };
-      "ui.menu" = {
-        fg = "base05";
-      };
-      "ui.menu.scroll" = {
-        fg = "base03";
-      };
-      "ui.menu.selected" = {
-        fg = "base01";
-      };
+      "ui.menu" = { fg = "base05"; };
+      "ui.menu.scroll" = { fg = "base03"; };
+      "ui.menu.selected" = { fg = "base01"; };
       "ui.popup" = { bg = "base01"; };
       "ui.selection" = { bg = "base02"; };
       "ui.selection.primary" = { bg = "base02"; };
-      "ui.statusline" = {
-        fg = "base04";
-      };
-      "ui.statusline.inactive" = {
-        fg = "base03";
-      };
-      "ui.statusline.insert" = {
-        fg = "base00";
-      };
-      "ui.statusline.normal" = {
-        fg = "base00";
-      };
-      "ui.statusline.select" = {
-        fg = "base00";
-      };
+      "ui.statusline" = { fg = "base04"; };
+      "ui.statusline.inactive" = { fg = "base03"; };
+      "ui.statusline.insert" = { fg = "base00"; };
+      "ui.statusline.normal" = { fg = "base00"; };
+      "ui.statusline.select" = { fg = "base00"; };
       "ui.text" = "base05";
       "ui.text.focus" = "base05";
       "ui.virtual.indent-guide" = { fg = "base03"; };
       "ui.virtual.inlay-hint" = { fg = "base01"; };
-      
-      palette = (lib.attrsets.mapAttrs (name: value:  "#" + value) config.colorScheme.colors);
+
+      palette = (lib.attrsets.mapAttrs (name: value: "#" + value)
+        config.colorScheme.colors);
     };
   };
-  # ---------------------------------- Eww ------------------------------------
-  programs.eww.enable = true;
-  programs.eww.package = pkgs.eww-wayland;
-  programs.eww.configDir = import ./eww-config.nix { inherit pkgs config; };
   # -------------------------------- Firefox ----------------------------------
   programs.firefox = {
     enable = true;
@@ -620,25 +607,22 @@ in
   programs.direnv.nix-direnv.enable = true;
   xdg.mimeApps = let
     associations = {
-      "inode/directory" = ["thunar.desktop"];
-      "image/png" = ["feh.desktop"];
-      "image/jpeg" = ["feh.desktop"];
-      "image/webp" = ["feh.desktop"];
-      "image/gif" = ["feh.desktop"];
-      "image/bmp" = ["feh.desktop"];
-      "image/svg+xml" = ["feh.desktop"];
-      "image/tiff" = ["feh.desktop"];
-      "image/apng" = ["feh.desktop"];
-      "application/pdf" = ["org.gnome.Evince.desktop"];
+      "inode/directory" = [ "thunar.desktop" ];
+      "image/png" = [ "feh.desktop" ];
+      "image/jpeg" = [ "feh.desktop" ];
+      "image/webp" = [ "feh.desktop" ];
+      "image/gif" = [ "feh.desktop" ];
+      "image/bmp" = [ "feh.desktop" ];
+      "image/svg+xml" = [ "feh.desktop" ];
+      "image/tiff" = [ "feh.desktop" ];
+      "image/apng" = [ "feh.desktop" ];
+      "application/pdf" = [ "org.gnome.Evince.desktop" ];
     };
-  in
-  {
+  in {
     enable = true;
     associations.added = associations;
     defaultApplications = associations;
   };
-  services.gpg-agent = {
-    enable = true;
-  };
+  services.gpg-agent = { enable = true; };
   programs.zellij.enable = true;
 }

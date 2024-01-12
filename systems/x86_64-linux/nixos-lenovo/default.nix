@@ -6,7 +6,7 @@
 
 {
   # Enable plymouth
-  boot.kernelParams = ["quiet" "splash"];
+  boot.kernelParams = [ "quiet" "splash" ];
   boot.initrd.systemd.enable = true;
   boot.plymouth.enable = true;
   # Enable GVFS to be able to mount and see removable devices in thunar
@@ -22,12 +22,13 @@
       wants = [ "graphical-session.target" ];
       after = [ "graphical-session.target" ];
       serviceConfig = {
-          Type = "simple";
-          ExecStart = "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1";
-          Restart = "on-failure";
-          RestartSec = 1;
-          TimeoutStopSec = 10;
-        };
+        Type = "simple";
+        ExecStart =
+          "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1";
+        Restart = "on-failure";
+        RestartSec = 1;
+        TimeoutStopSec = 10;
+      };
     };
   };
 
@@ -107,8 +108,10 @@
   # Enable steam
   programs.steam = {
     enable = true;
-    remotePlay.openFirewall = true; # Open ports in the firewall for Steam Remote Play
-    dedicatedServer.openFirewall = true; # Open ports in the firewall for Source Dedicated Server
+    remotePlay.openFirewall =
+      true; # Open ports in the firewall for Steam Remote Play
+    dedicatedServer.openFirewall =
+      true; # Open ports in the firewall for Source Dedicated Server
   };
   # Enable japanese input with ibus
   i18n.inputMethod = {
@@ -117,7 +120,8 @@
   };
   # Enable bluetooth
   hardware.bluetooth.enable = true; # enables support for Bluetooth
-  hardware.bluetooth.powerOnBoot = true; # powers up the default Bluetooth controller on boot
+  hardware.bluetooth.powerOnBoot =
+    true; # powers up the default Bluetooth controller on boot
   services.blueman.enable = true;
   programs.gnupg.agent = {
     enable = true;
