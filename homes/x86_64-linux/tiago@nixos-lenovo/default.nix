@@ -340,14 +340,29 @@ in {
     enable = true;
     mutableExtensionsDir = false;
     extensions = with pkgs.vscode-extensions;
-      [ jnoortheen.nix-ide ]
+      [
+        jnoortheen.nix-ide
+        mkhl.direnv
+        usernamehw.errorlens
+        dart-code.flutter
+        dart-code.dart-code
+        davidanson.vscode-markdownlint
+        svelte.svelte-vscode
+        rust-lang.rust-analyzer
+      ]
       ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [
-
         {
-          name = "svelte-vscode";
-          publisher = "svelte";
-          version = "108.1.0";
-          sha256 = "sha256-LCY8M77vfvzcNGOHWrDcuRkhxH1/LeUkI5r37sDuCuI=";
+          publisher = "aaron-bond";
+          name = "better-comments";
+          version = "3.0.2";
+          sha256 = "sha256-hQmA8PWjf2Nd60v5EAuqqD8LIEu7slrNs8luc3ePgZc=";
+
+        }
+        {
+          publisher = "naumovs";
+          name = "color-highlight";
+          version = "2.5.0";
+          sha256 = "sha256-dYMDV84LEGXUjt/fbsSy3BVM5SsBHcPaDDll8KjPIWY=";
         }
         {
           name = "yuck";
@@ -372,6 +387,12 @@ in {
           publisher = "k--kato";
           version = "1.5.12";
           sha256 = "sha256-khXO8zLwQcdqiJxFlgLQSQbVz2fNxFY6vGTuD1DBjlc=";
+        }
+        {
+          name = "arb-editor";
+          publisher = "Google";
+          version = "0.0.12";
+          sha256 = "sha256-1egXFSDBe2njR4gI3mr+2Hu5TddP2VHkxjdgwCwXXU4=";
         }
       ];
   };
