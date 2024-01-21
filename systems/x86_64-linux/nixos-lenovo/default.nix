@@ -82,12 +82,13 @@
   programs.hyprland.enable = true;
   users.users.tiago = {
     isNormalUser = true;
-    extraGroups = [ "wheel" "docker" ]; # Enable ‘sudo’ for the user.
+    extraGroups = [ "wheel" "docker" "adbusers" ]; # Enable ‘sudo’ for the user.
     hashedPassword =
       "$y$j9T$x4wYgVWjLlUp43gVSTvj61$XX50fudyvMCLx0kvm/EHAplZ.ev1Lxj1ZrRoB4itEMA";
     shell = pkgs.nushell;
   };
   environment.systemPackages = with pkgs; [
+    virtiofsd
     xfce.thunar
     xfce.thunar-volman
     xfce.thunar-archive-plugin
@@ -139,4 +140,7 @@
     enable = true;
     securityType = "user";
   };
+  programs.virt-manager.enable = true;
+  virtualisation.libvirtd.enable = true;
+  programs.adb.enable = true;
 }
