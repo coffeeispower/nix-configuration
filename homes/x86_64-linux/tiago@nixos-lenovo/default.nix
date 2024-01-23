@@ -442,6 +442,8 @@ in {
   home.homeDirectory = "/home/tiago";
   home.stateVersion = "23.11";
   home.packages = with pkgs; [
+    networkmanagerapplet
+    protonvpn-gui
     eww-wayland
     libreoffice
     evince
@@ -463,9 +465,15 @@ in {
     clang
     wdisplays
     beekeeper-studio
+
+    ferdium
+    obsidian
   ];
   # --------------------------- Allow unfree packages ---------------------------
   nixpkgs.config.allowUnfree = true;
+  nixpkgs.config.permittedInsecurePackages = [
+    "electron-25.9.0"
+  ];
   # -------------------------------- GTK Theme ----------------------------------
   home.pointerCursor = {
     gtk.enable = true;
