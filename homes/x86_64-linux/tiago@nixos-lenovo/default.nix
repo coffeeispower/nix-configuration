@@ -264,7 +264,9 @@ in {
       input = {
         # Enable touchpad natural scroll
         touchpad.natural_scroll = "yes";
+        touchpad.disable_while_typing = false;
       };
+      windowrule = ["tile,title:^(Minecraft)(.*)$"];
       # Enable workspace swipe
       gestures.workspace_swipe = "yes";
       binde = [
