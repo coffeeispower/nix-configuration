@@ -8,7 +8,7 @@ in {
   };
   home.file.".config/fcitx5/" = {
     source = ./fcitx5;
-    recursive = true;
+    recursive = false;
   };
   home.file.".config/networkmanager-dmenu/config.ini" = {
     source = template "nm-dmenu-config" ./networkmanager-dmenu/config.ini {
