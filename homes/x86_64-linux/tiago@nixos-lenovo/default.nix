@@ -249,8 +249,8 @@ in {
         # Start Hyprpaper with the beautiful hackerman wallpaper :sunglasses:
         "${pkgs.hyprpaper}/bin/hyprpaper -c ${
           pkgs.writeText "hyprpaper.conf" ''
-            preload=/home/tiago/.config/wallpapers/dark-mountain.jpg
-            wallpaper=eDP-1,/home/tiago/.config/wallpapers/dark-mountain.jpg
+            preload=/home/tiago/.config/wallpapers/hackerman.jpg
+            wallpaper=eDP-1,/home/tiago/.config/wallpapers/hackerman.jpg
           ''
         }"
       ];
@@ -505,6 +505,7 @@ in {
   programs.nushell = {
     enable = true;
     shellAliases = { lg = "lazygit"; };
+    envFile.source = ./nushell/env.nu;
   };
   # --------------------------------- Helix -----------------------------------
   programs.helix = {
