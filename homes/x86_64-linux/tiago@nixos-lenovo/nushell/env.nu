@@ -42,7 +42,7 @@ def create_right_prompt [] {
         ($env.LAST_EXIT_CODE)
     ] | str join)
     } else { "" }
-    let devShellIndicator = if $env.name != null { $"\(devShell: ($env.name)\)" } else { null };
+    let devShellIndicator = if $env.name? != null { $"\(devShell: ($env.name)\)" } else { null };
     ([$last_exit_code, (ansi green), (char space), $devShellIndicator, (char space),$time_segment] | str join)
 }
 
