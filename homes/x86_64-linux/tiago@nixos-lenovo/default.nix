@@ -405,7 +405,7 @@ in {
   programs.alacritty = {
     enable = true;
     settings = {
-      window.opacity = 0.5;
+      window.opacity = 0.9;
       colors = with config.colorScheme.colors; {
         bright = {
           black = "0x${base00}";
