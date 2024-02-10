@@ -351,6 +351,7 @@ in {
         davidanson.vscode-markdownlint
         svelte.svelte-vscode
         rust-lang.rust-analyzer
+        llvm-vs-code-extensions.vscode-clangd
       ]
       ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [
         {
