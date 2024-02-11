@@ -224,11 +224,13 @@ in {
         "col.active_border" = "rgba(${base01}ff) rgba(${base0A}ff) 45deg";
         "col.inactive_border" = "rgba(${base00}ff)";
         "border_size" = 2;
-      };
-      "device:at-translated-set-2-keyboard" = {
+      }; # device:at-translated-set-2-keyboard
+      "input" = {
         kb_layout = "pt,jp";
         kb_variant = "anthy";
         kb_options = "grp:win_space_toggle";
+        touchpad.natural_scroll = "yes";
+        touchpad.disable_while_typing = false;
       };
       decoration = {
         rounding = 10;
@@ -261,11 +263,6 @@ in {
       # Move apps with the mouse
       bindm = [ "$mod,mouse:272,movewindow" "$mod,mouse:273,resizewindow" ];
 
-      input = {
-        # Enable touchpad natural scroll
-        touchpad.natural_scroll = "yes";
-        touchpad.disable_while_typing = false;
-      };
       windowrule = ["tile,title:^(Minecraft)(.*)$"];
       # Enable workspace swipe
       gestures.workspace_swipe = "yes";
