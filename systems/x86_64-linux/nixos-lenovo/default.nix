@@ -76,7 +76,6 @@
   services.xserver.enable = true;
   # Enable touchpad support (enabled default in most desktopManager).
   services.xserver.libinput.enable = true;
-  services.xserver.displayManager.gdm.enable = true;
   programs.dconf.enable = true;
   programs.git.enable = true;
   programs.hyprland.enable = true;
@@ -150,4 +149,14 @@
     keepEnv = true;  # Optional, retains environment variables while running commands
     persist = true;  # Optional, only require password verification a single time
   }];
+  services.greetd = {
+    enable = true;
+    settings = rec {
+      initial_session = {
+        command = "dbus-run-session Hyprland";
+        user = "tiago";
+      };
+      default_session = initial_session;
+    };
+  };
 }
