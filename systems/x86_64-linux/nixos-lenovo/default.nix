@@ -48,6 +48,7 @@
     packages = with pkgs; [
       (nerdfonts.override { fonts = [ "FiraCode" ]; })
       ipafont
+      monocraft
     ];
   };
   # Set your time zone.
@@ -74,6 +75,8 @@
     pulse.enable = true;
   };
   services.xserver.enable = true;
+  services.xserver.excludePackages = [ pkgs.xterm ];
+  services.xserver.desktopManager.xterm.enable = false;
   # Enable touchpad support (enabled default in most desktopManager).
   services.xserver.libinput.enable = true;
   programs.dconf.enable = true;
