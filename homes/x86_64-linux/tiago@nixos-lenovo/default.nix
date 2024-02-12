@@ -629,7 +629,7 @@ in {
   };
 
   # -------------------------------- Github CLI -------------------------------
-  programs.gh = { enable = true; };
+  programs.gh = { enable = true; settings.git_protocol = "ssh"; };
   # -------------------------------- Enable DirEnv -------------------------------
   programs.direnv.enable = true;
   programs.direnv.nix-direnv.enable = true;
