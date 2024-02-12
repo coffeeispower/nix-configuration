@@ -1,6 +1,10 @@
 { config, pkgs, lib, inputs, system, ... }:
 let template = (import ./mustache.nix) pkgs;
 in {
+  home.sessionVariables = {
+    BROWSER = "${pkgs.firefox}/bin/firefox";
+    TERMINAL = "${pkgs.alacritty}/bin/alacritty";
+  };
   imports = [ inputs.nix-colors.homeManagerModules.default ];
   home.file.".config/wallpapers/" = {
     source = ./wallpapers;
