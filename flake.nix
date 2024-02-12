@@ -14,12 +14,16 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     nix-colors.url = "github:misterio77/nix-colors";
+    nix-software-center.url = "github:snowfallorg/nix-software-center";
   };
 
   outputs = inputs:
     inputs.snowfall-lib.mkFlake {
       inherit inputs;
       channels-config.allowUnfree = true;
+      channels-config.permittedInsecurePackages = [
+        "electron-25.9.0"
+      ];
       src = ./.;
     };
 }

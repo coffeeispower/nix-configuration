@@ -1,8 +1,4 @@
-# Edit this configuration file to define what should be installed on
-# your system.  Help is available in the configuration.nix(5) man page
-# and in the NixOS manual (accessible by running `nixos-help`).
-
-{ config, pkgs, lib, ... }:
+{ config, pkgs, lib, system, ... }:
 
 {
   # Enable plymouth
@@ -100,6 +96,32 @@
     pinentry-rofi
     plymouth
     cifs-utils
+    inputs.nix-software-center.packages.${system}.nix-software-center
+    networkmanagerapplet
+    protonvpn-gui
+    eww-wayland
+    libreoffice
+    evince
+    lutris
+    wine
+    nixfmt
+    pamixer
+    libnotify
+    spotify
+    discord
+    cli-visualizer
+    pavucontrol
+    neofetch
+    feh
+    vlc
+    networkmanager_dmenu
+    playerctl
+    prismlauncher
+    clang
+    wdisplays
+    beekeeper-studio
+    ferdium
+    obsidian
   ];
   system.stateVersion = "unstable";
   xdg.portal.extraPortals = with pkgs; [ xdg-desktop-portal-hyprland ];

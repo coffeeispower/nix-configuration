@@ -276,10 +276,8 @@ in {
         ", XF86AudioRaiseVolume, exec, ${pkgs.pamixer}/bin/pamixer --increase 5"
       ];
       bind = [
-        ''
-          $mod, S, exec, hyprctl keyword bind ", Escape, exec, eww close shutdown"''
-        ''
-          $mod, S, exec, hyprctl keyword bind ", Escape, exec, hyprctl keyword unbind ,Escape"''
+        ''$mod, S, exec, hyprctl keyword bind ", Escape, exec, eww close shutdown"''
+        ''$mod, S, exec, hyprctl keyword bind ", Escape, exec, hyprctl keyword unbind ,Escape"''
         "$mod, S, exec, eww open shutdown"
         # Screenshot keybind
         ", Print, exec, ${pkgs.grimblast}/bin/grimblast copy area"
@@ -439,39 +437,6 @@ in {
   home.username = "tiago";
   home.homeDirectory = "/home/tiago";
   home.stateVersion = "23.11";
-  home.packages = with pkgs; [
-    networkmanagerapplet
-    protonvpn-gui
-    eww-wayland
-    libreoffice
-    evince
-    lutris
-    wine
-    nixfmt
-    pamixer
-    libnotify
-    spotify
-    discord
-    cli-visualizer
-    pavucontrol
-    neofetch
-    feh
-    vlc
-    networkmanager_dmenu
-    playerctl
-    prismlauncher
-    clang
-    wdisplays
-    beekeeper-studio
-
-    ferdium
-    obsidian
-  ];
-  # --------------------------- Allow unfree packages ---------------------------
-  nixpkgs.config.allowUnfree = true;
-  nixpkgs.config.permittedInsecurePackages = [
-    "electron-25.9.0"
-  ];
   # -------------------------------- GTK Theme ----------------------------------
   home.pointerCursor = {
     gtk.enable = true;
