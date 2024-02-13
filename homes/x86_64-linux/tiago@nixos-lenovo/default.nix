@@ -437,6 +437,10 @@ in {
   home.username = "tiago";
   home.homeDirectory = "/home/tiago";
   home.stateVersion = "23.11";
+  nixpkgs.config.allowUnfree = true;
+  nixpkgs.config.permittedInsecurePackages = [
+    "electron-25.9.0"
+  ];
   # -------------------------------- GTK Theme ----------------------------------
   home.pointerCursor = {
     gtk.enable = true;

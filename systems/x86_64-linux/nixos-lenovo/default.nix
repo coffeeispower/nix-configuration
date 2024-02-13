@@ -1,4 +1,4 @@
-{ config, pkgs, lib, system, ... }:
+{ config, pkgs, lib, system, inputs, ... }:
 
 {
   # Enable plymouth
@@ -122,7 +122,10 @@
     beekeeper-studio
     ferdium
     obsidian
+    gimp
+    transmission-gtk
   ];
+  environment.shells = [ pkgs.nushell ];
   system.stateVersion = "unstable";
   xdg.portal.extraPortals = with pkgs; [ xdg-desktop-portal-hyprland ];
   xdg.portal.config = { common = { default = [ "hyprland" ]; }; };
