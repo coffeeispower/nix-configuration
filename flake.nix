@@ -15,6 +15,7 @@
     };
     nix-colors.url = "github:misterio77/nix-colors";
     nix-software-center.url = "github:snowfallorg/nix-software-center";
+    nixos-conf-editor.url = "github:snowfallorg/nixos-conf-editor";
   };
 
   outputs = inputs:
