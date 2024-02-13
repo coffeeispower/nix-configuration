@@ -42,11 +42,11 @@
     (box :class "time" :orientation "h" time)
   ))
 
-(defpoll net_strength :interval "100s"
+(defpoll net_strength :interval "1s"
   :initial `N/A`
   `LANG=en nmcli -t -f SIGNAL,ACTIVE device wifi \
   | awk -F':' '{if($2=="yes")print$1}'`)
-(defpoll net_ssid :interval "100s"
+(defpoll net_ssid :interval "1s"
   :initial `N/A`
   `LANG=en nmcli -t -f SSID,ACTIVE device wifi \
   | awk -F':' '{if($2=="yes")print$1}'`)

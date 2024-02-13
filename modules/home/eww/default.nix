@@ -11,7 +11,7 @@
             inherit pkgs;
             name = "eww-config-scss";
             templateFile = ./eww.template.scss;
-            variables = config.colorScheme.palette;
+            variables = config.stylix.base16Scheme;
           }
         } $out/eww.scss
         cp *.yuck $out/
@@ -19,10 +19,7 @@
     };
     recursive = true;
   };
-  wayland.windowManager.hyprland.settings.exec = [
-    (pkgs.writeShellScript "reset-eww" ''
-          eww close-all
-          eww open bar
-        '')
-    ];
+  wayland.windowManager.hyprland.settings.exec-once = [
+    "${pkgs.eww}/bin/eww open bar"
+  ];
 }

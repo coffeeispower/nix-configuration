@@ -6,7 +6,7 @@
       templateFile = ./config.ini;
       name = "networkmanager-dmenu-config";
       variables = {
-        colors = config.colorScheme.palette;
+        colors = config.stylix.base16Scheme;
         commands = {
           dmenu = "${pkgs.rofi}/bin/rofi -dmenu";
           terminal = "${pkgs.alacritty}/bin/alacritty";

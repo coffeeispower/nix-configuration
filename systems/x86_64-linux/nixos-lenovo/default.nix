@@ -36,17 +36,7 @@
   # Set hostname
   networking.hostName = "nixos-lenovo";
   networking.networkmanager.enable = true;
-  # Add soem fonts
-  fonts = {
-    fontDir.enable = true;
-    enableDefaultPackages = true;
-    fontconfig = { defaultFonts.monospace = [ "FiraCode" ]; };
-    packages = with pkgs; [
-      (nerdfonts.override { fonts = [ "FiraCode" ]; })
-      ipafont
-      monocraft
-    ];
-  };
+  
   # Set your time zone.
   time.timeZone = "Europe/Lisbon";
   virtualisation.docker.enable = true;

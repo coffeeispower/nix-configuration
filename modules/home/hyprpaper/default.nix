@@ -1,9 +1,10 @@
-{pkgs, ...}: {
+{pkgs, config, ...}: {
   wayland.windowManager.hyprland.settings.exec = [
     "${pkgs.hyprpaper}/bin/hyprpaper -c ${
       pkgs.writeText "hyprpaper.conf" ''
-        preload=${./wallpapers/hackerman.jpg}
-        wallpaper=eDP-1,${./wallpapers/hackerman.jpg}
+        preload=${config.stylix.image}
+        wallpaper=eDP-1,${config.stylix.image}
+        wallpaper=DP-1,${config.stylix.image}
       ''
     }"
   ];

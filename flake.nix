@@ -13,8 +13,8 @@
       url = "gitlab:rycee/nur-expressions?dir=pkgs/firefox-addons";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    nix-colors = {
-      url = "github:misterio77/nix-colors";
+    stylix = {
+      url = "github:danth/stylix/release-23.11";
     };
     nix-software-center = {
       url = "github:snowfallorg/nix-software-center";
@@ -35,12 +35,6 @@
       ];
       src = ./.;
       snowfall.namespace = "my-lib";
-      homes = {
-        users."tiago@nixos-lenovo" = {
-          modules = [
-            inputs.nix-colors.homeManagerModules.default
-          ];
-        };
-      };
+      systems.modules.nixos = [ inputs.stylix.nixosModules.stylix ];
     };
 }

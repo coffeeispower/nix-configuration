@@ -4,12 +4,6 @@
     enable = true;
 
     settings = {
-      general = let inherit (config.colorScheme.palette) base00 base01 base0A;
-      in {
-        "col.active_border" = "rgba(${base01}ff) rgba(${base0A}ff) 45deg";
-        "col.inactive_border" = "rgba(${base00}ff)";
-        "border_size" = 2;
-      };
       "input" = {
         kb_layout = "pt,jp";
         kb_variant = "anthy";
@@ -46,20 +40,12 @@
         ''$mod, S, exec, hyprctl keyword bind ", Escape, exec, hyprctl keyword unbind ,Escape"''
         "$mod, S, exec, eww open shutdown"
         # Screenshot keybind
-        ", Print, exec, ${pkgs.grimblast}/bin/grimblast copy area"
+        '',Print,exec,${pkgs.grim}/bin/grim -c -g "$(${pkgs.slurp}/bin/slurp)" - | ${pkgs.swappy}/bin/swappy -f -''
         # Binds to move between workspaces
         "CTRL ALT, left, workspace, e-1"
         "CTRL ALT, right, workspace, e+1"
         "CTRL ALT SHIFT, left, movetoworkspace, e-1"
         "CTRL ALT SHIFT, right, movetoworkspace, e+1"
-
-        # Reload eww bind
-        "$mod, R, exec, ${
-          pkgs.writeShellScript "reset-eww" ''
-            pkill eww
-            eww open bar
-          ''
-        }"
 
         # Start rofi app launcher
         "$mod, D, exec, ${pkgs.rofi-wayland}/bin/rofi -show drun -show-icons"

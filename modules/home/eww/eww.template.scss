@@ -1,9 +1,8 @@
-$widgets-bg: #{{base01}};
-$widgets-fg: #{{base06}};
-$widgets-fg-dark: #{{base04}};
-$widgets-track: #{{base00}};
-$low-battery-color: #{{base08}};
-$charging-battery-color: #{{base0A}};
+$widgets-bg: #{{base00}};
+$widgets-fg: #{{base0D}};
+$widgets-track: #{{base01}};
+$low-battery-color: #{{base00}};
+$charging-battery-color: #{{base00}};
 
 * {
     all: unset; //Unsets everything so you can style everything from scratch
@@ -124,27 +123,32 @@ $charging-battery-color: #{{base0A}};
 }
 .shutdown-button.tray-reboot-button {
     padding-left: 5px;
-    color: #AAFF22;
+    color: $widgets-fg;
     &:hover {
-        background-color: #AAFF22;
+        background-color: $widgets-fg;
         color: $widgets-bg;
     }
 }
 .tray-shutdown-button {
     padding-left: 8px;
-    color: #FF3333;
+    color: $widgets-fg;
     &:hover {
-        background-color: #FF3333;
+        color: $widgets-bg;
+        background-color: $widgets-fg;
     }
 }
 .tray-suspend-button {
     padding-left: 0px;
-    color: #00FFFF;
+    color: $widgets-fg;
     &:hover {
-        background-color: #0044FF;
+        color: $widgets-bg;
+        background-color: $widgets-fg;
     }
 }
-.tray-logout-button:hover {
-    background-color: $widgets-fg;
-    color: $widgets-bg;
+.tray-logout-button {
+    color: $widgets-fg;
+    &:hover {
+        color: $widgets-bg;
+        background-color: $widgets-fg;
+    }
 }
