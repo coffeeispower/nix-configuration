@@ -59,7 +59,7 @@
   i18n.defaultLocale = "pt_PT.UTF-8";
   console = {
     font = "Lat2-Terminus16";
-    #    keyMap = lib.mkForce "pt";
+    # keyMap = lib.mkForce "pt";
     useXkbConfig = true;
   };
 
@@ -187,5 +187,9 @@
       };
       default_session = initial_session;
     };
+  };
+  home-manager = {
+    useGlobalPkgs = true;
+    useUserPackages = true;
   };
 }

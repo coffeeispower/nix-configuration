@@ -26,5 +26,13 @@
         "electron-25.9.0"
       ];
       src = ./.;
+      snowfall.namespace = "my-lib";
+      homes = {
+        users."tiago@nixos-lenovo" = {
+          modules = [
+            inputs.nix-colors.homeManagerModules.default
+          ];
+        };
+      };
     };
 }
