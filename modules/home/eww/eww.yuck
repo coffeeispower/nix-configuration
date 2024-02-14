@@ -6,7 +6,7 @@
 
 (defwidget indicators []
   (box :class "indicators" :orientation "h" :space-evenly false :spacing 16 :halign "end"
-
+    (music)
     (box :class "wifi" :orientation "h"
       (_network
         :ssid net_ssid :strength net_strength
