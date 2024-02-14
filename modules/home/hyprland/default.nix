@@ -62,7 +62,6 @@ with config.stylix.base16Scheme;
             workspace_swipe = yes
         }
         windowrule=tile,title:^(Minecraft)(.*)$
-        exec=${pkgs.eww-wayland}/bin/eww open bar
         binde=, XF86AudioLowerVolume, exec, ${pkgs.pamixer}/bin/pamixer --decrease 5
         binde=, XF86AudioRaiseVolume, exec, ${pkgs.pamixer}/bin/pamixer --increase 5
         binde=, XF86MonBrightnessUp, exec, ${pkgs.brightnessctl}/bin/brightnessctl s +5%

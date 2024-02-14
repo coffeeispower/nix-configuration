@@ -19,7 +19,7 @@
     };
     recursive = true;
   };
-  wayland.windowManager.hyprland.settings.exec-once = [
-    "${pkgs.eww}/bin/eww open bar"
+  wayland.windowManager.hyprland.settings.exec = [
+    "${pkgs.eww-wayland}/bin/eww open bar"
   ];
 }
