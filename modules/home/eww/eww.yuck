@@ -5,7 +5,15 @@
     (indicators)))
 
 (defwidget indicators []
-  (box :class "indicators" :orientation "h" :space-evenly false :spacing 15 :halign "end"
+  (box :class "indicators" :orientation "h" :space-evenly false :spacing 16 :halign "end"
+
+    (box :class "wifi" :orientation "h"
+      (_network
+        :ssid net_ssid :strength net_strength
+        :offline "󰤮"
+        :excellent "󰤨" :good "󰤥" :okay "󰤢" :slow "󰤟"
+      )
+    )
     (box :class "volume" :orientation "h" (
         metric
         :label {(volume > 80 ? "󰕾" : (volume > 40 ? "󰖀" : (volume > 0 ? "󰕿" : "󰝟")))}
@@ -19,13 +27,6 @@
     (box :class "disk_usage" :orientation "h" (metric :label "󰋊"
         :value {round((1 - (EWW_DISK["/"].free / EWW_DISK["/"].total)) * 100, 0)}
       :onchange ""))
-    (box :class "wifi" :orientation "h"
-      (_network
-        :ssid net_ssid :strength net_strength
-        :offline "󰤮"
-        :excellent "󰤨" :good "󰤥" :okay "󰤢" :slow "󰤟"
-      )
-    )
     (box :class "battery" :class {EWW_BATTERY["BATT"].status == "Charging" ? "battery_charging" : (EWW_BATTERY["BATT"].capacity > 40 ? "battery_normal" : "battery_low")}
       :orientation "h"
       (metric
@@ -112,11 +113,11 @@
 (defwindow bar
   :monitor 0
   :geometry (geometry :x "0%"
-    :y "2.5%"
+    :y "0%"
     :width "97%"
-    :height "5%"
+    :height "20px"
   :anchor "top center")
-  :reserve (struts :side "top" :distance "5%")
+  :reserve (struts :side "top" :distance "20px")
   :exclusive true
   :namespace "bar"
   :stacking "bottom"

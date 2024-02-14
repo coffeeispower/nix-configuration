@@ -7,6 +7,7 @@ $charging-battery-color: #{{base00}};
 * {
     all: unset; //Unsets everything so you can style everything from scratch
     font-family: monospace;
+    font-size: 10px;
 }
 
 //Global Styles
@@ -14,6 +15,8 @@ $charging-battery-color: #{{base00}};
     color: $widgets-fg;
     margin-right: 20px;
     margin-left: 20px;
+    background-color: $widgets-bg;
+    border-radius: 0px 0px 10px 10px;
 }
 
 // Styles on classes (see eww.yuck for more information)
@@ -28,10 +31,9 @@ $charging-battery-color: #{{base00}};
     all: unset;
     background-color: $widgets-track;
     border-radius: 50px;
-    min-height: 5px;
-    min-width: 50px;
-    margin-left: 10px;
-    margin-right: 10px;
+    min-height: 2px;
+    min-width: 40px;
+    margin: 0px 4px;
 }
 
 .metric scale trough highlight {
@@ -41,9 +43,6 @@ $charging-battery-color: #{{base00}};
 }
 
 
-.label-ram {
-    font-size: large;
-}
 
 .workspaces button:hover {
     color: $widgets-bg;
@@ -51,7 +50,7 @@ $charging-battery-color: #{{base00}};
 }
 
 .workspaces button {
-    padding: 5px 10px;
+    padding: 0px 2px;
     margin: 5px;
     border-radius: 10px;
 }
@@ -61,10 +60,8 @@ $charging-battery-color: #{{base00}};
     background-color: $widgets-fg;
 }
 .workspaces {
-    background-color: $widgets-bg;
-    border-radius: 10px;
+    margin-left: 6px;
 }
-
 
 
 .volume,
@@ -74,17 +71,13 @@ $charging-battery-color: #{{base00}};
 .battery_normal,
 .wifi,
 .music {
-    background-color: $widgets-bg;
-    border-radius: 10px;
-    color: $widgets-fg;
-    padding: 0px 10px;
-    
 }
-
+.time {
+    margin-right: 10px;
+}
 .battery_low {
     border-radius: 10px;
     color: $widgets-fg;
-    padding: 0px 10px;
     background-color: $low-battery-color;
 }
 
@@ -94,7 +87,6 @@ $charging-battery-color: #{{base00}};
 
 .battery_charging {
     border-radius: 10px;
-    padding: 0px 10px;
     background-color: $widgets-bg;
     color: $charging-battery-color;
 }
@@ -109,9 +101,7 @@ $charging-battery-color: #{{base00}};
     border-style: solid;
     border-color: lighten($widgets-bg, 10%);
     border-width: 1px;
-}
-.shutdown-icons-tray {
-    font-size: 30px;
+    font-size: 20px;
 }
 .shutdown-button {
     padding-left: 10px;
@@ -122,7 +112,8 @@ $charging-battery-color: #{{base00}};
     }
 }
 .shutdown-button.tray-reboot-button {
-    padding-left: 5px;
+    padding-left: 10px;
+    padding-right: 10px;
     color: $widgets-fg;
     &:hover {
         background-color: $widgets-fg;
@@ -130,7 +121,8 @@ $charging-battery-color: #{{base00}};
     }
 }
 .tray-shutdown-button {
-    padding-left: 8px;
+    padding-left: 10px;
+    padding-right: 10px;
     color: $widgets-fg;
     &:hover {
         color: $widgets-bg;
@@ -138,7 +130,8 @@ $charging-battery-color: #{{base00}};
     }
 }
 .tray-suspend-button {
-    padding-left: 0px;
+    padding-left: 10px;
+    padding-right: 10px;
     color: $widgets-fg;
     &:hover {
         color: $widgets-bg;
@@ -146,6 +139,8 @@ $charging-battery-color: #{{base00}};
     }
 }
 .tray-logout-button {
+    padding-left: 10px;
+    padding-right: 10px;
     color: $widgets-fg;
     &:hover {
         color: $widgets-bg;
