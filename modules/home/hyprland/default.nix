@@ -33,8 +33,16 @@
         # Volume Up and Down keybinds
         ", XF86AudioLowerVolume, exec, ${pkgs.pamixer}/bin/pamixer --decrease 5"
         ", XF86AudioRaiseVolume, exec, ${pkgs.pamixer}/bin/pamixer --increase 5"
+        # Brightness keys
+        ", XF86MonBrightnessUp, exec, ${pkgs.brightnessctl}/bin/brightnessctl s +5%"
+        ", XF86MonBrightnessDown, exec, ${pkgs.brightnessctl}/bin/brightnessctl s 5%-"
       ];
       bind = [
+        # Toggle sound
+        ", XF86AudioMute, exec, ${pkgs.pamixer}/bin/pamixer -t"
+        # Suspend button
+        ", XF86Sleep, exec, ${pkgs.systemd}/bin/systemctl suspend"
+        # Shutdown menu
         ''$mod, S, exec, ${pkgs.hyprland}/bin/hyprctl keyword bind ", Escape, exec, eww close shutdown"''
         ''$mod, S, exec, ${pkgs.hyprland}/bin/hyprctl keyword bind ", Escape, exec, hyprctl keyword unbind ,Escape"''
         "$mod, S, exec, ${pkgs.eww-wayland}/bin/eww open shutdown"

@@ -101,47 +101,13 @@ $charging-battery-color: #{{base00}};
     border-style: solid;
     border-color: lighten($widgets-bg, 10%);
     border-width: 1px;
-    font-size: 20px;
 }
+
 .shutdown-button {
-    padding-left: 10px;
-    padding-right: 10px;
+    min-width: 30px;
+    min-height: 30px;
+    color: $widgets-fg;
     border-radius: 10px;
-    &:hover {
-        color: $widgets-fg;
-    }
-}
-.shutdown-button.tray-reboot-button {
-    padding-left: 10px;
-    padding-right: 10px;
-    color: $widgets-fg;
-    &:hover {
-        background-color: $widgets-fg;
-        color: $widgets-bg;
-    }
-}
-.tray-shutdown-button {
-    padding-left: 10px;
-    padding-right: 10px;
-    color: $widgets-fg;
-    &:hover {
-        color: $widgets-bg;
-        background-color: $widgets-fg;
-    }
-}
-.tray-suspend-button {
-    padding-left: 10px;
-    padding-right: 10px;
-    color: $widgets-fg;
-    &:hover {
-        color: $widgets-bg;
-        background-color: $widgets-fg;
-    }
-}
-.tray-logout-button {
-    padding-left: 10px;
-    padding-right: 10px;
-    color: $widgets-fg;
     &:hover {
         color: $widgets-bg;
         background-color: $widgets-fg;
