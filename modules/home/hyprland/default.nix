@@ -1,6 +1,83 @@
 {pkgs, config, inputs, ...}:
 let
   hyprland = inputs.hyprland.packages.${pkgs.system}.hyprland;
+  hyprlandEventHandlers = pkgs.writeShellScript "hyprlandEventHandlers" ''
+    event_workspace() {
+      ${pkgs.eww-wayland}/bin/eww update currentworkspace=$WORKSPACENAME
+    }
+
+    event_focusedmon() {
+      : # MONNAME WORKSPACENAME
+    }
+
+    event_activewindow() {
+      : # WINDOWCLASS WINDOWTITLE
+    }
+
+    event_activewindowv2() {
+      : # WINDOWADDRESS
+    }
+
+    event_fullscreen() {
+      : # ENTER (0 if leaving fullscreen, 1 if entering)
+    }
+
+    event_monitorremoved() {
+      : # MONITORNAME
+    }
+
+    event_monitoradded() {
+      : # MONITORNAME
+    }
+
+    event_createworkspace() {
+      : # WORKSPACENAME
+    }
+
+    event_destroyworkspace() {
+      : # WORKSPACENAME
+    }
+
+    event_moveworkspace() {
+      : # WORKSPACENAME MONNAME
+    }
+
+    event_activelayout() {
+      : # KEYBOARDNAME LAYOUTNAME
+    }
+
+    event_openwindow() {
+      : # WINDOWADDRESS WORKSPACENAME WINDOWCLASS WINDOWTITLE
+    }
+
+    event_closewindow() {
+      : # WINDOWADDRESS
+    }
+
+    event_movewindow() {
+      : # WINDOWADDRESS WORKSPACENAME
+    }
+
+    event_windowtitle() {
+      : # WINDOWADDRESS
+    }
+
+    event_openlayer() {
+      : # NAMESPACE
+    }
+
+    event_closelayer() {
+      : # NAMESPACE
+    }
+
+    event_submap() {
+      : # SUBMAPNAME
+    }
+  '';
+  hyprlandHandleEvents = pkgs.writeShellScript "hyprlandHandleEvents" ''
+    ${pkgs.socat}/bin/socat -u UNIX-CONNECT:/tmp/hypr/$HYPRLAND_INSTANCE_SIGNATURE/.socket2.sock \
+      EXEC:"${inputs.hyprland-contrib.packages.${pkgs.system}.shellevents}/bin/shellevents ${hyprlandEventHandlers}",nofork
+  '';
 in
 with config.stylix.base16Scheme;
 {
@@ -22,9 +99,7 @@ with config.stylix.base16Scheme;
             ws = let c = (x + 1) / 10; in builtins.toString (x + 1 - (c * 10));
           in [
             "SUPER, ${ws}, workspace, ${toString (x + 1)}"
-            "SUPER, ${ws}, exec, ${pkgs.eww-wayland}/bin/eww update currentworkspace=${toString (x + 1)}"
             "SUPER SHIFT, ${ws}, movetoworkspace, ${toString (x + 1)}"
-            "SUPER SHIFT, ${ws}, exec, ${pkgs.eww-wayland}/bin/eww update currentworkspace=${toString (x + 1)}"
           ]) 10));
     };
     extraConfig = ''
@@ -62,6 +137,7 @@ with config.stylix.base16Scheme;
             workspace_swipe = yes
         }
         windowrule=tile,title:^(Minecraft)(.*)$
+        exec=${hyprlandHandleEvents}
         binde=, XF86AudioLowerVolume, exec, ${pkgs.pamixer}/bin/pamixer --decrease 5
         binde=, XF86AudioRaiseVolume, exec, ${pkgs.pamixer}/bin/pamixer --increase 5
         binde=, XF86MonBrightnessUp, exec, ${pkgs.brightnessctl}/bin/brightnessctl s +5%

@@ -30,6 +30,10 @@
       inputs.hyprland.follows = "hyprland";
     };
     spicetify-nix.url = "github:the-argus/spicetify-nix";
+    hyprland-contrib = {
+      url = "github:hyprwm/contrib";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = inputs:
