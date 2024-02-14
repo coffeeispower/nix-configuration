@@ -129,15 +129,15 @@ with config.stylix.base16Scheme;
             blur {
                 enabled = true
                 size = 5
-                passes = 2
+                passes = 1
                 vibrancy = 0.5
             }
         }
         gestures {
             workspace_swipe = yes
         }
-        windowrule=tile,title:^(Minecraft)(.*)$
-        exec=${hyprlandHandleEvents}
+        exec-once=${pkgs.eww-wayland}/bin/eww open bar
+        exec-once=${hyprlandHandleEvents}
         binde=, XF86AudioLowerVolume, exec, ${pkgs.pamixer}/bin/pamixer --decrease 5
         binde=, XF86AudioRaiseVolume, exec, ${pkgs.pamixer}/bin/pamixer --increase 5
         binde=, XF86MonBrightnessUp, exec, ${pkgs.brightnessctl}/bin/brightnessctl s +5%
@@ -145,7 +145,7 @@ with config.stylix.base16Scheme;
         bind=$mod, S, exec, ${pkgs.eww-wayland}/bin/eww open shutdown
         bind=$mod, S, submap, shutdown-menu
         bind=, XF86Sleep, exec, ${pkgs.systemd}/bin/systemctl suspend
-        bind=$mod, S, exec, ${hyprland}/bin/hyprctl keyword bind ", Escape, exec, eww close shutdown"        bind=, XF86AudioMute, exec, ${pkgs.pamixer}/bin/pamixer -t
+        bind=, XF86AudioMute, exec, ${pkgs.pamixer}/bin/pamixer -t
         bind=CTRL ALT, left, workspace, e-1
         bind=CTRL ALT, right, workspace, e+1
         bind=CTRL ALT SHIFT, left, movetoworkspace, e-1
