@@ -1,8 +1,8 @@
 {pkgs, inputs, ...}:
 let
   inputImage = ./wallpaper.jpg;
-  brightness = "10";
-  contrast = "10";
+  brightness = "0";
+  contrast = "0";
   fillColor = "black";
 in
 {

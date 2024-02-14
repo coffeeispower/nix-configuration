@@ -1,5 +1,5 @@
-{ config, pkgs, lib, inputs, system, ... }:
+{ config, pkgs, lib, inputs, ... }:
 {
   home.stateVersion = "23.11";
-  stylix.targets.vscode.enable= false;
+  imports = [inputs.spicetify-nix.homeManagerModules.default];
 }
