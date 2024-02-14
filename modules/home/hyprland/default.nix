@@ -1,8 +1,17 @@
-{pkgs, config, ...}:
+{pkgs, config, inputs, ...}:
+let
+  hyprland = inputs.hyprland.packages.${pkgs.system}.hyprland;
+in
+with config.stylix.base16Scheme;
 {
   wayland.windowManager.hyprland = {
     enable = true;
-
+    plugins = with inputs.hyprland-plugins.packages.${pkgs.system}; [
+      hyprbars
+  #      hyprtrails
+      csgo-vulkan-fix
+    ];
+    package = hyprland;
     settings = {
       bind = (
         # Workspace keybind
@@ -20,7 +29,17 @@
     };
     extraConfig = ''
         $mod = SUPER
-
+        plugin {
+            hyprbars {
+                bar_color = rgb(${base00})
+                col.text = rgb(${base0D})
+                bar_part_of_window = true
+                bar_height = 20
+                bar_text_font = monospace
+                bar_text_size = 8
+                bar_text_align = left
+            }
+        }
         input {
             kb_layout = pt,jp
             kb_variant = anthy
@@ -51,7 +70,7 @@
         bind=$mod, S, exec, ${pkgs.eww-wayland}/bin/eww open shutdown
         bind=$mod, S, submap, shutdown-menu
         bind=, XF86Sleep, exec, ${pkgs.systemd}/bin/systemctl suspend
-        bind=$mod, S, exec, ${pkgs.hyprland}/bin/hyprctl keyword bind ", Escape, exec, eww close shutdown"        bind=, XF86AudioMute, exec, ${pkgs.pamixer}/bin/pamixer -t
+        bind=$mod, S, exec, ${hyprland}/bin/hyprctl keyword bind ", Escape, exec, eww close shutdown"        bind=, XF86AudioMute, exec, ${pkgs.pamixer}/bin/pamixer -t
         bind=CTRL ALT, left, workspace, e-1
         bind=CTRL ALT, right, workspace, e+1
         bind=CTRL ALT SHIFT, left, movetoworkspace, e-1
@@ -71,42 +90,44 @@
         bind=$mod, down, movefocus, d
 
         bind=$mod, U, focusurgentorlast
+        # Switch to mouse mode
+        bind=$mod, M, submap, mouse
         
         # Mouse bindings
-        bind=$mod, M, submap, mouse
         submap=mouse
-        bindm=$mod,mouse:272,movewindow
-        bindm=$mod,mouse:273,resizewindow
-        bind=,Escape,submap,reset
+            bindm=$mod,mouse:272,movewindow
+            bindm=$mod,mouse:273,resizewindow
+            bind=,Escape,submap,reset
         
         # Exit shutdown menu bind
         submap=shutdown-menu
-        bind=, Escape, exec, ${pkgs.eww-wayland}/bin/eww close shutdown
-        
+            bind=, Escape, exec, ${pkgs.eww-wayland}/bin/eww close shutdown
+            bind=, Escape,submap,reset
+
+        # Rearrange mode keybinds
         submap=rearrange
+            $rearrangeMod=SHIFT
+            bind=, a, movefocus, l
+            bind=, d, movefocus, r
+            bind=, w, movefocus, u
+            bind=, s, movefocus, d
 
-        $rearrangeMod=SHIFT
-        bind=, a, movefocus, l
-        bind=, d, movefocus, r
-        bind=, w, movefocus, u
-        bind=, s, movefocus, d
-
-        binde=, right, resizeactive, -10 0
-        binde=, left, resizeactive, 10 0
-        binde=, down, resizeactive, 0 -10
-        binde=, up, resizeactive, 0 10
+            binde=, right, resizeactive, -10 0
+            binde=, left, resizeactive, 10 0
+            binde=, down, resizeactive, 0 -10
+            binde=, up, resizeactive, 0 10
         
-        bind=, Tab, cyclenext
-        bind=$rearrangeMod, Tab, swapnext
+            bind=, Tab, cyclenext
+            bind=$rearrangeMod, Tab, swapnext
  	      
-        bind=$rearrangeMod, right,movewindow, r
-        bind=$rearrangeMod, left, movewindow, l
-        bind=$rearrangeMod, down, movewindow, d
-        bind=$rearrangeMod, up,   movewindow, u
-        bind=, Escape, submap         , reset
-        bind=, f,      togglefloating
-        bind=, c,      centerwindow
-        
+            bind=$rearrangeMod, right,movewindow, r
+            bind=$rearrangeMod, left, movewindow, l
+            bind=$rearrangeMod, down, movewindow, d
+            bind=$rearrangeMod, up,   movewindow, u
+            bind=, f,      togglefloating
+            bind=, c,      centerwindow
+            # Exit rearrange mode
+            bind=, Escape, submap         , reset
         submap=reset
         
     '';
