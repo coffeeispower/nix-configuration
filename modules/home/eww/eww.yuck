@@ -61,7 +61,7 @@
 )
 
 (defwidget workspacebutton [number label]
-  (button :class {currentworkspace == number ? "current" : ""} :onclick {("hyprctl dispatch workspace ${number}")} label)
+  (button :class {currentworkspace == number ? "current" : ""} :onclick {("hyprctl dispatch workspace ${number} && eww update currentworkspace=${number}")} label)
 )
 (defwidget workspaces []
   (box :class "workspaces"
@@ -104,8 +104,8 @@
 (deflisten music :initial ""
 "playerctl --follow metadata --format '{{ artist }} - {{ title }}' || true")
 
-(defpoll volume :interval "100ms" "pamixer --get-volume")
-(defpoll currentworkspace :interval "100ms" "nu -c 'hyprctl activeworkspace -j | from json | get id'")
+(defpoll volume :interval "2ms" "pamixer --get-volume")
+(defpoll currentworkspace :interval "2s" "nu -c 'hyprctl activeworkspace -j | from json | get id'")
 
 (defpoll time :interval "1s"
 "date '+%H:%M %b %d, %Y'")
