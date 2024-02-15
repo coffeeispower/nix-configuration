@@ -11,7 +11,7 @@ let
 
     event_focusedmon() {
       update_active_workspace
-      : # MONNAME WORKSPACENAME
+      # MONNAME WORKSPACENAME
     }
 
     event_activewindow() {
@@ -75,7 +75,8 @@ let
     }
 
     event_submap() {
-      : # SUBMAPNAME
+      # SUBMAPNAME
+      ${pkgs.eww-wayland}/bin/eww update submap=$SUBMAPNAME
     }
   '';
   hyprlandHandleEvents = pkgs.writeShellScript "hyprlandHandleEvents" ''

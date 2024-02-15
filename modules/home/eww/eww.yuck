@@ -3,9 +3,12 @@
     (workspaces)
     (box)
     (indicators)))
-
+(defwidget submap_indicator []
+    (box :class {submap != "" ? "submap": ""} {submap != "" ? "󰘵 ${submap} mode" : ""})
+)
 (defwidget indicators []
   (box :class "indicators" :orientation "h" :space-evenly false :spacing 16 :halign "end"
+    (submap_indicator)
     (music)
     (box :class "wifi" :orientation "h"
       (_network
@@ -102,11 +105,11 @@
 
 
 (deflisten music :initial ""
-"playerctl --follow metadata --format '{{ artist }} - {{ title }}' || true")
+"playerctl --follow metadata --format '{{ artist }} - {{ album }} - {{ title }}' || true")
 
-(defpoll volume :interval "2ms" "pamixer --get-volume")
-(defpoll currentworkspace :interval "10s" "nu -c 'hyprctl activeworkspace -j | from json | get id'")
-
+(defpoll volume :interval "400ms" "pamixer --get-volume")
+(defvar currentworkspace "1")
+(defvar submap "")
 (defpoll time :interval "1s"
 "date '+%H:%M %b %d, %Y'")
 

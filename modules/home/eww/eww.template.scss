@@ -18,6 +18,11 @@ $charging-battery-color: #{{base08}};
     background-color: $widgets-bg;
     border-radius: 0px 0px 10px 10px;
 }
+.submap {
+    background-color: $widgets-fg;
+    color: $widgets-bg;
+    padding: 0px 4px;
+}
 
 // Styles on classes (see eww.yuck for more information)
 
