@@ -34,6 +34,7 @@
       url = "github:hyprwm/contrib";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    nix-rice = { url = "github:bertof/nix-rice"; };
   };
 
   outputs = inputs:

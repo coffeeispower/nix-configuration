@@ -99,7 +99,7 @@
     pamixer
     libnotify
     spotify
-    discord
+    vesktop
     cli-visualizer
     pavucontrol
     neofetch
