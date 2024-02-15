@@ -1,2 +1,2 @@
 #!/usr/bin/env bash
-nix build .#nixosConfigurations.live-iso-image.config.system.build.isoImage
+nix build .#nixosConfigurations.live-iso-image.config.system.build.isoImage --extra-experimental-features nix-command --extra-experimental-features flakes
