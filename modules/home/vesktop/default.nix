@@ -40,17 +40,11 @@ in
 {
 
   home.packages = [ pkgs.vesktop ];
-  xdg.configFile."VencordDesktop/VencordDesktop/" = {
-    recursive = true;
-    source = pkgs.stdenv.mkDerivation {
-      src = ./.;
-      name = "vesktop-config";
-      installPhase = ''
-        mkdir -p $out/{settings,themes}
-        cp ${stylixTheme} $out/themes/Stylix.theme.css
-        cp ${settingsJson} $out/settings.json
-        cp ${settingsSettingsJson} $out/settings/settings.json
-      '';
-    };
-  };
+  home.activation.vencordCP = inputs.home-manager.lib.hm.dag.entryAfter ["writeBoundary"] ''
+    mkdir -p $HOME/.config/VencordDesktop/VencordDesktop/settings/
+    rm -f $HOME/.config/VencordDesktop/VencordDesktop/settings.json $HOME/.config/VencordDesktop/VencordDesktop/settings/settings.json
+    cat ${settingsJson} > $HOME/.config/VencordDesktop/VencordDesktop/settings.json
+    cat ${settingsSettingsJson} > $HOME/.config/VencordDesktop/VencordDesktop/settings/settings.json
+  '';
+  xdg.configFile."VencordDesktop/VencordDesktop/themes/Stylix.theme.css".source = stylixTheme;  
 }
