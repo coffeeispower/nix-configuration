@@ -15,22 +15,31 @@ with config.stylix.base16Scheme;
     ];
     colorScheme = "custom";
     customColorScheme = {
-      button = base09;
       main = base00;
-      subtext = base01;
-      text = base04;
-      sidebar = base01;
+      button = base09;
+      
+      sidebar = base0D;
       selected-row = base03;
+      
+      text = base0D;
+      subtext = base0D;
       tab-active = base03;
-      sidebar-text = base00;
-      player = base04;
-      card = base06;
-      shadow = "000000";
+
+      
+      sidebar-text = base0D;
+      
+      player = base0E;
+      
+      card = base01;
       button-active = base0E;
       button-disabled = base0D;
-      notification = base04;
-      notification-error = base04;
-      misc = base04;
+      
+      notification = base09;
+      notification-error = base08;
+
+      misc = base00;
+
+      shadow = "000000";
     };
   };
 }
