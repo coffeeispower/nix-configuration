@@ -2,11 +2,15 @@
 let
   hyprland = inputs.hyprland.packages.${pkgs.system}.hyprland;
   hyprlandEventHandlers = pkgs.writeShellScript "hyprlandEventHandlers" ''
-    event_workspace() {
+    update_active_workspace() {
       ${pkgs.eww-wayland}/bin/eww update currentworkspace=$WORKSPACENAME
+    }
+    event_workspace() {
+      update_active_workspace
     }
 
     event_focusedmon() {
+      update_active_workspace
       : # MONNAME WORKSPACENAME
     }
 
