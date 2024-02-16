@@ -112,7 +112,7 @@ with config.stylix.base16Scheme;
         plugin {
             hyprbars {
                 bar_color = rgb(${base00})
-                col.text = rgb(${base0D})
+                col.text = rgb(${base05})
                 bar_part_of_window = true
                 bar_height = 20
                 bar_text_font = monospace
