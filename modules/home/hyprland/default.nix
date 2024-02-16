@@ -90,8 +90,6 @@ with config.stylix.base16Scheme;
     enable = true;
     plugins = with inputs.hyprland-plugins.packages.${pkgs.system}; [
       hyprbars
-  #      hyprtrails
-      csgo-vulkan-fix
     ];
     package = hyprland;
     settings = {
