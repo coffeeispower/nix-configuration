@@ -63,6 +63,7 @@
   programs.git.enable = true;
   programs.hyprland.enable = true;
   environment.systemPackages = with pkgs; [
+    slides
     virtiofsd
     xfce.thunar
     xfce.thunar-volman
