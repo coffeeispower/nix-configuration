@@ -4,8 +4,8 @@ let
   inherit (inputs.nix-rice.lib) color;
 
   bgRgba = color.hexToRgba "#${base00}";
-  bgDarkRgba = color.darken 30 bgRgba;
-  bgDarkerRgba = color.darken 30 bgDarkRgba;
+  bgDarkRgba = color.darken 5 bgRgba;
+  bgDarkerRgba = color.darken 5 bgDarkRgba;
   
   bg = color.toRGBHex bgRgba;
   bgDark = color.toRGBHex bgDarkRgba;
