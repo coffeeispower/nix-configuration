@@ -35,6 +35,10 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     nix-rice = { url = "github:bertof/nix-rice"; };
+    slides = {
+      url = "github:maaslalani/slides";
+      flake = false;
+    };
   };
 
   outputs = inputs:

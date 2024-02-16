@@ -804,9 +804,26 @@
         "nix-software-center": "nix-software-center",
         "nixos-conf-editor": "nixos-conf-editor",
         "nixpkgs": "nixpkgs_3",
+        "slides": "slides",
         "snowfall-lib": "snowfall-lib_2",
         "spicetify-nix": "spicetify-nix",
         "stylix": "stylix"
+      }
+    },
+    "slides": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1703112600,
+        "narHash": "sha256-u81wRJrBJN6rnbTrLmQ/x4f5h+bZzvZ19KzUkzkS49U=",
+        "owner": "maaslalani",
+        "repo": "slides",
+        "rev": "53a45c6fc1dfaa4101c1cca716ec7a66b0eca559",
+        "type": "github"
+      },
+      "original": {
+        "owner": "maaslalani",
+        "repo": "slides",
+        "type": "github"
       }
     },
     "snowfall-lib": {
