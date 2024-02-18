@@ -15,11 +15,13 @@ in
     name = "Bibata-Modern-Classic";
     size = 16;
   };
-  stylix.fonts = with pkgs; {
+  stylix.fonts = with pkgs; rec {
     monospace = {
       package = (nerdfonts.override { fonts = [ "FiraCode" ]; });
       name = "FiraCodeNerdFontMono";
     };
+    sansSerif = monospace;
+    serif = monospace;
   };
 
   # Add some fonts
