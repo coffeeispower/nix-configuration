@@ -1,6 +1,6 @@
 {pkgs, config, inputs, ...}:
 let
-  hyprland = inputs.hyprland.packages.${pkgs.system}.hyprland;
+  hyprland = pkgs.hyprland; # inputs.hyprland.packages.${pkgs.system}.hyprland;
   hyprlandEventHandlers = pkgs.writeShellScript "hyprlandEventHandlers" ''
     update_active_workspace() {
       ${pkgs.eww-wayland}/bin/eww update currentworkspace=$WORKSPACENAME
@@ -88,9 +88,9 @@ with config.stylix.base16Scheme;
 {
   wayland.windowManager.hyprland = {
     enable = true;
-    plugins = with inputs.hyprland-plugins.packages.${pkgs.system}; [
-      hyprbars
-    ];
+    # plugins = with inputs.hyprland-plugins.packages.${pkgs.system}; [
+    #   hyprbars
+    # ];
     package = hyprland;
     settings = {
       bind = (
@@ -142,6 +142,7 @@ with config.stylix.base16Scheme;
         exec-once=${pkgs.eww-wayland}/bin/eww open bar
         exec-once=${hyprlandHandleEvents}
         exec-once=${pkgs.arrpc}/bin/arrpc
+        exec-once=${pkgs.dex}/bin/dex -a
         binde=, XF86AudioLowerVolume, exec, ${pkgs.pamixer}/bin/pamixer --decrease 5
         binde=, XF86AudioRaiseVolume, exec, ${pkgs.pamixer}/bin/pamixer --increase 5
         binde=, XF86MonBrightnessUp, exec, ${pkgs.brightnessctl}/bin/brightnessctl s +5%
