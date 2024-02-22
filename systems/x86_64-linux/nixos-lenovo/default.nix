@@ -19,4 +19,5 @@
     persist = true;  # Optional, only require password verification a single time
   }];
   services.greetd.settings.initial_session.user = "tiago";
+  boot.resumeDevice = (builtins.elemAt config.swapDevices 0).device;
 }
