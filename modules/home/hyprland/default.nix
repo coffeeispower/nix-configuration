@@ -175,8 +175,8 @@ with config.stylix.base16Scheme;
         
         # Mouse bindings
         submap=mouse
-            bindm=$mod,mouse:272,movewindow
-            bindm=$mod,mouse:273,resizewindow
+            bindm=,mouse:272,movewindow
+            bindm=,mouse:273,resizewindow
             bind=,Escape,submap,reset
         
         # Exit shutdown menu bind
