@@ -16,6 +16,12 @@
       ]
       ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [
         {
+          publisher = "slushnys";
+          name = "worktreesnuts";
+          version = "1.0.2";
+          sha256 = "sha256-BS4FxwnohVA+qaFZXJDfUDQv4Gh4accTIZ5BhxIa3xI=";
+        }
+        {
           publisher = "LeonardSSH";
           name = "vscord";
           version = "5.1.18";
