@@ -2,6 +2,10 @@
   programs.vscode = {
     enable = true;
     mutableExtensionsDir = false;
+    userSettings = {
+      "workbench.colorTheme" = "Gruvbox Dark Hard";
+      "git.confirmSync" = false;
+    };
     extensions = with pkgs.vscode-extensions;
       [
         jnoortheen.nix-ide
@@ -13,6 +17,7 @@
         svelte.svelte-vscode
         rust-lang.rust-analyzer
         llvm-vs-code-extensions.vscode-clangd
+        jdinhlife.gruvbox
         editorconfig.editorconfig
       ]
       ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [
