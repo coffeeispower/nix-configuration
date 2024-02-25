@@ -13,6 +13,7 @@
         svelte.svelte-vscode
         rust-lang.rust-analyzer
         llvm-vs-code-extensions.vscode-clangd
+        editorconfig.editorconfig
       ]
       ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [
         {
