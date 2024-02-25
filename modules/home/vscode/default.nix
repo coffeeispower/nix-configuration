@@ -16,11 +16,16 @@
       ]
       ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [
         {
+          publisher = "LeonardSSH";
+          name = "vscord";
+          version = "5.1.18";
+          sha256 = "sha256-pJ9loVW1uhlITXSNBsCEgW+o3ABn0cxcZxg6S7cKWHI=";
+        }
+        {
           publisher = "aaron-bond";
           name = "better-comments";
           version = "3.0.2";
           sha256 = "sha256-hQmA8PWjf2Nd60v5EAuqqD8LIEu7slrNs8luc3ePgZc=";
-
         }
         {
           publisher = "naumovs";
