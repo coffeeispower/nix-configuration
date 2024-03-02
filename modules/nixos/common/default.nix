@@ -64,6 +64,7 @@
   programs.hyprland.enable = true;
   environment.systemPackages = with pkgs; [
     my-lib.slides
+    my-lib.bombsquad
     virtiofsd
     xfce.thunar
     xfce.thunar-volman
