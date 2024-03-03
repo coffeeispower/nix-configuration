@@ -16,14 +16,6 @@
     stylix = {
       url = "github:danth/stylix/release-23.11";
     };
-    nix-software-center = {
-      url = "github:snowfallorg/nix-software-center";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-    nixos-conf-editor = {
-      url = "github:snowfallorg/nixos-conf-editor";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
     spicetify-nix.url = "github:the-argus/spicetify-nix";
     hyprland-contrib = {
       url = "github:hyprwm/contrib";
