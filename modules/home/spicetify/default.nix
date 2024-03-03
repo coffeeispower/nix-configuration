@@ -12,6 +12,7 @@ with config.stylix.base16Scheme;
       trashbin
       loopyLoop
       keyboardShortcut
+      brokenAdblock
     ];
     colorScheme = "custom";
     customColorScheme = {
