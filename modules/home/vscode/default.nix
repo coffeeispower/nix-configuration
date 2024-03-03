@@ -3,6 +3,7 @@
     enable = true;
     mutableExtensionsDir = false;
     userSettings = {
+      "editor.fontLigatures" = true;
       "git.confirmSync" = false;
       "workbench.colorTheme" = "Tomorrow Night Blue";
       "vscord.status.problems.text" = "{problems_count} erros";
