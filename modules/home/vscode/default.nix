@@ -4,7 +4,7 @@
     mutableExtensionsDir = false;
     userSettings = {
       "git.confirmSync" = false;
-      "workbench.colorTheme" = "Gruvbox Dark Hard";
+      "workbench.colorTheme" = "Tomorrow Night Blue";
       "vscord.status.problems.text" = "{problems_count} erros";
   
       "vscord.status.details.text.debugging" = "Deu merda na {workspace} e tou a debugar";
@@ -54,7 +54,7 @@
         svelte.svelte-vscode
         rust-lang.rust-analyzer
         llvm-vs-code-extensions.vscode-clangd
-        jdinhlife.gruvbox
+#        jdinhlife.gruvbox
         editorconfig.editorconfig
         tamasfe.even-better-toml
       ]
