@@ -1,4 +1,5 @@
 {pkgs, ...}: {
+  stylix.targets.vscode.enable = false;
   programs.vscode = {
     enable = true;
     mutableExtensionsDir = false;
