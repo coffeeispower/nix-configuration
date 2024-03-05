@@ -64,6 +64,12 @@
       ]
       ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [
         {
+          publisher = "doppler";
+          name = "doppler-vscode";
+          version = "0.0.5";
+          sha256 = "sha256-XZ289+JlGZ8kQhShQsKSbrgsRXbora2iRyQYYit91IQ=";
+        }
+        {
           publisher = "ms-vscode";
           name = "vscode-github-issue-notebooks";
           version = "0.0.130";
