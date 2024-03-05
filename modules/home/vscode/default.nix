@@ -59,8 +59,16 @@
 #        jdinhlife.gruvbox
         editorconfig.editorconfig
         tamasfe.even-better-toml
+        github.vscode-pull-request-github
+        github.vscode-github-actions
       ]
       ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [
+        {
+          publisher = "ms-vscode";
+          name = "vscode-github-issue-notebooks";
+          version = "0.0.130";
+          sha256 = "sha256-0wXJ6fJC8YOTrqDrM/t0HFdAJMAeTOqmd0sFeXH4Aj0=";
+        }
         {
           publisher = "slushnys";
           name = "worktreesnuts";
