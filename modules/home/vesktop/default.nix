@@ -1,4 +1,4 @@
-{lib, pkgs, config, inputs, ...}: 
+{lib, pkgs, config, inputs, system, ...}: 
 with config.stylix.base16Scheme;
 let
   inherit (inputs.nix-rice.lib) color;
@@ -39,7 +39,7 @@ let
 in
 {
 
-  home.packages = [ pkgs.vesktop ];
+  home.packages = [ (import inputs.nixpkgs-unstable { inherit system; }).vesktop ];
   home.activation.vencordCP = inputs.home-manager.lib.hm.dag.entryAfter ["writeBoundary"] ''
     mkdir -p $HOME/.config/VencordDesktop/VencordDesktop/settings/
     rm -f $HOME/.config/VencordDesktop/VencordDesktop/settings.json $HOME/.config/VencordDesktop/VencordDesktop/settings/settings.json

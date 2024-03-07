@@ -30,7 +30,7 @@ stdenv.mkDerivation (finalAttrs: {
 
   src = fetchurl {
     url = "http://files.ballistica.net/bombsquad/builds/BombSquad_Linux_x86_64_${finalAttrs.version}.tar.gz";
-    hash = "sha256-pfimBt1s4QP+6buPvTkSdmt5zj2NpXqJUfbxRirfz/o=";
+    hash = "sha256-VtOMhlXGxh7WLPJHMgIXvmwknSDCZhBAQdjuXJ3ahxA=";
   };
 
   sourceRoot = "BombSquad_Linux_x86_64_${finalAttrs.version}";

@@ -86,7 +86,6 @@
     pamixer
     libnotify
     spotify
-    vesktop
     cli-visualizer
     pavucontrol
     neofetch
@@ -162,4 +161,5 @@
     useGlobalPkgs = true;
     useUserPackages = true;
   };
+  system.stateVersion = "23.11";
 }

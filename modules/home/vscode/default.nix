@@ -1,12 +1,13 @@
-{pkgs, ...}: {
-  stylix.targets.vscode.enable = false;
+{pkgs, inputs, system, ...}: {
+#  stylix.targets.vscode.enable = false;
   programs.vscode = {
     enable = true;
+    package = (import inputs.nixpkgs-unstable {inherit system; config.allowUnfree = true;}).vscode;
     mutableExtensionsDir = false;
     userSettings = {
       "editor.fontLigatures" = true;
       "git.confirmSync" = false;
-      "workbench.colorTheme" = "Tomorrow Night Blue";
+#      "workbench.colorTheme" = "Tomorrow Night Blue";
       "vscord.status.problems.text" = "{problems_count} erros";
   
       "vscord.status.details.text.debugging" = "Deu merda na {workspace} e tou a debugar";
