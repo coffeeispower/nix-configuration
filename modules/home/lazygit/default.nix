@@ -1,3 +1,3 @@
 {...}: {
-  programs.lazygit = { enable = true; };
+  programs.lazygit = { enable = true; settings = { gui.nerdFontsVersion = "3"; }; };
 }
