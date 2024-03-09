@@ -57,11 +57,11 @@
         svelte.svelte-vscode
         rust-lang.rust-analyzer
         llvm-vs-code-extensions.vscode-clangd
-#        jdinhlife.gruvbox
         editorconfig.editorconfig
         tamasfe.even-better-toml
         github.vscode-pull-request-github
         github.vscode-github-actions
+        vadimcn.vscode-lldb
       ]
       ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [
         {
