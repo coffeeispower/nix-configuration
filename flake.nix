@@ -16,6 +16,7 @@
     };
     stylix = {
       url = "github:coffee-is-power/stylix/release-23.11";
+      inputs.home-manager.follows = "home-manager";
     };
     spicetify-nix.url = "github:the-argus/spicetify-nix";
     hyprland-contrib = {
