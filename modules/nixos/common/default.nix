@@ -101,6 +101,7 @@
     obsidian
     gimp
     transmission-gtk
+    nil
   ];
   environment.shells = [ pkgs.nushell ];
   xdg.portal.extraPortals = with pkgs; [ xdg-desktop-portal-hyprland ];
