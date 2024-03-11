@@ -6,6 +6,7 @@
     name = "Bibata-Modern-Classic";
     size = 16;
   };
+  stylix.polarity = "dark";
   stylix.fonts = with pkgs; rec {
     monospace = {
       package = (nerdfonts.override { fonts = [ "FiraCode" ]; });
