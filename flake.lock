@@ -663,11 +663,11 @@
         "nixpkgs": "nixpkgs_4"
       },
       "locked": {
-        "lastModified": 1710003229,
-        "narHash": "sha256-PX11KvooYhOOo/+5URTc6IguVFGNZHU2fhE/OG5B/gM=",
+        "lastModified": 1710188582,
+        "narHash": "sha256-0968XB7m4QuBqaqRFhgjZCYx0iQJld4wbJmE8qoZUTE=",
         "owner": "coffee-is-power",
         "repo": "stylix",
-        "rev": "04403053b460b2027ef79b1607e822f4b65f1ea2",
+        "rev": "0c1114121d73f49b231471a1546f18dd1ac85e26",
         "type": "github"
       },
       "original": {
