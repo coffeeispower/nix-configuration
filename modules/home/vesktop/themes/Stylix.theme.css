@@ -5,18 +5,58 @@
  * @description A cold, dark & frosty theme. (Patched with stylix & Home Manager)
  * @source https://github.com/DiscordStyles/DarkMatter/
 */
+@import url(https://mwittrien.github.io/BetterDiscordAddons/Themes/BlurpleRecolor/BlurpleRecolor.css);
+.modeUnreadImportant_efb53e {
+	color: #{{base04}} !important;
+}
+:not(div[class*="userProfile"][class*="unThemed"]).theme-dark,
+:not(div[class*="userProfile"]).theme-light,
+div[class*="userProfile"][class*="unThemed"].theme-light {
+	/* Discord vars */
+	--background-primary: #{{base00}};
+	--background-mobile-primary: var(--background-primary);
+	--background-mobile-secondary: var(--background-secondary);
+	--background-secondary: #{{base00}};
+	--background-secondary-alt: #{{base00}};
+	--background-tertiary: #{{base00}};
+	--background-floating: var(--background-primary);
 
-@import url('https://DiscordStyles.github.io/DarkMatter/src/base.css');
+  --background-accent: #{{base04}};
+	--background-message-hover: #{{base01}}7F;
+	--channeltextarea-background: transparent;
+	--activity-card-background: #{{base01}};
+	--deprecated-store-bg: transparent;
+	
+	
+	--elevation-low: inset 0 -1px 0 0 rgba(0, 0, 0, 0.3);
+	--channels-default: #{{base05}};
+	--deprecated-quickswitcher-input-background: #{{base00}};
+	--header-primary: #{{base04}};
+	--header-secondary: #{{base05}};
 
+	--text-normal: #{{base05}};
+	--text-muted: #{{base05}};
+	
+	--interactive-muted: #{{base04}};
+	--interactive-normal: #{{base05}};
+	
+	--interactive-hover: #{{base05}};
+	--interactive-active: #{{base05}};
+	
+	--background-modifier-hover: #{{base01}};
+	--background-modifier-active: #{{base01}};
+	--background-modifier-selected: #{{base01}};
+	
+	--deprecated-card-bg: #{{base00}};
+	--text-link: #{{base04}};
+	--focus-primary: #{{base0A}};
+  --modal-background: #{{base01}};
+  --modal-footer-background: #{{base00}};
+}
 /* Variables */
 :root {
-    --avatar-size: 32px;
-    --background-image: url('https://i.imgur.com/7SbtKvw.png');
-    --home-image: url('https://i.imgur.com/233d55Y.gif');
-    --background-solid: {{ bg }};
-    --background-solid-dark: {{ bgDark }};
-    --background-solid-darker: {{ bgDarker }};
-    --accent: {{accent}};
-    --accent-alt: {{ accentAlt }};
     --font-primary: monospace, sans-serif;
+    --font-display: var(--font-primary) !important;
+		--accentcolor: {{accent}};
+		--accentcolor2: {{accentAlt}};
 }
