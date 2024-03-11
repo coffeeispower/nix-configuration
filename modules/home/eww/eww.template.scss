@@ -15,7 +15,7 @@ $charging-battery-color: #{{base08}};
     color: $widgets-fg;
     margin-right: 20px;
     margin-left: 20px;
-    background-color: $widgets-bg;
+    background-color: rgba($widgets-bg, {{desktopOpacity}});
     border-radius: 0px 0px 10px 10px;
 }
 .submap {
@@ -28,7 +28,6 @@ $charging-battery-color: #{{base08}};
 
 .metric scale trough highlight {
     all: unset;
-    background-color: $widgets-bg;
     border-radius: 10px;
 }
 
@@ -92,7 +91,6 @@ $charging-battery-color: #{{base08}};
 
 .battery_charging {
     border-radius: 10px;
-    background-color: $widgets-bg;
     color: $charging-battery-color;
 }
 
@@ -100,12 +98,12 @@ $charging-battery-color: #{{base08}};
 
 // Shutdown window related stuff
 .shutdown-box {
-    background-color: $widgets-bg;
     padding: 5px;
     border-radius: 10px;
     border-style: solid;
     border-color: lighten($widgets-bg, 10%);
     border-width: 1px;
+    background-color: rgba($widgets-bg, {{desktopOpacity}});
 }
 
 .shutdown-button {

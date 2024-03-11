@@ -139,6 +139,9 @@ with config.stylix.base16Scheme;
         gestures {
             workspace_swipe = yes
         }
+        windowrulev2=opacity ${builtins.toString config.stylix.opacity.applications},class:(vesktop|thunar|firefox|Spotify|Code)$
+        windowrulev2=opaque,title:(.*)( - YouTube — Mozilla Firefox)$
+        layerrule=blur,(bar)
         exec-once=${pkgs.eww-wayland}/bin/eww open bar
         exec-once=${hyprlandHandleEvents}
         exec-once=${pkgs.arrpc}/bin/arrpc

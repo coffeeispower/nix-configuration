@@ -11,7 +11,9 @@
             inherit pkgs;
             name = "eww-config-scss";
             templateFile = ./eww.template.scss;
-            variables = config.stylix.base16Scheme;
+            variables = config.stylix.base16Scheme // {
+              desktopOpacity = builtins.toString config.stylix.opacity.desktop;
+            };
           }
         } $out/eww.scss
         cp *.yuck $out/

@@ -97,7 +97,6 @@
     clang
     wdisplays
     beekeeper-studio
-    ferdium
     obsidian
     gimp
     transmission-gtk

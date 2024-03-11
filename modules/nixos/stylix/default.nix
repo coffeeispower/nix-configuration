@@ -1,15 +1,6 @@
-{pkgs, inputs, ...}:
-let
-  inputImage = ./wallpaper.jpg;
-  brightness = "0";
-  contrast = "0";
-  fillColor = "black";
-in
+{pkgs, ...}:
 {
-  stylix.image = pkgs.runCommand "dimmed-background.png" { } ''
-    ${pkgs.imagemagick}/bin/convert "${inputImage}" -brightness-contrast ${brightness},${contrast} -fill ${fillColor} $out
-  '';
-  stylix.polarity = "dark";
+  stylix.image = ./wallpaper.jpg;
   stylix.cursor = {
     package = pkgs.bibata-cursors;
     name = "Bibata-Modern-Classic";
@@ -33,6 +24,7 @@ in
   stylix.opacity = {
     applications = 0.9;
     popups = 0.9;
-    terminal = 0.9;
+    terminal = 0.5;
+    desktop = 0.5;
   };
 }
