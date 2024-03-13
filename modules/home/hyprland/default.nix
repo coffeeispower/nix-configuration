@@ -160,7 +160,7 @@ with config.stylix.base16Scheme;
         bind=CTRL ALT SHIFT, right, movetoworkspace, e+1
         bind=,Print,exec,${pkgs.grim}/bin/grim -c -g "$(${pkgs.slurp}/bin/slurp)" - | ${pkgs.swappy}/bin/swappy -f -
         bind=$mod, D, exec, ${pkgs.rofi-wayland}/bin/rofi -show drun -show-icons
-        bind=$mod, T, exec, ${pkgs.alacritty}/bin/alacritty
+        bind=$mod, T, exec, ${pkgs.kitty}/bin/kitty
         bind=$mod, F, fullscreen
         bind=$mod, R, submap, rearrange
         # Close app

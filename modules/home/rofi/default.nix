@@ -5,7 +5,7 @@
     cycle = true;
     # Install the wayland variant of rofi
     package = pkgs.rofi-wayland;
-    # Set terminal to alacritty
-    terminal = "${pkgs.alacritty}/bin/alacritty";
+    # Set terminal to kitty
+    terminal = "${pkgs.kitty}/bin/kitty";
   };
 }

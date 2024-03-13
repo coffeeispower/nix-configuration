@@ -9,7 +9,7 @@
         colors = config.stylix.base16Scheme;
         commands = {
           dmenu = "${pkgs.rofi}/bin/rofi -dmenu";
-          terminal = "${pkgs.alacritty}/bin/alacritty";
+          terminal = "${pkgs.kitty}/bin/kitty";
         };
       };
     };
