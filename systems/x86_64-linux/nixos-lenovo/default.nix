@@ -158,4 +158,10 @@
 
   # Enable noise torch for microphone noise cancellation
   programs.noisetorch.enable = true;
+
+  # Use the systemd-boot EFI boot loader.
+  boot.loader.systemd-boot.enable = true;
+
+  boot.kernelParams = ["quiet" "splash"];
+  boot.consoleLogLevel = 0;
 }

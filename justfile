@@ -14,3 +14,6 @@ update:
   nix flake update
 update-one NAME:
   nix flake lock --update-input {{ NAME }}
+
+build-iso:
+  nix build .#nixosConfigurations.isoimage.config.system.build.isoImage

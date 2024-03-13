@@ -27,30 +27,18 @@
     };
   };
 
-  boot.kernelParams = ["quiet" "splash"];
-  boot.consoleLogLevel = 0;
   boot.initrd.systemd.enable = true;
   hardware.opengl.enable = true;
   hardware.opengl.driSupport = true;
-  # Use the systemd-boot EFI boot loader.
-  boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
   networking.networkmanager.enable = true;
 
   # Set your time zone.
   time.timeZone = "Europe/Lisbon";
-  # Configure network proxy if necessary
-  # networking.proxy.default = "http://user:password@proxy:port/";
-  # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
-
+  
   # Select internationalisation properties.
   i18n.defaultLocale = "pt_PT.UTF-8";
-  console = {
-    font = "Lat2-Terminus16";
-    # keyMap = lib.mkForce "pt";
-    useXkbConfig = true;
-  };
-
+  
   security.rtkit.enable = true;
   services.pipewire = {
     enable = true;
