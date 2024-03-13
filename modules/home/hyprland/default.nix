@@ -115,17 +115,6 @@ in
       };
       extraConfig = ''
         $mod = SUPER
-        plugin {
-            hyprbars {
-                bar_color = rgb(${base00})
-                col.text = rgb(${base05})
-                bar_part_of_window = true
-                bar_height = 20
-                bar_text_font = monospace
-                bar_text_size = 8
-                bar_text_align = left
-            }
-        }
         input {
             kb_layout = pt,jp
             kb_variant = anthy
@@ -146,6 +135,11 @@ in
         }
         gestures {
             workspace_swipe = yes
+        }
+        animations {
+          enabled = true
+          bezier = exponential, 0.64, 0.04, 0.83, 0.64
+          animation = global, 1, 2, exponential
         }
         windowrulev2=opacity ${builtins.toString config.stylix.opacity.applications},class:(vesktop|thunar|firefox|Spotify|Code)$
         windowrulev2=opaque,title:(.*)( - YouTube — Mozilla Firefox)$
