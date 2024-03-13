@@ -1,6 +1,9 @@
-{inputs, system, ...}: {
+{
+  inputs,
+  system,
+  ...
+}: {
   programs.firefox = {
-    enable = true;
     profiles.tiago = {
       settings = {
         "browser.tabs.inTitlebar" = "0";

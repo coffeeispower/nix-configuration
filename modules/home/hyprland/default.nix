@@ -1,9 +1,17 @@
-{pkgs, config, inputs, ...}:
-let
-  hyprland = pkgs.hyprland; # inputs.hyprland.packages.${pkgs.system}.hyprland;
+{
+  pkgs,
+  config,
+  inputs,
+  ...
+}: let
+  hyprland = pkgs.hyprland;
   hyprlandEventHandlers = pkgs.writeShellScript "hyprlandEventHandlers" ''
     update_active_workspace() {
-      ${pkgs.eww-wayland}/bin/eww update currentworkspace=$WORKSPACENAME
+      ${
+      if config.programs.eww.enable
+      then "${config.programs.eww.package}/bin/eww update currentworkspace=$WORKSPACENAME"
+      else ":"
+    }
     }
     event_workspace() {
       update_active_workspace
@@ -76,7 +84,11 @@ let
 
     event_submap() {
       # SUBMAPNAME
-      ${pkgs.eww-wayland}/bin/eww update submap=$SUBMAPNAME
+      ${
+      if config.programs.eww.enable
+      then "${config.programs.eww.package}/bin/eww update submap=$SUBMAPNAME"
+      else ":"
+    }
     }
   '';
   hyprlandHandleEvents = pkgs.writeShellScript "hyprlandHandleEvents" ''
@@ -84,28 +96,24 @@ let
       EXEC:"${inputs.hyprland-contrib.packages.${pkgs.system}.shellevents}/bin/shellevents ${hyprlandEventHandlers}",nofork
   '';
 in
-with config.stylix.base16Scheme;
-{
-  wayland.windowManager.hyprland = {
-    enable = true;
-    # plugins = with inputs.hyprland-plugins.packages.${pkgs.system}; [
-    #   hyprbars
-    # ];
-    package = hyprland;
-    settings = {
-      bind = (
-        # Workspace keybind
-        # $mod + {1..10} to workspace {1..10}
-        # $mod + shift + {1..10} to move to workspace {1..10}
-        builtins.concatLists (builtins.genList (x:
-          let
-            ws = let c = (x + 1) / 10; in builtins.toString (x + 1 - (c * 10));
-          in [
-            "SUPER, ${ws}, workspace, ${toString (x + 1)}"
-            "SUPER SHIFT, ${ws}, movetoworkspace, ${toString (x + 1)}"
-          ]) 10));
-    };
-    extraConfig = ''
+  with config.stylix.base16Scheme; {
+    wayland.windowManager.hyprland = {
+      package = hyprland;
+      settings = {
+        bind = (
+          # Workspace keybind
+          # $mod + {1..10} to workspace {1..10}
+          # $mod + shift + {1..10} to move to workspace {1..10}
+          builtins.concatLists (builtins.genList (x: let
+              ws = let c = (x + 1) / 10; in builtins.toString (x + 1 - (c * 10));
+            in [
+              "SUPER, ${ws}, workspace, ${toString (x + 1)}"
+              "SUPER SHIFT, ${ws}, movetoworkspace, ${toString (x + 1)}"
+            ])
+            10)
+        );
+      };
+      extraConfig = ''
         $mod = SUPER
         plugin {
             hyprbars {
@@ -142,16 +150,32 @@ with config.stylix.base16Scheme;
         windowrulev2=opacity ${builtins.toString config.stylix.opacity.applications},class:(vesktop|thunar|firefox|Spotify|Code)$
         windowrulev2=opaque,title:(.*)( - YouTube — Mozilla Firefox)$
         layerrule=blur,(bar)
-        exec-once=${pkgs.eww-wayland}/bin/eww open bar
+        ${
+          if config.programs.eww.enable
+          then "exec-once=${config.programs.eww.package}/bin/eww open bar"
+          else ""
+        }
+        ${
+          if (config.programs.vesktop.vencord.settings.plugins."WebRichPresence (arRPC)".enabled or false)
+          then "exec-once=${pkgs.arrpc}/bin/arrpc"
+          else ""
+        }
         exec-once=${hyprlandHandleEvents}
-        exec-once=${pkgs.arrpc}/bin/arrpc
         exec-once=${pkgs.dex}/bin/dex -a
         binde=, XF86AudioLowerVolume, exec, ${pkgs.pamixer}/bin/pamixer --decrease 5
         binde=, XF86AudioRaiseVolume, exec, ${pkgs.pamixer}/bin/pamixer --increase 5
         binde=, XF86MonBrightnessUp, exec, ${pkgs.brightnessctl}/bin/brightnessctl s +5%
         binde=, XF86MonBrightnessDown, exec, ${pkgs.brightnessctl}/bin/brightnessctl s 5%-
-        bind=$mod, S, exec, ${pkgs.eww-wayland}/bin/eww open shutdown
-        bind=$mod, S, submap, shutdown-menu
+        ${
+          if config.programs.eww.enable
+          then "bind=$mod, S, exec, ${config.programs.eww.package}/bin/eww open shutdown"
+          else ""
+        }
+        ${
+          if config.programs.eww.enable
+          then "bind=$mod, S, submap, shutdown-menu"
+          else ""
+        }
         bind=, XF86Sleep, exec, ${pkgs.systemd}/bin/systemctl suspend
         bind=, XF86AudioMute, exec, ${pkgs.pamixer}/bin/pamixer -t
         bind=CTRL ALT, left, workspace, e-1
@@ -159,8 +183,16 @@ with config.stylix.base16Scheme;
         bind=CTRL ALT SHIFT, left, movetoworkspace, e-1
         bind=CTRL ALT SHIFT, right, movetoworkspace, e+1
         bind=,Print,exec,${pkgs.grim}/bin/grim -c -g "$(${pkgs.slurp}/bin/slurp)" - | ${pkgs.swappy}/bin/swappy -f -
-        bind=$mod, D, exec, ${pkgs.rofi-wayland}/bin/rofi -show drun -show-icons
-        bind=$mod, T, exec, ${pkgs.kitty}/bin/kitty
+        ${
+          if config.programs.rofi.enable
+          then "bind=$mod, D, exec, ${pkgs.rofi-wayland}/bin/rofi -show drun -show-icons"
+          else ""
+        }
+        ${
+          if config.programs.kitty.enable
+          then "bind=$mod, T, exec, ${pkgs.kitty}/bin/kitty"
+          else ""
+        }
         bind=$mod, F, fullscreen
         bind=$mod, R, submap, rearrange
         # Close app
@@ -175,17 +207,27 @@ with config.stylix.base16Scheme;
         bind=$mod, U, focusurgentorlast
         # Switch to mouse mode
         bind=$mod, M, submap, mouse
-        
+
         # Mouse bindings
         submap=mouse
             bindm=,mouse:272,movewindow
             bindm=,mouse:273,resizewindow
             bind=,Escape,submap,reset
-        
-        # Exit shutdown menu bind
-        submap=shutdown-menu
-            bind=, Escape, exec, ${pkgs.eww-wayland}/bin/eww close shutdown
-            bind=, Escape,submap,reset
+        ${
+          if config.programs.eww.enable
+          then "submap=shutdown-menu"
+          else ""
+        }
+        ${
+          if config.programs.eww.enable
+          then "    bind=, Escape, exec, ${config.programs.eww.package}/bin/eww close shutdown"
+          else ""
+        }
+        ${
+          if config.programs.eww.enable
+          then "    bind=, Escape,submap,reset"
+          else ""
+        }
 
         # Rearrange mode keybinds
         submap=rearrange
@@ -199,10 +241,10 @@ with config.stylix.base16Scheme;
             binde=, left, resizeactive, 10 0
             binde=, down, resizeactive, 0 -10
             binde=, up, resizeactive, 0 10
-        
+
             bind=, Tab, cyclenext
             bind=$rearrangeMod, Tab, swapnext
- 	      
+
             bind=$rearrangeMod, right,movewindow, r
             bind=$rearrangeMod, left, movewindow, l
             bind=$rearrangeMod, down, movewindow, d
@@ -212,7 +254,7 @@ with config.stylix.base16Scheme;
             # Exit rearrange mode
             bind=, Escape, submap         , reset
         submap=reset
-        
-    '';
-  };
-}
+
+      '';
+    };
+  }

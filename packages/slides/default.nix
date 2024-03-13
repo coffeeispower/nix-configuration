@@ -1,11 +1,11 @@
-{ lib
-, bash
-, buildGoModule
-, fetchFromGitHub
-, go
-, inputs
+{
+  lib,
+  bash,
+  buildGoModule,
+  fetchFromGitHub,
+  go,
+  inputs,
 }:
-
 buildGoModule rec {
   pname = "slides";
   version = "0.10.0-beta";
@@ -30,6 +30,6 @@ buildGoModule rec {
     homepage = "https://github.com/maaslalani/slides";
     changelog = "https://github.com/maaslalani/slides/releases/tag/v${version}";
     license = licenses.mit;
-    maintainers = with maintainers; [ maaslalani penguwin ];
+    maintainers = with maintainers; [maaslalani penguwin];
   };
 }

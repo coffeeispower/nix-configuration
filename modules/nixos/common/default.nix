@@ -1,5 +1,11 @@
-{ config, pkgs, lib, system, inputs, ... }: {
-  
+{
+  config,
+  pkgs,
+  lib,
+  system,
+  inputs,
+  ...
+}: {
   # Enable plymouth
   boot.plymouth.enable = true;
   # Enable GVFS to be able to mount and see removable devices in thunar
@@ -8,13 +14,12 @@
   systemd = {
     user.services.polkit-gnome-authentication-agent-1 = {
       description = "polkit-gnome-authentication-agent-1";
-      wantedBy = [ "graphical-session.target" ];
-      wants = [ "graphical-session.target" ];
-      after = [ "graphical-session.target" ];
+      wantedBy = ["graphical-session.target"];
+      wants = ["graphical-session.target"];
+      after = ["graphical-session.target"];
       serviceConfig = {
         Type = "simple";
-        ExecStart =
-          "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1";
+        ExecStart = "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1";
         Restart = "on-failure";
         RestartSec = 1;
         TimeoutStopSec = 10;
@@ -22,7 +27,8 @@
     };
   };
 
-  boot.kernelParams = [ "quiet" "splash" ];
+  boot.kernelParams = ["quiet" "splash"];
+  boot.consoleLogLevel = 0;
   boot.initrd.systemd.enable = true;
   hardware.opengl.enable = true;
   hardware.opengl.driSupport = true;
@@ -30,11 +36,9 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
   networking.networkmanager.enable = true;
-  
+
   # Set your time zone.
   time.timeZone = "Europe/Lisbon";
-  virtualisation.docker.enable = true;
-  virtualisation.docker.storageDriver = "btrfs";
   # Configure network proxy if necessary
   # networking.proxy.default = "http://user:password@proxy:port/";
   # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
@@ -55,52 +59,28 @@
     pulse.enable = true;
   };
   services.xserver.enable = true;
-  services.xserver.excludePackages = [ pkgs.xterm ];
   services.xserver.desktopManager.xterm.enable = false;
   # Enable touchpad support (enabled default in most desktopManager).
   services.xserver.libinput.enable = true;
   programs.dconf.enable = true;
   programs.git.enable = true;
-  programs.hyprland.enable = true;
   environment.systemPackages = with pkgs; [
-    my-lib.slides
-    my-lib.bombsquad
-    virtiofsd
-    xfce.thunar
-    xfce.thunar-volman
-    xfce.thunar-archive-plugin
+    # System monitor
     btop
+    # Gnome disks for managing partitions
     gnome.gnome-disk-utility
+
+    # For opening compressed archives like zip, rar, tar.gz, etc...
     gnome.file-roller
+
     pinentry-rofi
-    plymouth
-    cifs-utils
-    networkmanagerapplet
-    protonvpn-gui
-    eww-wayland
-    libreoffice
-    evince
-    lutris
-    wine
-    nixfmt
+
     pamixer
     libnotify
-    spotify
-    cli-visualizer
     pavucontrol
     neofetch
-    feh
     vlc
-    networkmanager_dmenu
-    playerctl
-    prismlauncher
-    clang
-    wdisplays
-    beekeeper-studio
-    obsidian
-    gimp
-    transmission-gtk
-    nil
+
     (pkgs.where-is-my-sddm-theme.override {
       themeConfig.General = {
         background = "${config.stylix.image}";
@@ -113,31 +93,18 @@
       };
     })
   ];
-  environment.shells = [ pkgs.nushell ];
-  xdg.portal.extraPortals = with pkgs; [ xdg-desktop-portal-hyprland ];
-  xdg.portal.config = { common = { default = [ "hyprland" ]; }; };
+  environment.shells = [pkgs.nushell];
+
+  xdg.portal.extraPortals = with pkgs; [xdg-desktop-portal-hyprland];
+  xdg.portal.config = {common = {default = ["hyprland"];};};
   xdg.portal.enable = true;
 
-  # Enable noise torch
-  programs.noisetorch.enable = true;
-  # Enable steam
-  programs.steam = {
-    enable = true;
-    remotePlay.openFirewall =
-      true; # Open ports in the firewall for Steam Remote Play
-    dedicatedServer.openFirewall =
-      true; # Open ports in the firewall for Source Dedicated Server
-  };
-  # Enable japanese input with ibus
-  i18n.inputMethod = {
-    enabled = "fcitx5";
-    fcitx5.addons = [ pkgs.fcitx5-mozc pkgs.fcitx5-gtk ];
-  };
   # Enable bluetooth
   hardware.bluetooth.enable = true; # enables support for Bluetooth
   hardware.bluetooth.powerOnBoot =
     true; # powers up the default Bluetooth controller on boot
   services.blueman.enable = true;
+
   programs.gnupg.agent = {
     enable = true;
     settings = {
@@ -145,32 +112,19 @@
     };
     enableSSHSupport = true;
   };
-  services.samba-wsdd = {
-    # make shares visible for windows 10 clients
-    enable = true;
-    openFirewall = true;
-  };
-  services.samba = {
-    enable = true;
-    securityType = "user";
-  };
-  programs.virt-manager.enable = true;
-  virtualisation.libvirtd.enable = true;
-  programs.adb.enable = true;
+
+  # Use doas instead of sudo
   security.doas.enable = true;
   security.sudo.enable = false;
+
   services.xserver.displayManager.sddm = {
     enable = true;
     wayland.enable = true;
-    settings = {
-      Autologin = {
-        Session = "hyprland.desktop";
-        User = "tiago";
-      };
-    };
     theme = "where_is_my_sddm_theme";
   };
+  programs.hyprland.enable = true;
   services.xserver.displayManager.defaultSession = "hyprland";
+
   home-manager = {
     useGlobalPkgs = true;
     useUserPackages = true;

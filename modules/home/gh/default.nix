@@ -1,4 +1,3 @@
-{...}: 
-{
-  programs.gh = { enable = true; settings.git_protocol = "ssh"; };
+{...}: {
+  programs.gh = {settings.git_protocol = "ssh";};
 }

@@ -1,4 +1,7 @@
-{...}: {
-  programs.zoxide.enable = true;
-  programs.nushell.shellAliases.cd = "z";
+{
+  lib,
+  config,
+  ...
+}: {
+  programs.nushell.shellAliases = lib.optionalAttrs config.programs.zoxide.enable {cd = "z";};
 }

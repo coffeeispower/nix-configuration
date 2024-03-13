@@ -1,7 +1,11 @@
-{pkgs, config, ...}:
 {
-  programs.rofi = let inherit (config.lib.formats.rasi) mkLiteral; in {
-    enable = true;
+  pkgs,
+  config,
+  ...
+}: {
+  programs.rofi = let
+    inherit (config.lib.formats.rasi) mkLiteral;
+  in {
     cycle = true;
     # Install the wayland variant of rofi
     package = pkgs.rofi-wayland;

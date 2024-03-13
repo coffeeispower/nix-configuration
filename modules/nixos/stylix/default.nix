@@ -1,5 +1,4 @@
-{pkgs, ...}:
-{
+{pkgs, ...}: {
   stylix.image = ./wallpaper.jpg;
   stylix.cursor = {
     package = pkgs.bibata-cursors;
@@ -9,7 +8,7 @@
   stylix.polarity = "dark";
   stylix.fonts = with pkgs; rec {
     monospace = {
-      package = (nerdfonts.override { fonts = [ "FiraCode" ]; });
+      package = nerdfonts.override {fonts = ["FiraCode"];};
       name = "FiraCodeNerdFontMono";
     };
     sansSerif = monospace;
@@ -20,7 +19,7 @@
   fonts = {
     fontDir.enable = true;
     enableDefaultPackages = true;
-    packages = with pkgs; [ ipafont (nerdfonts.override { fonts = [ "FiraCode" ]; }) ];
+    packages = with pkgs; [ipafont (nerdfonts.override {fonts = ["FiraCode"];})];
   };
   stylix.opacity = {
     applications = 0.9;

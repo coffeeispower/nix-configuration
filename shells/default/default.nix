@@ -1,4 +1,7 @@
-{pkgs, stdenv}:
+{
+  pkgs,
+  stdenv,
+}:
 pkgs.mkShell {
   buildInputs = with pkgs; [
     just
