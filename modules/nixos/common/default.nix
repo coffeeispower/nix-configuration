@@ -101,6 +101,17 @@
     gimp
     transmission-gtk
     nil
+    (pkgs.where-is-my-sddm-theme.override {
+      themeConfig.General = {
+        background = "${config.stylix.image}";
+        backgroundMode = "fill";
+        passwordCharacter = "*";
+        passwordFontSize = 96;
+        sessionsFontSize = 24;
+        usersFontSize = 48;
+        cursorColor = "#FFFFFF";
+      };
+    })
   ];
   environment.shells = [ pkgs.nushell ];
   xdg.portal.extraPortals = with pkgs; [ xdg-desktop-portal-hyprland ];
@@ -148,15 +159,18 @@
   programs.adb.enable = true;
   security.doas.enable = true;
   security.sudo.enable = false;
-  services.greetd = {
+  services.xserver.displayManager.sddm = {
     enable = true;
-    settings = rec {
-      initial_session = {
-        command = "dbus-run-session Hyprland";
+    wayland.enable = true;
+    settings = {
+      Autologin = {
+        Session = "hyprland.desktop";
+        User = "tiago";
       };
-      default_session = initial_session;
     };
+    theme = "where_is_my_sddm_theme";
   };
+  services.xserver.displayManager.defaultSession = "hyprland";
   home-manager = {
     useGlobalPkgs = true;
     useUserPackages = true;
