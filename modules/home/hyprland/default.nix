@@ -120,9 +120,7 @@ in
         }
         $mod = SUPER
         input {
-            kb_layout = pt,jp
-            kb_variant = anthy
-            kb_options = grp:win_space_toggle
+            kb_layout = pt
             touchpad {
                 natural_scroll = yes
                 disable_while_typing = false
