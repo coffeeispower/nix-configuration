@@ -10,7 +10,7 @@ with lib; let
   jsonFormat = pkgs.formats.json {};
 
   # settings/settings.json file
-  mergedVencordSettings = mkMerge [
+  mergedVencordSettings = recursiveUpdate (recursiveUpdate
     {
       notifyAboutUpdates = false;
       autoUpdate = false;
@@ -36,11 +36,10 @@ with lib; let
       enabledThemes = [
         "Stylix.theme.css"
       ];
-    })
-    config.programs.vesktop.vencord.settings
-  ];
+    }))
+  config.programs.vesktop.vencord.settings;
   # settings.json file
-  mergedVesktopSettings = mkMerge [
+  mergedVesktopSettings = recursiveUpdate (recursiveUpdate
     {
       discordBranch = "stable";
       firstLaunch = false;
@@ -53,9 +52,8 @@ with lib; let
       splashColor = "#${config.stylix.base16Scheme.base0D}";
       splashBackground = "#${config.stylix.base16Scheme.base00}";
       splashTheming = true;
-    })
-    config.programs.vesktop.settings
-  ];
+    }))
+  config.programs.vesktop.settings;
 in {
   options.programs.vesktop = {
     enable = mkEnableOption "vesktop";
