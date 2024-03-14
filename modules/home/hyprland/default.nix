@@ -114,6 +114,10 @@ in
         );
       };
       extraConfig = ''
+        misc {
+          disable_hyprland_logo = true
+          disable_splash_rendering = true
+        }
         $mod = SUPER
         input {
             kb_layout = pt,jp
