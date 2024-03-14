@@ -1,6 +1,10 @@
-{pkgs, modulesPath, ...}: {
+{
+  pkgs,
+  modulesPath,
+  ...
+}: {
   imports = ["${modulesPath}/installer/cd-dvd/installation-cd-minimal.nix"];
-  
+
   # This conflicts with networkmanager
   networking.wireless.enable = false;
   users.users.nixos.shell = pkgs.nushell;
