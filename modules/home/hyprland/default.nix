@@ -201,14 +201,9 @@ in
         bind=$mod, down, movefocus, d
 
         bind=$mod, U, focusurgentorlast
-        # Switch to mouse mode
-        bind=$mod, M, submap, mouse
-
         # Mouse bindings
-        submap=mouse
-            bindm=,mouse:272,movewindow
-            bindm=,mouse:273,resizewindow
-            bind=,Escape,submap,reset
+        bindm=$mod,mouse:272,movewindow
+        bindm=$mod,mouse:273,resizewindow
         ${
           if config.programs.eww.enable
           then "submap=shutdown-menu"
