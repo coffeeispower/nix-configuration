@@ -26,34 +26,6 @@
     }
   ];
   boot.resumeDevice = (builtins.elemAt config.swapDevices 0).device;
-  programs.nix-ld.libraries = with pkgs;
-    [
-      zlib
-      zstd
-      stdenv.cc.cc
-      curl
-      openssl
-      attr
-      libssh
-      bzip2
-      libxml2
-      acl
-      libsodium
-      util-linux
-      xz
-      systemd
-      freetype
-      fontconfig
-    ]
-    ++ (with pkgs.xorg; [
-      libXext
-      libX11
-      libXrender
-      libXtst
-      libXi
-    ]);
-  programs.nix-ld.enable = true;
-
   environment.systemPackages = with pkgs; [
     # Custom packages
     my-lib.slides
