@@ -96,7 +96,7 @@
       EXEC:"${inputs.hyprland-contrib.packages.${pkgs.system}.shellevents}/bin/shellevents ${hyprlandEventHandlers}",nofork
   '';
 in
-  with config.stylix.base16Scheme; {
+  {
     wayland.windowManager.hyprland = {
       package = hyprland;
       settings = {
@@ -140,8 +140,20 @@ in
         }
         animations {
           enabled = true
-          bezier = exponential, 0.64, 0.04, 0.83, 0.64
-          animation = global, 1, 2, exponential
+          bezier = exponential, .84,.02,.31,.95
+          bezier = workspacesBezier, .44,.59,0,1.27
+          bezier = easeout, 0,0,.58,1
+          bezier = easein, .42,0,1,1
+          animation = global, 1, 6, exponential
+
+          animation = windowsIn, 1, 4, easeout, popin 80%
+          animation = windowsOut, 1, 4, easein, popin 80%
+
+          animation = fadeIn, 1, 2, easeout
+          animation = fadeOut, 1, 2, easein
+          
+          animation = windowsMove, 1, 4, exponential
+          animation = workspaces, 1, 4, workspacesBezier, slidefade
         }
         windowrulev2=opacity ${builtins.toString config.stylix.opacity.applications},class:(vesktop|thunar|firefox|Spotify|Code)$
         windowrulev2=opaque,title:(.*)( - YouTube — Mozilla Firefox)$
