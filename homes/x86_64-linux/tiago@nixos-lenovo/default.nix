@@ -98,4 +98,28 @@
     associations.added."application/pdf" = ["org.gnome.Evince.desktop"];
     defaultApplications."application/pdf" = ["org.gnome.Evince.desktop"];
   };
+
+  programs.pyprland = {
+    enable = true;
+    config = {
+      pyprland.plugins = ["scratchpads"];
+      scratchpads = {
+        pavucontrol = {
+          command = "${pkgs.pavucontrol}/bin/pavucontrol";
+          margin = 50;
+          unfocus = "hide";
+          animation = "fromTop";
+          lazy = true;
+        };
+
+        kitty = {
+          command = "${pkgs.kitty}/bin/kitty --class scratchpad";
+          margin = 50;
+          unfocus = "hide";
+          animation = "fromTop";
+          lazy = true;
+        };
+      };
+    };
+  };
 }

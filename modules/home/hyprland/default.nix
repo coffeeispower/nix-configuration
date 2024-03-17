@@ -113,152 +113,180 @@ in {
           10)
       );
     };
-    extraConfig = ''
-      misc {
-        disable_hyprland_logo = true
-        disable_splash_rendering = true
-      }
-      $mod = SUPER
-      input {
-          kb_layout = pt
-          touchpad {
-              natural_scroll = yes
-              disable_while_typing = false
-          }
-      }
-      decoration {
-          rounding = 10
-          blur {
-              enabled = true
-              size = 5
-              passes = 1
-              vibrancy = 0.5
-          }
-      }
-      gestures {
-          workspace_swipe = yes
-      }
-      animations {
-        enabled = true
-        bezier = exponential, .84,.02,.31,.95
-        bezier = workspacesBezier, .44,.59,0,1.27
-        bezier = easeout, 0,0,.58,1
-        bezier = easein, .42,0,1,1
-        animation = global, 1, 6, exponential
-        animation = layers, 1, 4, easeout, popin 80%
+    extraConfig =
+      ''
+        misc {
+          disable_hyprland_logo = true
+          disable_splash_rendering = true
+        }
+        $mod = SUPER
+        input {
+            kb_layout = pt
+            touchpad {
+                natural_scroll = yes
+                disable_while_typing = false
+            }
+        }
+        decoration {
+            rounding = 10
+            blur {
+                enabled = true
+                size = 5
+                passes = 1
+                vibrancy = 0.5
+            }
+        }
+        gestures {
+            workspace_swipe = yes
+        }
+        animations {
+          enabled = true
+          bezier = exponential, .84,.02,.31,.95
+          bezier = workspacesBezier, .44,.59,0,1.27
+          bezier = easeout, 0,0,.58,1
+          bezier = easein, .42,0,1,1
+          animation = global, 1, 6, exponential
+          animation = layers, 1, 4, easeout, popin 80%
 
-        animation = windowsIn, 1, 4, easeout, popin 80%
-        animation = windowsOut, 1, 4, easein, popin 80%
+          animation = windowsIn, 1, 4, easeout, popin 80%
+          animation = windowsOut, 1, 4, easein, popin 80%
 
-        animation = fadeIn, 1, 2, easeout
-        animation = fadeOut, 1, 2, easein
+          animation = fadeIn, 1, 2, easeout
+          animation = fadeOut, 1, 2, easein
 
-        animation = windowsMove, 1, 4, exponential
-        animation = workspaces, 1, 4, workspacesBezier, slidefade
-      }
-      windowrulev2=opacity ${builtins.toString config.stylix.opacity.applications},class:(vesktop|thunar|firefox|Spotify|Code)$
-      windowrulev2=opaque,title:(.*)( - YouTube — Mozilla Firefox)$
-      layerrule=blur,(bar)
-      ${
-        if config.programs.eww.enable
-        then "exec-once=${config.programs.eww.package}/bin/eww open bar"
+          animation = windowsMove, 1, 4, exponential
+          animation = workspaces, 1, 4, workspacesBezier, slidefade
+        }
+        windowrulev2=opacity ${builtins.toString config.stylix.opacity.applications},class:(vesktop|thunar|firefox|Spotify|Code)$
+        windowrulev2=opaque,title:(.*)( - YouTube — Mozilla Firefox)$
+      ''
+      + (
+        if config.programs.pyprland.enable
+        then ''
+          $pavucontrol = class:^(pavucontrol)$
+          windowrulev2 = float,$pavucontrol
+          windowrulev2 = size 86% 40%,$pavucontrol
+          windowrulev2 = move 50% 6%,$pavucontrol
+          windowrulev2 = workspace special silent,$pavucontrol
+          windowrulev2 = opacity 0.80,$pavucontrol
+
+          $scratchpadsize = size 80% 85%
+          $scratchpad = class:^(scratchpad)$
+          windowrulev2 = float,$scratchpad
+          windowrulev2 = $scratchpadsize,$scratchpad
+          windowrulev2 = workspace special silent,$scratchpad
+          windowrulev2 = center,$scratchpad
+
+          bind=$mod, SPACE, exec, ${config.programs.pyprland.package}/bin/pypr toggle kitty && hyprctl dispatch bringactivetotop
+          bind=$mod, V, exec, ${config.programs.pyprland.package}/bin/pypr toggle pavucontrol && hyprctl dispatch bringactivetotop
+        ''
         else ""
-      }
-      ${
-        if (config.programs.vesktop.vencord.settings.plugins."WebRichPresence (arRPC)".enabled or false)
-        then "exec-once=${pkgs.arrpc}/bin/arrpc"
-        else ""
-      }
-      exec-once=${hyprlandHandleEvents}
-      exec-once=${pkgs.dex}/bin/dex -a
-      binde=, XF86AudioLowerVolume, exec, ${pkgs.pamixer}/bin/pamixer --decrease 5
-      binde=, XF86AudioRaiseVolume, exec, ${pkgs.pamixer}/bin/pamixer --increase 5
-      binde=, XF86MonBrightnessUp, exec, ${pkgs.brightnessctl}/bin/brightnessctl s +5%
-      binde=, XF86MonBrightnessDown, exec, ${pkgs.brightnessctl}/bin/brightnessctl s 5%-
-      ${
-        if config.programs.eww.enable
-        then "bind=$mod, S, exec, ${config.programs.eww.package}/bin/eww open shutdown"
-        else ""
-      }
-      ${
-        if config.programs.eww.enable
-        then "bind=$mod, S, submap, shutdown-menu"
-        else ""
-      }
-      bind=, XF86Sleep, exec, ${pkgs.systemd}/bin/systemctl suspend
-      bind=, XF86AudioMute, exec, ${pkgs.pamixer}/bin/pamixer -t
-      bind=CTRL ALT, left, workspace, e-1
-      bind=CTRL ALT, right, workspace, e+1
-      bind=CTRL ALT SHIFT, left, movetoworkspace, e-1
-      bind=CTRL ALT SHIFT, right, movetoworkspace, e+1
-      bind=,Print,exec,${pkgs.grim}/bin/grim -c -g "$(${pkgs.slurp}/bin/slurp)" - | ${pkgs.swappy}/bin/swappy -f -
-      ${
-        if config.programs.rofi.enable
-        then "bind=$mod, D, exec, ${pkgs.rofi-wayland}/bin/rofi -show drun -show-icons"
-        else ""
-      }
-      ${
-        if config.programs.kitty.enable
-        then "bind=$mod, T, exec, ${pkgs.kitty}/bin/kitty"
-        else ""
-      }
-      bind=$mod, F, fullscreen
-      bind=$mod, R, submap, rearrange
-      # Close app
-      bind=$mod, C, killactive
+      )
+      + ''
 
-      # Move focus keybinds
-      bind=$mod, left, movefocus, l
-      bind=$mod, right, movefocus, r
-      bind=$mod, up, movefocus, u
-      bind=$mod, down, movefocus, d
 
-      bind=$mod, U, focusurgentorlast
-      # Mouse bindings
-      bindm=$mod,mouse:272,movewindow
-      bindm=$mod,mouse:273,resizewindow
-      ${
-        if config.programs.eww.enable
-        then "submap=shutdown-menu"
-        else ""
-      }
-      ${
-        if config.programs.eww.enable
-        then "    bind=, Escape, exec, ${config.programs.eww.package}/bin/eww close shutdown"
-        else ""
-      }
-      ${
-        if config.programs.eww.enable
-        then "    bind=, Escape,submap,reset"
-        else ""
-      }
 
-      # Rearrange mode keybinds
-      submap=rearrange
-          $rearrangeMod=SHIFT
-          bind=, a, movefocus, l
-          bind=, d, movefocus, r
-          bind=, w, movefocus, u
-          bind=, s, movefocus, d
+        layerrule=blur,(bar)
+        ${
+          if config.programs.eww.enable
+          then "exec-once=${config.programs.eww.package}/bin/eww open bar"
+          else ""
+        }
+        ${
+          if (config.programs.vesktop.vencord.settings.plugins."WebRichPresence (arRPC)".enabled or false)
+          then "exec-once=${pkgs.arrpc}/bin/arrpc"
+          else ""
+        }
+        exec-once=${hyprlandHandleEvents}
+        exec-once=${pkgs.dex}/bin/dex -a
+        binde=, XF86AudioLowerVolume, exec, ${pkgs.pamixer}/bin/pamixer --decrease 5
+        binde=, XF86AudioRaiseVolume, exec, ${pkgs.pamixer}/bin/pamixer --increase 5
+        binde=, XF86MonBrightnessUp, exec, ${pkgs.brightnessctl}/bin/brightnessctl s +5%
+        binde=, XF86MonBrightnessDown, exec, ${pkgs.brightnessctl}/bin/brightnessctl s 5%-
+        ${
+          if config.programs.eww.enable
+          then "bind=$mod, S, exec, ${config.programs.eww.package}/bin/eww open shutdown"
+          else ""
+        }
+        ${
+          if config.programs.eww.enable
+          then "bind=$mod, S, submap, shutdown-menu"
+          else ""
+        }
+        bind=, XF86Sleep, exec, ${pkgs.systemd}/bin/systemctl suspend
+        bind=, XF86AudioMute, exec, ${pkgs.pamixer}/bin/pamixer -t
+        bind=CTRL ALT, left, workspace, e-1
+        bind=CTRL ALT, right, workspace, e+1
+        bind=CTRL ALT SHIFT, left, movetoworkspace, e-1
+        bind=CTRL ALT SHIFT, right, movetoworkspace, e+1
+        bind=,Print,exec,${pkgs.grim}/bin/grim -c -g "$(${pkgs.slurp}/bin/slurp)" - | ${pkgs.swappy}/bin/swappy -f -
+        ${
+          if config.programs.rofi.enable
+          then "bind=$mod, D, exec, ${pkgs.rofi-wayland}/bin/rofi -show drun -show-icons"
+          else ""
+        }
+        ${
+          if config.programs.kitty.enable
+          then "bind=$mod, T, exec, ${pkgs.kitty}/bin/kitty"
+          else ""
+        }
+        bind=$mod, F, fullscreen
+        bind=$mod, R, submap, rearrange
+        # Close app
+        bind=$mod, C, killactive
 
-          binde=, right, resizeactive, -10 0
-          binde=, left, resizeactive, 10 0
-          binde=, down, resizeactive, 0 -10
-          binde=, up, resizeactive, 0 10
+        # Move focus keybinds
+        bind=$mod, left, movefocus, l
+        bind=$mod, right, movefocus, r
+        bind=$mod, up, movefocus, u
+        bind=$mod, down, movefocus, d
 
-          bind=, Tab, cyclenext
-          bind=$rearrangeMod, Tab, swapnext
+        bind=$mod, U, focusurgentorlast
+        # Mouse bindings
+        bindm=$mod,mouse:272,movewindow
+        bindm=$mod,mouse:273,resizewindow
+        ${
+          if config.programs.eww.enable
+          then "submap=shutdown-menu"
+          else ""
+        }
+        ${
+          if config.programs.eww.enable
+          then "    bind=, Escape, exec, ${config.programs.eww.package}/bin/eww close shutdown"
+          else ""
+        }
+        ${
+          if config.programs.eww.enable
+          then "    bind=, Escape,submap,reset"
+          else ""
+        }
 
-          bind=$rearrangeMod, right,movewindow, r
-          bind=$rearrangeMod, left, movewindow, l
-          bind=$rearrangeMod, down, movewindow, d
-          bind=$rearrangeMod, up,   movewindow, u
-          bind=, f,      togglefloating
-          bind=, c,      centerwindow
-          # Exit rearrange mode
-          bind=, Escape, submap         , reset
-      submap=reset
+        # Rearrange mode keybinds
+        submap=rearrange
+            $rearrangeMod=SHIFT
+            bind=, a, movefocus, l
+            bind=, d, movefocus, r
+            bind=, w, movefocus, u
+            bind=, s, movefocus, d
 
-    '';
+            binde=, right, resizeactive, -10 0
+            binde=, left, resizeactive, 10 0
+            binde=, down, resizeactive, 0 -10
+            binde=, up, resizeactive, 0 10
+
+            bind=, Tab, cyclenext
+            bind=$rearrangeMod, Tab, swapnext
+
+            bind=$rearrangeMod, right,movewindow, r
+            bind=$rearrangeMod, left, movewindow, l
+            bind=$rearrangeMod, down, movewindow, d
+            bind=$rearrangeMod, up,   movewindow, u
+            bind=, f,      togglefloating
+            bind=, c,      centerwindow
+            # Exit rearrange mode
+            bind=, Escape, submap         , reset
+        submap=reset
+
+      '';
   };
 }
