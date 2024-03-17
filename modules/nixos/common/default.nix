@@ -5,7 +5,8 @@
   system,
   inputs,
   ...
-}: {
+}: let
+in {
   # Enable plymouth
   boot.plymouth.enable = true;
   # Enable GVFS to be able to mount and see removable devices in thunar
@@ -28,8 +29,15 @@
   };
 
   boot.initrd.systemd.enable = true;
-  hardware.opengl.enable = true;
-  hardware.opengl.driSupport = true;
+  hardware.opengl = let
+    hyprland-nixpkgs = import inputs.hyprland.inputs.nixpkgs {inherit system;};
+  in {
+    enable = true;
+    driSupport = true;
+    package = hyprland-nixpkgs.mesa.drivers;
+    driSupport32Bit = true;
+    package32 = hyprland-nixpkgs.pkgsi686Linux.mesa.drivers;
+  };
   boot.loader.efi.canTouchEfiVariables = true;
   networking.networkmanager.enable = true;
 
