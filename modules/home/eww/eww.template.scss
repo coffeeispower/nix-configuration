@@ -7,7 +7,6 @@ $charging-battery-color: #{{base08}};
 * {
     all: unset; //Unsets everything so you can style everything from scratch
     font-family: monospace;
-    font-size: 10px;
 }
 
 //Global Styles
@@ -17,6 +16,7 @@ $charging-battery-color: #{{base08}};
     margin-left: 20px;
     background-color: rgba($widgets-bg, {{desktopOpacity}});
     border-radius: 0px 0px 10px 10px;
+    font-size: 10px;
 }
 .submap {
     background-color: $widgets-fg;
