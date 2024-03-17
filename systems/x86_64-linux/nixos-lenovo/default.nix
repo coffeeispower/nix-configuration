@@ -125,6 +125,7 @@
 
   programs.virt-manager.enable = true;
   virtualisation.libvirtd.enable = true;
+  programs.hyprland.enable = true;
   services.xserver.displayManager.sddm.settings.Autologin = {
     Session = "hyprland.desktop";
     User = "tiago";

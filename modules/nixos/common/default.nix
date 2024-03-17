@@ -83,10 +83,6 @@
   ];
   environment.shells = [pkgs.nushell];
 
-  xdg.portal.extraPortals = with pkgs; [xdg-desktop-portal-hyprland];
-  xdg.portal.config = {common = {default = ["hyprland"];};};
-  xdg.portal.enable = true;
-
   # Enable bluetooth
   hardware.bluetooth.enable = true; # enables support for Bluetooth
   hardware.bluetooth.powerOnBoot =
@@ -110,7 +106,7 @@
     wayland.enable = true;
     theme = "where_is_my_sddm_theme";
   };
-  programs.hyprland.enable = true;
+  programs.hyprland.package = inputs.hyprland.packages."${system}".hyprland;
   services.xserver.displayManager.defaultSession = "hyprland";
 
   home-manager = {
@@ -118,4 +114,8 @@
     useUserPackages = true;
   };
   system.stateVersion = "23.11";
+  nix.settings = {
+    substituters = ["https://hyprland.cachix.org"];
+    trusted-public-keys = ["hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc="];
+  };
 }
