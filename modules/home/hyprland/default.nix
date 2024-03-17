@@ -2,9 +2,10 @@
   pkgs,
   config,
   inputs,
+  system,
   ...
 }: let
-  hyprland = pkgs.hyprland;
+  hyprland = inputs.hyprland.packages."${system}".hyprland;
   hyprlandEventHandlers = pkgs.writeShellScript "hyprlandEventHandlers" ''
     update_active_workspace() {
       ${
@@ -145,6 +146,7 @@ in
           bezier = easeout, 0,0,.58,1
           bezier = easein, .42,0,1,1
           animation = global, 1, 6, exponential
+          animation = layers, 1, 4, easeout, popin 80%
 
           animation = windowsIn, 1, 4, easeout, popin 80%
           animation = windowsOut, 1, 4, easein, popin 80%

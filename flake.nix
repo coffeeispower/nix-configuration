@@ -28,6 +28,7 @@
       url = "github:maaslalani/slides";
       flake = false;
     };
+    hyprland.url = "github:hyprwm/Hyprland/v0.37.1";
   };
 
   outputs = inputs:
