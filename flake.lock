@@ -804,11 +804,11 @@
         "nixpkgs": "nixpkgs_5"
       },
       "locked": {
-        "lastModified": 1710188582,
-        "narHash": "sha256-0968XB7m4QuBqaqRFhgjZCYx0iQJld4wbJmE8qoZUTE=",
+        "lastModified": 1710795873,
+        "narHash": "sha256-nW2hZ5UG7VpnYhMPMaMPEY1gGmDnYZgzvPKLFV/GgTc=",
         "owner": "coffee-is-power",
         "repo": "stylix",
-        "rev": "0c1114121d73f49b231471a1546f18dd1ac85e26",
+        "rev": "5411796031f2bd26e48d19110b04d5bd07789783",
         "type": "github"
       },
       "original": {
