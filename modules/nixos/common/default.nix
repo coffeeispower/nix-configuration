@@ -5,7 +5,8 @@
   system,
   inputs,
   ...
-}: {
+}: let
+in {
   # Enable plymouth
   boot.plymouth.enable = true;
   # Enable GVFS to be able to mount and see removable devices in thunar
