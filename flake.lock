@@ -147,6 +147,22 @@
         "type": "github"
       }
     },
+    "comfy-theme-spicetify": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1710633825,
+        "narHash": "sha256-F6e83schEWjTshK68n0OFJHbDy5XCHv4NB5YU3CNnf8=",
+        "owner": "Comfy-Themes",
+        "repo": "Spicetify",
+        "rev": "21b70a9c3a8f2eb05819f7b57393cef89e6e3079",
+        "type": "github"
+      },
+      "original": {
+        "owner": "Comfy-Themes",
+        "repo": "Spicetify",
+        "type": "github"
+      }
+    },
     "firefox-addons": {
       "inputs": {
         "flake-utils": "flake-utils",
@@ -716,6 +732,7 @@
     },
     "root": {
       "inputs": {
+        "comfy-theme-spicetify": "comfy-theme-spicetify",
         "firefox-addons": "firefox-addons",
         "home-manager": "home-manager",
         "hyprland": "hyprland",

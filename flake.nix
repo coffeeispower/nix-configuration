@@ -28,6 +28,10 @@
       url = "github:maaslalani/slides";
       flake = false;
     };
+    comfy-theme-spicetify = {
+      url = "github:Comfy-Themes/Spicetify";
+      flake = false;
+    };
     hyprland.url = "github:hyprwm/Hyprland/v0.37.1";
   };
 
