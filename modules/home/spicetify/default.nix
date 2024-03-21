@@ -24,6 +24,10 @@ in
         loopyLoop
         keyboardShortcut
         brokenAdblock
+        {
+          filename = "spicetify-furigana-lyrics.js";
+          src = "${inputs.spicetify-furigana-lyrics}/dist";
+        }
       ];
       colorScheme = "custom";
       customColorScheme = {
