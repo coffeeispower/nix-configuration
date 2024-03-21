@@ -742,6 +742,7 @@
         "nixpkgs-unstable": "nixpkgs-unstable",
         "slides": "slides",
         "snowfall-lib": "snowfall-lib",
+        "spicetify-furigana-lyrics": "spicetify-furigana-lyrics",
         "spicetify-nix": "spicetify-nix",
         "stylix": "stylix"
       }
@@ -781,6 +782,22 @@
       "original": {
         "owner": "snowfallorg",
         "repo": "lib",
+        "type": "github"
+      }
+    },
+    "spicetify-furigana-lyrics": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1706365039,
+        "narHash": "sha256-BD2uwstKcyJ1x4UqhY/prNog8OkA630n/2BEnT1gx+c=",
+        "owner": "duffey",
+        "repo": "spicetify-furigana-lyrics",
+        "rev": "3e0a99f1c38be9a5a1727388815453a78f41f8ca",
+        "type": "github"
+      },
+      "original": {
+        "owner": "duffey",
+        "repo": "spicetify-furigana-lyrics",
         "type": "github"
       }
     },

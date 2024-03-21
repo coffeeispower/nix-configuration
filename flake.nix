@@ -32,6 +32,10 @@
       url = "github:Comfy-Themes/Spicetify";
       flake = false;
     };
+    spicetify-furigana-lyrics = {
+      url = "github:duffey/spicetify-furigana-lyrics";
+      flake = false;
+    };
     hyprland.url = "github:hyprwm/Hyprland/v0.37.1";
   };
 

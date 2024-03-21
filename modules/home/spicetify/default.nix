@@ -10,7 +10,14 @@ in
   with config.stylix.base16Scheme; {
     imports = [inputs.spicetify-nix.homeManagerModules.default];
     programs.spicetify = {
-      theme = spicePkgs.themes.text;
+      theme = {
+        name = "Comfy";
+        src = inputs.comfy-theme-spicetify;
+        injectCss = true;
+        replaceColors = true;
+        overwriteAssets = true;
+        sidebarConfig = true;
+      };
       enabledExtensions = with spicePkgs.extensions; [
         fullAppDisplay
         trashbin
@@ -20,30 +27,42 @@ in
       ];
       colorScheme = "custom";
       customColorScheme = {
-        main = base00;
-        button = base09;
+        text               = base04;
+        subtext            = base05;
 
-        sidebar = base0D;
-        selected-row = base03;
+        main               = base00;
+        main-elevated      = base02;
+        main-transition    = base01;
 
-        text = base0D;
-        subtext = base0D;
-        tab-active = base03;
+        highlight          = base01;
+        highlight-elevated = base01;
+        
+        sidebar            = base00;
+        player             = base00;
+        card               = base01;
+        shadow             = "1E2233";
 
-        sidebar-text = base0D;
+        selected-row       = base01;
 
-        player = base0E;
+        button             = base01;
+        button-active      = base02;
+        button-disabled    = base09;
+        
+        tab-active         = base0D;
+        notification       = base06;
+        notification-error = base0F;
+        misc               = "000000";
 
-        card = base01;
-        button-active = base0E;
-        button-disabled = base0D;
+        play-button        = base02;
+        play-button-active = base0D;
+        
+        progress-fg        = base0D;
+        progress-bg        = base01;
 
-        notification = base09;
-        notification-error = base08;
+        heart              = base0D;
 
-        misc = base00;
-
-        shadow = "000000";
+        pagelink-active    = base0E;
+        radio-btn-active   = base02;
       };
     };
   }
