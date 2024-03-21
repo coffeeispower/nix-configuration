@@ -12,8 +12,6 @@ $charging-battery-color: #{{base08}};
 //Global Styles
 .bar {
     color: $widgets-fg;
-    margin-right: 20px;
-    margin-left: 20px;
     background-color: rgba($widgets-bg, {{desktopOpacity}});
     border-radius: 0px 0px 10px 10px;
     font-size: 10px;

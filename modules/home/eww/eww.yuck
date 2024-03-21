@@ -84,11 +84,16 @@
 )
 
 (defwidget music []
-  (box :class "music"
-    :orientation "h"
-    :space-evenly false
-    :halign "center"
-  {music != "" ? " ${music}" : ""}))
+  (tooltip
+    (image :path '${musicArtUrl}' :image-width 300)
+    (box :class "music"
+        :orientation "h"
+        :space-evenly false
+        :halign "center"
+      {music != "" ? " ${music}" : ""}
+    )
+  )
+)
 
 
 (defwidget metric [label value onchange]
@@ -107,6 +112,8 @@
 (deflisten music :initial ""
 "playerctl --follow metadata --format '{{ artist }} - {{ album }} - {{ title }}' || true")
 
+(deflisten musicArtUrl :initial "" "getArtUrl")
+
 (defpoll volume :interval "400ms" "pamixer --get-volume")
 (defvar currentworkspace "1")
 (defvar submap "")
@@ -123,6 +130,6 @@
   :reserve (struts :side "top" :distance "20px")
   :exclusive true
   :namespace "bar"
-  :stacking "bottom"
+  :stacking "fg"
   (bar))
 (include "./shutdown.yuck")
