@@ -30,6 +30,7 @@
     # Custom packages
     my-lib.slides
     my-lib.bombsquad
+    my-lib.lunarvim-gui
 
     # For virt manager
     virtiofsd
