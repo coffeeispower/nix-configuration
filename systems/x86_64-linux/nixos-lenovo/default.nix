@@ -44,6 +44,7 @@
       systemd
       freetype
       fontconfig
+      libGL
     ]
     ++ (with pkgs.xorg; [
       libXext
