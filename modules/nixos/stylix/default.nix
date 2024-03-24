@@ -1,9 +1,9 @@
 {pkgs, ...}: {
   stylix.image = ./wallpaper.jpg;
   stylix.cursor = {
-    package = pkgs.bibata-cursors;
-    name = "Bibata-Modern-Classic";
-    size = 16;
+    package = pkgs.catppuccin-cursors.frappeMauve;
+    name = "Catppuccin-Frappe-Mauve-Cursors";
+    size = 8;
   };
   stylix.polarity = "dark";
   stylix.fonts = with pkgs; rec {
