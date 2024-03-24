@@ -32,7 +32,7 @@
   programs.nushell.enable = true;
   programs.rofi.enable = true;
   programs.spicetify.enable = true;
-  programs.thunar.enable = true;
+  programs.nautilus.enable = true;
   programs.vscode.enable = true;
   programs.zellij.enable = true;
   programs.zoxide.enable = true;

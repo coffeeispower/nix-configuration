@@ -157,7 +157,7 @@ in {
           animation = windowsMove, 1, 4, exponential
           animation = workspaces, 1, 4, workspacesBezier, slidefade
         }
-        windowrulev2=opacity ${builtins.toString config.stylix.opacity.applications},class:(vesktop|thunar|firefox|Spotify|Code)$
+        windowrulev2=opacity ${builtins.toString config.stylix.opacity.applications},class:(vesktop|nautilus|firefox|Spotify|Code)$
         windowrulev2=opaque,title:(.*)( - YouTube — Mozilla Firefox)$
       ''
       + (

@@ -5,11 +5,11 @@
   system,
   inputs,
   ...
-}: let
-in {
+}:
+{
   # Enable plymouth
   boot.plymouth.enable = true;
-  # Enable GVFS to be able to mount and see removable devices in thunar
+  # Enable GVFS to be able to mount and see removable devices in nautilus
   services.gvfs.enable = true;
   security.polkit.enable = true;
   systemd = {
