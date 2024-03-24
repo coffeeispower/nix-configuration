@@ -45,6 +45,7 @@
       freetype
       fontconfig
       libGL
+      libpulseaudio
     ]
     ++ (with pkgs.xorg; [
       libXext
@@ -52,6 +53,9 @@
       libXrender
       libXtst
       libXi
+      libXcursor
+      libXinerama
+      libXrandr
     ]);
   programs.nix-ld.enable = true;
 
