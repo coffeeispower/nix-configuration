@@ -152,10 +152,10 @@
     enabled = "fcitx5";
     fcitx5.addons = [pkgs.fcitx5-mozc pkgs.fcitx5-gtk];
   };
-  environment.variables = {
-    GTK_IM_MODULE = lib.mkForce "";
-    QT_IM_MODULE = lib.mkForce "";
-  };
+#  environment.variables = {
+#    GTK_IM_MODULE = lib.mkForce "";
+#    QT_IM_MODULE = lib.mkForce "";
+#  };
   # Enable steam
   programs.steam = {
     enable = true;
