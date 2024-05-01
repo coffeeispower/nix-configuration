@@ -61,6 +61,7 @@
   programs.dconf.enable = true;
   programs.git.enable = true;
   environment.systemPackages = with pkgs; [
+    xdg-user-dirs
     # System monitor
     btop
     # Gnome disks for managing partitions
