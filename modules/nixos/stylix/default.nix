@@ -27,4 +27,5 @@
     terminal = 0.5;
     desktop = 0.5;
   };
+  stylix.targets.plymouth.logo = "${pkgs.nixos-icons}/share/icons/hicolor/48x48/apps/nix-snowflake-white.png";
 }

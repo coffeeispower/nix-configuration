@@ -28,8 +28,8 @@ in
     pname = "bombsquad";
 
     src = fetchurl {
-      url = "http://files.ballistica.net/bombsquad/builds/BombSquad_Linux_x86_64_${finalAttrs.version}.tar.gz";
-      hash = "sha256-VtOMhlXGxh7WLPJHMgIXvmwknSDCZhBAQdjuXJ3ahxA=";
+      url = "http://files.ballistica.net/bombsquad/builds/old/BombSquad_Linux_x86_64_${finalAttrs.version}.tar.gz";
+      hash = "sha256-V+fipfrfUgNDJjxTQX4j2XiF6l4d0IM7jVxfyfTMrYw=";
     };
 
     sourceRoot = "BombSquad_Linux_x86_64_${finalAttrs.version}";

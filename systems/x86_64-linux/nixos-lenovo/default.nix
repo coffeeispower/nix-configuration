@@ -5,7 +5,9 @@
   system,
   inputs,
   ...
-}: {
+}: 
+let pkgs-unstable = import inputs.nixpkgs-unstable { inherit system; }; in
+{
   imports = [
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
@@ -26,7 +28,7 @@
     }
   ];
   boot.resumeDevice = (builtins.elemAt config.swapDevices 0).device;
-  programs.nix-ld.libraries = with pkgs;
+  programs.nix-ld.libraries = with pkgs-unstable;
     [
       zlib
       zstd
@@ -173,4 +175,11 @@
 
   boot.kernelParams = ["quiet" "splash"];
   boot.consoleLogLevel = 0;
+  networking.firewall = {
+    enable = true;
+    allowedTCPPorts = [ 25565 ];
+    allowedUDPPortRanges = [
+      { from = 25565; to = 25565; }
+    ];
+  };
 }
