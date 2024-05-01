@@ -12,6 +12,9 @@ test-other HOSTNAME:
 switch:
     doas nixos-rebuild switch --flake .
 
+boot:
+    doas nixos-rebuild boot --flake .
+
 # Rebuild the configuration.
 switch-to-other HOSTNAME:
     doas nixos-rebuild switch --flake .#{{HOSTNAME}}
