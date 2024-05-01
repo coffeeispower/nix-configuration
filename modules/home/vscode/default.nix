@@ -68,8 +68,15 @@
         github.vscode-pull-request-github
         github.vscode-github-actions
         vadimcn.vscode-lldb
+        ms-vscode-remote.remote-containers
       ]
       ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [
+        {
+          publisher = "Wokwi";
+          name = "wokwi-vscode";
+          version = "2.4.3";
+          sha256 = "sha256-WDbukOWOyKfK6Q7Nq8J2cCfFSzDw4q0rvm3hD8SfJiA=";
+        }
         {
           publisher = "doppler";
           name = "doppler-vscode";
