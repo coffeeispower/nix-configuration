@@ -16,7 +16,7 @@
   services.dunst.enable = true;
 
   gtk.enable = true;
-
+  home.packages = with pkgs; [ kdenlive stremio yt-dlp blender wl-clipboard ];
   programs.direnv.enable = true;
   programs.eww.enable = true;
   programs.feh.enable = true;
