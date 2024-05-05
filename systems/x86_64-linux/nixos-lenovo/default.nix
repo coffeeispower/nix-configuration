@@ -177,7 +177,7 @@ let pkgs-unstable = import inputs.nixpkgs-unstable { inherit system; }; in
   boot.consoleLogLevel = 0;
   networking.firewall = {
     enable = true;
-    allowedTCPPorts = [ 25565 ];
+    allowedTCPPorts = [ 25565 3000 5173 ];
     allowedUDPPortRanges = [
       { from = 25565; to = 25565; }
     ];
