@@ -51,6 +51,7 @@
       "vscord.status.image.large.idle.key" = "https://raw.githubusercontent.com/LeonardSSH/vscord/main/assets/icons/idle.png";
       "vscord.status.idle.timeout" = 300;
       "vscord.status.idle.resetElapsedTime" = true;
+      "svelte.enable-ts-plugin" = true;
     };
     extensions = with pkgs.vscode-extensions;
       [
