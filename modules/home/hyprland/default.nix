@@ -162,6 +162,8 @@ in {
         }
         windowrulev2=opacity ${builtins.toString config.stylix.opacity.applications},class:(vesktop|nautilus|firefox|Spotify|Code)$
         windowrulev2=opaque,title:(.*)( - YouTube — Mozilla Firefox)$
+        # Disable animation for screenshots
+        layerrule = noanim, selection
       ''
       + (
         if config.programs.pyprland.enable
@@ -222,6 +224,7 @@ in {
         bind=CTRL ALT, right, workspace, e+1
         bind=CTRL ALT SHIFT, left, movetoworkspace, e-1
         bind=CTRL ALT SHIFT, right, movetoworkspace, e+1
+        bind=SHIFT, Print,exec,${pkgs.grim}/bin/grim -c - | ${pkgs.swappy}/bin/swappy -f -
         bind=,Print,exec,${pkgs.grim}/bin/grim -c -g "$(${pkgs.slurp}/bin/slurp)" - | ${pkgs.swappy}/bin/swappy -f -
         ${
           if config.programs.rofi.enable
