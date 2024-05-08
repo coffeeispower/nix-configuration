@@ -31,42 +31,32 @@ in
       ];
       colorScheme = "custom";
       customColorScheme = {
-        text               = base04;
-        subtext            = base05;
-
-        main               = base00;
-        main-elevated      = base02;
-        main-transition    = base01;
-
-        highlight          = base01;
-        highlight-elevated = base01;
-        
-        sidebar            = base00;
-        player             = base00;
-        card               = base01;
-        shadow             = "1E2233";
-
-        selected-row       = base01;
-
-        button             = base01;
-        button-active      = base02;
-        button-disabled    = base09;
-        
-        tab-active         = base0D;
-        notification       = base06;
-        notification-error = base0F;
-        misc               = "000000";
-
-        play-button        = base02;
-        play-button-active = base0D;
-        
-        progress-fg        = base0D;
-        progress-bg        = base01;
-
-        heart              = base0D;
-
-        pagelink-active    = base0E;
-        radio-btn-active   = base02;
+        subtext = base0F;
+        text = base07;
+        main = base00;
+        main-elevated = base01;
+        main-transition = base05;
+        highlight = base0D;
+        highlight-elevated = base0C;
+        sidebar = base00;
+        player = base00;
+        card = base00;
+        shadow = base02;
+        selected-row = base0C;
+        button = base0E;
+        button-active = base0D;
+        button-disabled = base01;
+        tab-active = base0C;
+        notification = base0E;
+        notification-error = base08;
+        misc = base06;
+        play-button = base0D;
+        play-button-active = base0E;
+        progress-fg = base0E;
+        progress-bg = base01;
+        heart = base08;
+        pagelink-active = base0D;
+        radio-btn-active = base0D;
       };
     };
   }
