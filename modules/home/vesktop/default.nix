@@ -49,7 +49,7 @@ with lib; let
       appBadge = false;
     }
     (optionalAttrs config.programs.vesktop.stylixIntegration.enable {
-      splashColor = "#${config.stylix.base16Scheme.base0D}";
+      splashColor = "#${config.stylix.base16Scheme.base0A}";
       splashBackground = "#${config.stylix.base16Scheme.base00}";
       splashTheming = true;
     }))
@@ -86,9 +86,8 @@ in {
       enable = config.programs.vesktop.stylixIntegration.enable;
       source = with config.stylix.base16Scheme; let
         inherit (inputs.nix-rice.lib) color;
-        base03Rgba = color.hexToRgba "#${base03}";
-        base0DRgba = color.hexToRgba "#${base0D}";
-        dmWhite = color.hexToRgba "#${base05}";
+        base09Rgba = color.hexToRgba "#${base09}";
+        base0ARgba = color.hexToRgba "#${base0A}";
       in
         lib.my-lib.mustache.template {
           inherit pkgs;
@@ -96,9 +95,8 @@ in {
           templateFile = ./Stylix.theme.css.mustache;
           variables =
             {
-              accent = "${builtins.toString (builtins.floor base03Rgba.r)}, ${builtins.toString (builtins.floor base03Rgba.g)}, ${builtins.toString (builtins.floor base03Rgba.b)}";
-              accentAlt = "${builtins.toString (builtins.floor base0DRgba.r)}, ${builtins.toString (builtins.floor base0DRgba.g)}, ${builtins.toString (builtins.floor base0DRgba.b)}";
-              dmWhite = "${builtins.toString (builtins.floor dmWhite.r)}, ${builtins.toString (builtins.floor dmWhite.g)}, ${builtins.toString (builtins.floor dmWhite.b)}";
+              splitBase09 = "${builtins.toString (builtins.floor base09Rgba.r)}, ${builtins.toString (builtins.floor base09Rgba.g)}, ${builtins.toString (builtins.floor base09Rgba.b)}";
+              splitBase0A = "${builtins.toString (builtins.floor base0ARgba.r)}, ${builtins.toString (builtins.floor base0ARgba.g)}, ${builtins.toString (builtins.floor base0ARgba.b)}";
             }
             // config.stylix.base16Scheme;
         };
