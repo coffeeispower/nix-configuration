@@ -36,7 +36,7 @@ in
         main = base00;
         main-elevated = base01;
         main-transition = base05;
-        highlight = base0D;
+        highlight = base03;
         highlight-elevated = base0C;
         sidebar = base00;
         player = base00;
