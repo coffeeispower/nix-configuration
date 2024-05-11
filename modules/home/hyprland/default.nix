@@ -5,7 +5,8 @@
   system,
   ...
 }: let
-  hyprland = inputs.hyprland.packages."${system}".hyprland;
+  pkgs-unstable = import inputs.nixpkgs-unstable { inherit system; };
+  hyprland = pkgs-unstable.hyprland;
   hyprlandEventHandlers = pkgs.writeShellScript "hyprlandEventHandlers" ''
     update_active_workspace() {
       ${
@@ -246,8 +247,11 @@ in {
         bind=$mod, right, movefocus, r
         bind=$mod, up, movefocus, u
         bind=$mod, down, movefocus, d
-
         bind=$mod, U, focusurgentorlast
+        
+        # Lock bind
+        bind=$mod, L, exec, ${pkgs-unstable.hyprlock}/bin/hyprlock
+        
         # Mouse bindings
         bindm=$mod,mouse:272,movewindow
         bindm=$mod,mouse:273,resizewindow

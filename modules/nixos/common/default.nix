@@ -8,7 +8,7 @@
 }:
 
 let
-    hyprland-nixpkgs = import inputs.hyprland.inputs.nixpkgs {inherit system;};
+    nixpkgs-unstable = import inputs.nixpkgs-unstable {inherit system;};
 in {
   # Enable plymouth
   boot.plymouth.enable = true;
@@ -35,9 +35,9 @@ in {
   hardware.opengl = {
     enable = true;
     driSupport = true;
-    package = hyprland-nixpkgs.mesa.drivers;
+    package = nixpkgs-unstable.mesa.drivers;
     driSupport32Bit = true;
-    package32 = hyprland-nixpkgs.pkgsi686Linux.mesa.drivers;
+    package32 = nixpkgs-unstable.pkgsi686Linux.mesa.drivers;
   };
   boot.loader.efi.canTouchEfiVariables = true;
   networking.networkmanager.enable = true;
@@ -116,7 +116,7 @@ in {
 #    wayland.enable = true;
     theme = "where_is_my_sddm_theme";
   };
-  programs.hyprland.package = inputs.hyprland.packages."${system}".hyprland;
+  programs.hyprland.package = nixpkgs-unstable.hyprland;
   services.xserver.displayManager.defaultSession = "hyprland";
 
   home-manager = {
