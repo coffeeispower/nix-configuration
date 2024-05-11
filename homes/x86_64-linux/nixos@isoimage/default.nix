@@ -36,4 +36,5 @@
   programs.vscode.enable = false;
   programs.zellij.enable = false;
   programs.zoxide.enable = false;
+  programs.hyprlock.enable = true;
 }

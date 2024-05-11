@@ -26,6 +26,7 @@
   programs.helix.enable = true;
   wayland.windowManager.hyprland.enable = true;
   programs.hyprpaper.enable = true;
+  programs.hyprlock.enable = true;
   programs.kitty.enable = true;
   programs.lazygit.enable = true;
   programs.networkmanager-dmenu.enable = true;
