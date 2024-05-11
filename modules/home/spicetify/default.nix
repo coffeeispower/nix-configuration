@@ -32,10 +32,10 @@ in
       colorScheme = "custom";
       customColorScheme = {
         subtext = base0F;
-        text = base07;
+        text = base05;
         main = base00;
-        main-elevated = base01;
-        main-transition = base05;
+        main-transition = base01;
+        main-elevated = base02;
         highlight = base03;
         highlight-elevated = base0C;
         sidebar = base00;
@@ -49,14 +49,14 @@ in
         tab-active = base0C;
         notification = base0E;
         notification-error = base08;
-        misc = base06;
+        misc = base0E;
         play-button = base0D;
         play-button-active = base0E;
         progress-fg = base0E;
         progress-bg = base01;
         heart = base08;
         pagelink-active = base0D;
-        radio-btn-active = base0D;
+        radio-btn-active = base02;
       };
     };
   }

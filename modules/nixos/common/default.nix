@@ -6,7 +6,10 @@
   inputs,
   ...
 }:
-{
+
+let
+    hyprland-nixpkgs = import inputs.hyprland.inputs.nixpkgs {inherit system;};
+in {
   # Enable plymouth
   boot.plymouth.enable = true;
   # Enable GVFS to be able to mount and see removable devices in nautilus
@@ -29,9 +32,7 @@
   };
 
   boot.initrd.systemd.enable = true;
-  hardware.opengl = let
-    hyprland-nixpkgs = import inputs.hyprland.inputs.nixpkgs {inherit system;};
-  in {
+  hardware.opengl = {
     enable = true;
     driSupport = true;
     package = hyprland-nixpkgs.mesa.drivers;
@@ -86,7 +87,7 @@
         passwordFontSize = 96;
         sessionsFontSize = 24;
         usersFontSize = 48;
-        cursorColor = "#FFFFFF";
+        cursorColor = "#${config.stylix.base16Scheme.base05}";
       };
     })
   ];
@@ -112,7 +113,7 @@
 
   services.xserver.displayManager.sddm = {
     enable = true;
-    wayland.enable = true;
+#    wayland.enable = true;
     theme = "where_is_my_sddm_theme";
   };
   programs.hyprland.package = inputs.hyprland.packages."${system}".hyprland;

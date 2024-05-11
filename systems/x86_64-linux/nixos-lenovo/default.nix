@@ -133,10 +133,10 @@ let pkgs-unstable = import inputs.nixpkgs-unstable { inherit system; }; in
   programs.virt-manager.enable = true;
   virtualisation.libvirtd.enable = true;
   programs.hyprland.enable = true;
-  services.xserver.displayManager.sddm.settings.Autologin = {
-    Session = "hyprland.desktop";
-    User = "tiago";
-  };
+  # services.xserver.displayManager.sddm.settings.Autologin = {
+  #   Session = "hyprland.desktop";
+  #   User = "tiago";
+  # };
 
   # Enable samba for sharing and accessing shared folders
   services.samba-wsdd = {
