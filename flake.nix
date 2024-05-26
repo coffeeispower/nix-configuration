@@ -36,6 +36,7 @@
       url = "github:duffey/spicetify-furigana-lyrics";
       flake = false;
     };
+    woomer.url = "github:coffeeispower/woomer";
   };
 
   outputs = inputs:

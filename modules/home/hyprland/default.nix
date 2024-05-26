@@ -95,7 +95,7 @@
   '';
   hyprlandHandleEvents = pkgs.writeShellScript "hyprlandHandleEvents" ''
     ${pkgs.socat}/bin/socat -u UNIX-CONNECT:/tmp/hypr/$HYPRLAND_INSTANCE_SIGNATURE/.socket2.sock \
-      EXEC:"${inputs.hyprland-contrib.packages.${pkgs.system}.shellevents}/bin/shellevents ${hyprlandEventHandlers}",nofork
+      EXEC:"${inputs.hyprland-contrib.packages.${system}.shellevents}/bin/shellevents ${hyprlandEventHandlers}",nofork
   '';
 in {
   wayland.windowManager.hyprland = {
@@ -163,8 +163,10 @@ in {
         }
         windowrulev2=opacity ${builtins.toString config.stylix.opacity.applications},class:(vesktop|nautilus|firefox|Spotify|Code)$
         windowrulev2=opaque,title:(.*)( - YouTube — Mozilla Firefox)$
+        windowrulev2=noanim,title:(woomer)$
         # Disable animation for screenshots
         layerrule = noanim, selection
+        layerrule = ignorezero, bar
       ''
       + (
         if config.programs.pyprland.enable
@@ -227,6 +229,7 @@ in {
         bind=CTRL ALT SHIFT, right, movetoworkspace, e+1
         bind=SHIFT, Print,exec,${pkgs.grim}/bin/grim -c - | ${pkgs.swappy}/bin/swappy -f -
         bind=,Print,exec,${pkgs.grim}/bin/grim -c -g "$(${pkgs.slurp}/bin/slurp)" - | ${pkgs.swappy}/bin/swappy -f -
+        bind=$mod, W,exec,LD_LIBRARY_PATH=${pkgs.wayland}/lib ${inputs.woomer.packages.${system}.default}/bin/woomer
         ${
           if config.programs.rofi.enable
           then "bind=$mod, D, exec, ${pkgs.rofi-wayland}/bin/rofi -show drun -show-icons"
