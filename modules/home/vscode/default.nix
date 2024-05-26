@@ -70,6 +70,7 @@
         github.vscode-github-actions
         vadimcn.vscode-lldb
         ms-vscode-remote.remote-containers
+        bradlc.vscode-tailwindcss
       ]
       ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [
         {
