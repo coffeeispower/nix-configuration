@@ -229,7 +229,7 @@ in {
         bind=CTRL ALT SHIFT, right, movetoworkspace, e+1
         bind=SHIFT, Print,exec,${pkgs.grim}/bin/grim -c - | ${pkgs.swappy}/bin/swappy -f -
         bind=,Print,exec,${pkgs.grim}/bin/grim -c -g "$(${pkgs.slurp}/bin/slurp)" - | ${pkgs.swappy}/bin/swappy -f -
-        bind=$mod, W,exec,LD_LIBRARY_PATH=${pkgs.wayland}/lib ${inputs.woomer.packages.${system}.default}/bin/woomer
+        bind=$mod, W,exec,${inputs.woomer.packages.${system}.default}/bin/woomer
         ${
           if config.programs.rofi.enable
           then "bind=$mod, D, exec, ${pkgs.rofi-wayland}/bin/rofi -show drun -show-icons"

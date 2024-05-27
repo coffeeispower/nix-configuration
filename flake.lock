@@ -834,11 +834,11 @@
         "nixpkgs": "nixpkgs_5"
       },
       "locked": {
-        "lastModified": 1716752621,
-        "narHash": "sha256-q8z6i+Nzp2d4uWJ75b3Sb6hJQiLBZMp2ut/0OafIqdo=",
+        "lastModified": 1716792068,
+        "narHash": "sha256-FLkXzXVEa7deKsgm+f3HteupTJYc9hWAvV1R+RNn9p4=",
         "owner": "coffeeispower",
         "repo": "woomer",
-        "rev": "24155769d1c5ceb9309c2cd78e597a9c3b95696a",
+        "rev": "790fbd37224daed36cf981254af1e85b2d0fc377",
         "type": "github"
       },
       "original": {
