@@ -2,8 +2,6 @@
   lib,
   config,
   pkgs,
-  inputs,
-  system,
   ...
 }: {
   xdg.configFile."eww" = lib.mkIf config.programs.eww.enable {recursive = true;};
@@ -38,7 +36,6 @@
       done < <(${pkgs.playerctl}/bin/playerctl --follow metadata --format '{{ mpris:artUrl }}' || true)
     '')
   ];
-  programs.eww.package = (import inputs.nixpkgs-unstable { inherit system; }).eww-wayland;
   programs.eww.configDir = pkgs.stdenv.mkDerivation {
     src = ./.;
     name = "eww-config";

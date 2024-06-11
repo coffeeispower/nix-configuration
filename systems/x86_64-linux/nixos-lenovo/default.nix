@@ -5,9 +5,7 @@
   system,
   inputs,
   ...
-}: 
-let pkgs-unstable = import inputs.nixpkgs-unstable { inherit system; }; in
-{
+}: {
   imports = [
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
@@ -28,7 +26,7 @@ let pkgs-unstable = import inputs.nixpkgs-unstable { inherit system; }; in
     }
   ];
   boot.resumeDevice = (builtins.elemAt config.swapDevices 0).device;
-  programs.nix-ld.libraries = with pkgs-unstable;
+  programs.nix-ld.libraries = with pkgs;
     [
       zlib
       zstd
@@ -78,7 +76,6 @@ let pkgs-unstable = import inputs.nixpkgs-unstable { inherit system; }; in
     beekeeper-studio
 
     ## C compilers
-    gcc
     clang
 
     ## C LSP
@@ -101,6 +98,7 @@ let pkgs-unstable = import inputs.nixpkgs-unstable { inherit system; }; in
     # For playing some crazy games
     lutris
     wine
+    wine64
 
     ## Minecraft Launcher
     prismlauncher
@@ -154,10 +152,10 @@ let pkgs-unstable = import inputs.nixpkgs-unstable { inherit system; }; in
     enabled = "fcitx5";
     fcitx5.addons = [pkgs.fcitx5-mozc pkgs.fcitx5-gtk];
   };
-#  environment.variables = {
-#    GTK_IM_MODULE = lib.mkForce "";
-#    QT_IM_MODULE = lib.mkForce "";
-#  };
+  #  environment.variables = {
+  #    GTK_IM_MODULE = lib.mkForce "";
+  #    QT_IM_MODULE = lib.mkForce "";
+  #  };
   # Enable steam
   programs.steam = {
     enable = true;
@@ -177,9 +175,12 @@ let pkgs-unstable = import inputs.nixpkgs-unstable { inherit system; }; in
   boot.consoleLogLevel = 0;
   networking.firewall = {
     enable = true;
-    allowedTCPPorts = [ 25565 3000 5173 ];
+    allowedTCPPorts = [25565 3000 5173];
     allowedUDPPortRanges = [
-      { from = 25565; to = 25565; }
+      {
+        from = 25565;
+        to = 25565;
+      }
     ];
   };
 }

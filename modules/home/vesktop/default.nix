@@ -3,7 +3,6 @@
   pkgs,
   config,
   inputs,
-  system,
   ...
 }:
 with lib; let
@@ -74,7 +73,7 @@ in {
     };
   };
   config = {
-    home.packages = [(mkIf config.programs.vesktop.enable (import inputs.nixpkgs-unstable {inherit system;}).vesktop)];
+    home.packages = [(mkIf config.programs.vesktop.enable pkgs.vesktop)];
     home.activation.vencordCP = mkIf config.programs.vesktop.enable (
       inputs.home-manager.lib.hm.dag.entryAfter ["writeBoundary"] ''
         mkdir -p $HOME/.config/vesktop/settings/

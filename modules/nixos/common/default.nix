@@ -2,14 +2,10 @@
   config,
   pkgs,
   lib,
-  system,
-  inputs,
   ...
-}:
-
-let
-    nixpkgs-unstable = import inputs.nixpkgs-unstable {inherit system;};
-in {
+}: {
+  # Enable hyprlock pam service
+  security.pam.services.hyprlock = {};
   # Enable plymouth
   boot.plymouth.enable = true;
   # Enable GVFS to be able to mount and see removable devices in nautilus
@@ -35,9 +31,7 @@ in {
   hardware.opengl = {
     enable = true;
     driSupport = true;
-    package = nixpkgs-unstable.mesa.drivers;
     driSupport32Bit = true;
-    package32 = nixpkgs-unstable.pkgsi686Linux.mesa.drivers;
   };
   boot.loader.efi.canTouchEfiVariables = true;
   networking.networkmanager.enable = true;
@@ -55,10 +49,10 @@ in {
     alsa.support32Bit = true;
     pulse.enable = true;
   };
-  services.xserver.enable = true;
-  services.xserver.desktopManager.xterm.enable = false;
+  # services.xserver.enable = true;
+  # services.xserver.desktopManager.xterm.enable = false;
   # Enable touchpad support (enabled default in most desktopManager).
-  services.xserver.libinput.enable = true;
+  services.libinput.enable = true;
   programs.dconf.enable = true;
   programs.git.enable = true;
   environment.systemPackages = with pkgs; [
@@ -79,17 +73,31 @@ in {
     neofetch
     vlc
 
-    (pkgs.where-is-my-sddm-theme.override {
-      themeConfig.General = {
-        background = "${config.stylix.image}";
-        backgroundMode = "fill";
-        passwordCharacter = "*";
-        passwordFontSize = 96;
-        sessionsFontSize = 24;
-        usersFontSize = 48;
-        cursorColor = "#${config.stylix.base16Scheme.base05}";
-      };
-    })
+    # (pkgs.where-is-my-sddm-theme.override {
+    #   themeConfig.General = {
+    #     background = "${config.stylix.image}";
+    #     backgroundMode = "fill";
+    #     blurRadius = 10;
+    #     sessionsFontSize = 24;
+    #     usersFontSize = 48;
+    #     showSessionsByDefault = true;
+    #     cursorColor = "#${config.stylix.base16Scheme.base05}";
+
+    #     passwordInputCursorVisible = true;
+    #     passwordInputWidth = 0.25;        
+    #     passwordCharacter = "*";
+    #     passwordFontSize = 28;
+    #     passwordInputBackground = "#60ffffff";
+    #     passwordInputRadius = 10;
+    #   };
+    # })
+#     (catppuccin-sddm.override {
+#       flavor = "macchiato";
+#       background = "${config.stylix.image}";
+#       font = config.stylix.fonts.sansSerif.name;
+# #      fontSize = "${config.stylix.fonts.sizes.desktop}";
+#       loginBackground = true;
+#     })
   ];
   environment.shells = [pkgs.nushell];
 
@@ -111,19 +119,19 @@ in {
   security.doas.enable = true;
   security.sudo.enable = false;
 
-  services.xserver.displayManager.sddm = {
-    enable = true;
-#    wayland.enable = true;
-    theme = "where_is_my_sddm_theme";
-  };
-  programs.hyprland.package = nixpkgs-unstable.hyprland;
-  services.xserver.displayManager.defaultSession = "hyprland";
+  # services.displayManager.sddm = {
+  #   enable = true;
+  #   wayland.enable = true;
+  #   theme = "catppuccin-macchiato";
+  # };
+  # services.displayManager.defaultSession = "hyprland";
 
   home-manager = {
     useGlobalPkgs = true;
     useUserPackages = true;
+    backupFileExtension = ".bkp";
   };
-  system.stateVersion = "23.11";
+  system.stateVersion = "24.05";
   nix.settings = {
     substituters = ["https://hyprland.cachix.org"];
     trusted-public-keys = ["hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc="];

@@ -6,7 +6,7 @@
     size = 8;
   };
   stylix.base16Scheme = {
-    scheme =  "Catppuccin Macchiato";
+    scheme = "Catppuccin Macchiato";
     author = "https://github.com/catppuccin/catppuccin";
     # #24273a
     base00 = "24273a"; # base
@@ -64,4 +64,5 @@
     desktop = 0.5;
   };
   stylix.targets.plymouth.logo = "${pkgs.nixos-icons}/share/icons/hicolor/48x48/apps/nix-snowflake-white.png";
+  stylix.enable = true;
 }

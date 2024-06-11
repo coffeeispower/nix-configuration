@@ -1,10 +1,5 @@
-{
-  config,
-  pkgs,
-  lib,
-  ...
-}: {
-  home.stateVersion = "23.11";
+{pkgs, ...}: {
+  home.stateVersion = "24.05";
   programs.git = {
     enable = true;
     userName = "Tiago Dinis";
@@ -14,9 +9,12 @@
   services.gpg-agent.enable = true;
   services.fcitx5.enable = true;
   services.dunst.enable = true;
+  services.hyprpaper.enable = true;
+  services.hypridle.enable = true;
 
   gtk.enable = true;
-  home.packages = with pkgs; [ kdenlive stremio yt-dlp blender wl-clipboard ];
+  home.packages = with pkgs; [kdenlive stremio yt-dlp blender wl-clipboard];
+  programs.hyprlock.enable = true;
   programs.direnv.enable = true;
   programs.eww.enable = true;
   programs.feh.enable = true;
@@ -25,9 +23,6 @@
   programs.gh.enable = true;
   programs.helix.enable = true;
   wayland.windowManager.hyprland.enable = true;
-  programs.hyprpaper.enable = true;
-  programs.hyprlock.enable = true;
-  programs.hypridle.enable = true;
   programs.kitty.enable = true;
   programs.lazygit.enable = true;
   programs.networkmanager-dmenu.enable = true;

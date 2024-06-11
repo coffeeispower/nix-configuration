@@ -1,16 +1,5 @@
-{
-  pkgs,
-  inputs,
-  system,
-  ...
-}: {
+{pkgs, ...}: {
   programs.vscode = {
-    package =
-      (import inputs.nixpkgs-unstable {
-        inherit system;
-        config.allowUnfree = true;
-      })
-      .vscode;
     mutableExtensionsDir = false;
     userSettings = {
       "editor.fontLigatures" = true;
@@ -63,7 +52,7 @@
         davidanson.vscode-markdownlint
         svelte.svelte-vscode
         rust-lang.rust-analyzer
-        llvm-vs-code-extensions.vscode-clangd
+        ms-vscode.cpptools
         editorconfig.editorconfig
         tamasfe.even-better-toml
         github.vscode-pull-request-github
@@ -71,6 +60,7 @@
         vadimcn.vscode-lldb
         ms-vscode-remote.remote-containers
         bradlc.vscode-tailwindcss
+        ms-vscode.cmake-tools
       ]
       ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [
         {

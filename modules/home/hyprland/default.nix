@@ -5,13 +5,12 @@
   system,
   ...
 }: let
-  pkgs-unstable = import inputs.nixpkgs-unstable { inherit system; };
-  hyprland = pkgs-unstable.hyprland;
+  hyprland = pkgs.hyprland;
   hyprlandEventHandlers = pkgs.writeShellScript "hyprlandEventHandlers" ''
     update_active_workspace() {
       ${
       if config.programs.eww.enable
-      then "${config.programs.eww.package}/bin/eww update currentworkspace=$WORKSPACENAME"
+      then "eww update currentworkspace=$WORKSPACENAME"
       else ":"
     }
     }
@@ -88,13 +87,13 @@
       # SUBMAPNAME
       ${
       if config.programs.eww.enable
-      then "${config.programs.eww.package}/bin/eww update submap=$SUBMAPNAME"
+      then "eww update submap=$SUBMAPNAME"
       else ":"
     }
     }
   '';
   hyprlandHandleEvents = pkgs.writeShellScript "hyprlandHandleEvents" ''
-    ${pkgs.socat}/bin/socat -u UNIX-CONNECT:/tmp/hypr/$HYPRLAND_INSTANCE_SIGNATURE/.socket2.sock \
+    ${pkgs.socat}/bin/socat -u UNIX-CONNECT:$XDG_RUNTIME_DIR/hypr/$HYPRLAND_INSTANCE_SIGNATURE/.socket2.sock \
       EXEC:"${inputs.hyprland-contrib.packages.${system}.shellevents}/bin/shellevents ${hyprlandEventHandlers}",nofork
   '';
 in {
@@ -118,7 +117,7 @@ in {
       ''
         monitor=desc:Samsung Electric Company SME1920N H9FZA50833, 1366x768, -1366x0, 1
         monitor=eDP-1,preferred,0x0,1
-        monitor=DP-1,preferred,auto,1,mirror,eDP-1
+        monitor=,preferred,auto,1,mirror,eDP-1
         misc {
           disable_hyprland_logo = true
           disable_splash_rendering = true
@@ -251,7 +250,7 @@ in {
         bind=$mod, up, movefocus, u
         bind=$mod, down, movefocus, d
         bind=$mod, U, focusurgentorlast
-                
+
         # Mouse bindings
         bindm=$mod,mouse:272,movewindow
         bindm=$mod,mouse:273,resizewindow

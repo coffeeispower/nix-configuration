@@ -1,9 +1,4 @@
-{
-  config,
-  pkgs,
-  lib,
-  ...
-}: {
+{...}: {
   home.stateVersion = "23.11";
   programs.git = {
     enable = true;
@@ -14,18 +9,19 @@
   services.gpg-agent.enable = true;
   services.fcitx5.enable = false;
   services.dunst.enable = true;
+  services.hyprpaper.enable = true;
+  services.hypridle.enable = true;
 
   gtk.enable = true;
 
   programs.direnv.enable = true;
+  programs.hyprlock.enable = true;
   programs.eww.enable = true;
   programs.feh.enable = true;
   programs.feh.mimeApps.defaultAssociation.enable = true;
   programs.firefox.enable = true;
   programs.gh.enable = true;
   programs.helix.enable = true;
-  wayland.windowManager.hyprland.enable = true;
-  programs.hyprpaper.enable = true;
   programs.kitty.enable = true;
   programs.lazygit.enable = true;
   programs.networkmanager-dmenu.enable = true;
@@ -36,6 +32,5 @@
   programs.vscode.enable = false;
   programs.zellij.enable = false;
   programs.zoxide.enable = false;
-  programs.hyprlock.enable = true;
-  programs.hypridle.enable = true;
+  wayland.windowManager.hyprland.enable = true;
 }

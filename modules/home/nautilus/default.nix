@@ -15,7 +15,9 @@ with lib; {
     };
   };
 
-  config = let cfg = config.programs.nautilus; in {
+  config = let
+    cfg = config.programs.nautilus;
+  in {
     home.packages = [
       (mkIf cfg.enable pkgs.gnome.nautilus)
     ];
