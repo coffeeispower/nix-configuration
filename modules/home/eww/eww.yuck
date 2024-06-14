@@ -90,7 +90,8 @@
         :orientation "h"
         :space-evenly false
         :halign "center"
-      {music != "" ? " ${music}" : ""}
+        :width 550
+      (label :limit-width 90 :text {music != "" ? " ${music}" : ""})
     )
   )
 )
