@@ -6,12 +6,14 @@
   lib,
   pkgs,
   modulesPath,
+  inputs,
   ...
 }: {
-  imports = [(modulesPath + "/installer/scan/not-detected.nix")];
+  imports = [(modulesPath + "/installer/scan/not-detected.nix") inputs.nixos-hardware.nixosModules.common-gpu-intel];
 
   boot.initrd.availableKernelModules = ["xhci_pci" "ahci" "usb_storage" "sd_mod" "rtsx_usb_sdmmc"];
   boot.initrd.kernelModules = [];
+  boot.kernelPackages = pkgs.linuxPackages_latest;
   boot.kernelModules = ["kvm-intel"];
   boot.extraModulePackages = [];
 

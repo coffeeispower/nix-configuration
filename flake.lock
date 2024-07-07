@@ -478,6 +478,22 @@
         "type": "github"
       }
     },
+    "nixos-hardware": {
+      "locked": {
+        "lastModified": 1719145664,
+        "narHash": "sha256-+0bBlerLxsHUJcKPDWZM1wL3V9bzCFjz+VyRTG8fnUA=",
+        "owner": "NixOS",
+        "repo": "nixos-hardware",
+        "rev": "c3e48cbd88414f583ff08804eb57b0da4c194f9e",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOS",
+        "ref": "master",
+        "repo": "nixos-hardware",
+        "type": "github"
+      }
+    },
     "nixpkgs": {
       "locked": {
         "lastModified": 1681303793,
@@ -573,6 +589,7 @@
         "home-manager": "home-manager",
         "hyprland-contrib": "hyprland-contrib",
         "nix-rice": "nix-rice",
+        "nixos-hardware": "nixos-hardware",
         "nixpkgs": "nixpkgs_2",
         "slides": "slides",
         "snowfall-lib": "snowfall-lib",

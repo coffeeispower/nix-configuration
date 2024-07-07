@@ -13,7 +13,7 @@
 
   users.users.tiago = {
     isNormalUser = true;
-    extraGroups = ["wheel" "docker" "adbusers"]; # Enable ‘sudo’ for the user.
+    extraGroups = ["wheel" "docker" "adbusers" "networkmanager"]; # Enable ‘sudo’ for the user.
     hashedPassword = "$y$j9T$x4wYgVWjLlUp43gVSTvj61$XX50fudyvMCLx0kvm/EHAplZ.ev1Lxj1ZrRoB4itEMA";
     shell = pkgs.nushell;
   };
@@ -122,6 +122,9 @@
 
     # For samba
     cifs-utils
+    # For controlling CPU power
+    cpupower-gui
+    glib
   ];
   virtualisation.docker.enable = true;
   virtualisation.docker.storageDriver = "btrfs";
