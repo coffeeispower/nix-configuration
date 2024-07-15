@@ -10,7 +10,7 @@
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
   ];
-
+  virtualisation.waydroid.enable = true;
   users.users.tiago = {
     isNormalUser = true;
     extraGroups = ["wheel" "docker" "adbusers" "networkmanager"]; # Enable ‘sudo’ for the user.
