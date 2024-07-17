@@ -173,9 +173,16 @@ in {
           $pavucontrol = class:^(pavucontrol)$
           windowrulev2 = float,$pavucontrol
           windowrulev2 = size 86% 40%,$pavucontrol
-          windowrulev2 = move 50% 6%,$pavucontrol
+          windowrulev2 = move 6% 50%,$pavucontrol
           windowrulev2 = workspace special silent,$pavucontrol
           windowrulev2 = opacity 0.80,$pavucontrol
+
+          $cpupower-gui = class:^(cpupower-gui)$
+          windowrulev2 = float,$cpupower-gui
+          windowrulev2 = size 40% 86%,$cpupower-gui
+          windowrulev2 = move 50% 6%,$cpupower-gui
+          windowrulev2 = workspace special silent,$cpupower-gui
+          windowrulev2 = opacity 0.80,$cpupower-gui
 
           $scratchpadsize = size 80% 85%
           $scratchpad = class:^(scratchpad)$
@@ -186,6 +193,7 @@ in {
 
           bind=$mod, SPACE, exec, ${config.programs.pyprland.package}/bin/pypr toggle kitty && hyprctl dispatch bringactivetotop
           bind=$mod, V, exec, ${config.programs.pyprland.package}/bin/pypr toggle pavucontrol && hyprctl dispatch bringactivetotop
+          bind=$mod, P, exec, ${config.programs.pyprland.package}/bin/pypr toggle cpupower-gui && hyprctl dispatch bringactivetotop
         ''
         else ""
       )

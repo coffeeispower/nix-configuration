@@ -116,6 +116,13 @@
           animation = "fromTop";
           lazy = true;
         };
+        cpupower-gui = {
+          command = "${pkgs.cpupower-gui}/bin/cpupower-gui";
+          margin = 50;
+          animation = "fromRight";
+          lazy = true;
+          unfocus = "hide";
+        };
       };
     };
   };
