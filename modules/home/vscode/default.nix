@@ -44,6 +44,7 @@
     };
     extensions = with pkgs.vscode-extensions;
       [
+        esbenp.prettier-vscode
         jnoortheen.nix-ide
         mkhl.direnv
         usernamehw.errorlens
