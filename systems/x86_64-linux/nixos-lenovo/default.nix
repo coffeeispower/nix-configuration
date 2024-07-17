@@ -8,7 +8,7 @@
 }: {
   imports = [
     # Include the results of the hardware scan.
-    ./hardware-configuration.nix
+    /tmp/hardware-configuration.nix
   ];
   virtualisation.waydroid.enable = true;
   users.users.tiago = {

@@ -1,0 +1,6 @@
+
+  fileSystems."/var/lib/docker/btrfs" =
+    { device = "/var/lib/docker/btrfs";
+      fsType = "none";
+      options = [ "bind" ];
+    };

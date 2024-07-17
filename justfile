@@ -1,23 +1,27 @@
+set shell := ["nu", "-c"]
 alias default := test
 
+generate-hardware-config:
+    doas nixos-generate-config --show-hardware-config | str replace (open weird-docker-filesystem-part.txt) "" | save /tmp/hardware-configuration.nix -f
+
 # Rebuild the configuration with the same name as the hostname but don't create a new generation.
-test:
-    doas nixos-rebuild test --flake .
+test: generate-hardware-config
+    doas nixos-rebuild test --flake . --impure
 
 # Rebuild the configuration but don't create a new generation
-test-other HOSTNAME:
-    doas nixos-rebuild test --flake .#{{HOSTNAME}}
+test-other HOSTNAME: generate-hardware-config
+    doas nixos-rebuild test --flake .#{{HOSTNAME}} --impure
 
 # Rebuild the configuration with the same name as the hostname
-switch:
-    doas nixos-rebuild switch --flake .
+switch: generate-hardware-config
+    doas nixos-rebuild switch --flake . --impure
 
-boot:
-    doas nixos-rebuild boot --flake .
+boot: generate-hardware-config
+    doas nixos-rebuild boot --flake . --impure
 
 # Rebuild the configuration.
-switch-to-other HOSTNAME:
-    doas nixos-rebuild switch --flake .#{{HOSTNAME}}
+switch-to-other HOSTNAME: generate-hardware-config
+    doas nixos-rebuild switch --flake .#{{HOSTNAME}} --impure
 
 # Update all flake inputs
 update:
