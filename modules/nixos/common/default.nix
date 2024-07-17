@@ -8,6 +8,7 @@
   security.pam.services.hyprlock = {};
   # Enable plymouth
   boot.plymouth.enable = true;
+  services.cpupower-gui.enable = true;
   # Enable GVFS to be able to mount and see removable devices in nautilus
   services.gvfs.enable = true;
   security.polkit.enable = true;
