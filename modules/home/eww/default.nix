@@ -50,6 +50,7 @@
             config.stylix.base16Scheme
             // {
               desktopOpacity = builtins.toString config.stylix.opacity.desktop;
+              font = config.stylix.fonts.sansSerif.name;
             };
         }
       } $out/eww.scss

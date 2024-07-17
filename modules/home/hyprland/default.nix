@@ -194,6 +194,7 @@ in {
 
 
         layerrule=blur,(bar)
+        layerrule=blur,(rofi)
         ${
           if config.programs.eww.enable
           then "exec-once=${config.programs.eww.package}/bin/eww open bar"

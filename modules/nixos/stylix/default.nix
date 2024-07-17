@@ -42,20 +42,23 @@
     base0F = "f0c6c6"; # flamingo
   };
   stylix.polarity = "dark";
-  stylix.fonts = with pkgs; rec {
+  stylix.fonts = rec {
     monospace = {
-      package = nerdfonts.override {fonts = ["FiraCode"];};
+      package = pkgs.nerdfonts.override {fonts = ["FiraCode"];};
       name = "FiraCodeNerdFontMono";
     };
-    sansSerif = monospace;
-    serif = monospace;
+    sansSerif = {
+      package = pkgs.inter;
+      name = "InterVariable";
+    };
+    serif = sansSerif;
   };
 
   # Add some fonts
   fonts = {
     fontDir.enable = true;
     enableDefaultPackages = true;
-    packages = with pkgs; [ipafont (nerdfonts.override {fonts = ["FiraCode"];})];
+    packages = with pkgs; [ ipafont ];
   };
   stylix.opacity = {
     applications = 0.9;

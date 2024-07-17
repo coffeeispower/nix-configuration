@@ -61,7 +61,7 @@ with lib; {
           text = cmd[update:1000] echo "$TIME"
           color = rgb(${config.stylix.base16Scheme.base05})
           font_size = 55
-          font_family = Fira Semibold
+          font_family = sans-serif
           position = -100, -40
           halign = right
           valign = bottom
@@ -74,7 +74,7 @@ with lib; {
           text = $USER
           color = rgb(${config.stylix.base16Scheme.base05})
           font_size = 20
-          font_family = Fira Semibold
+          font_family = sans-serif
           position = -100, 160
           halign = right
           valign = bottom
