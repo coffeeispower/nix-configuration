@@ -41,9 +41,15 @@
       "vscord.status.idle.timeout" = 300;
       "vscord.status.idle.resetElapsedTime" = true;
       "svelte.enable-ts-plugin" = true;
+      "workbench.startupEditor" = "none";
+      "rust-analyzer.server.path" = "rust-analyzer";
+      "editor.inlayHints.enabled" = "offUnlessPressed";
+      "doppler.autocomplete.enable" = true;
+      "doppler.hover.enable" = true;
     };
     extensions = with pkgs.vscode-extensions;
       [
+        dbaeumer.vscode-eslint
         esbenp.prettier-vscode
         jnoortheen.nix-ide
         mkhl.direnv
