@@ -9,7 +9,7 @@ EnumerateBackwardKeys=
 EnumerateSkipFirst=False
 
 [Hotkey/TriggerKeys]
-0=Pause
+0=Alt+space
 
 [Hotkey/AltTriggerKeys]
 0=Shift_L
