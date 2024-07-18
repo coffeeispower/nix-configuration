@@ -118,6 +118,11 @@ in {
         monitor=desc:Samsung Electric Company SME1920N H9FZA50833, 1366x768, -1366x0, 1
         monitor=eDP-1,preferred,0x0,1
         monitor=,preferred,auto,1,mirror,eDP-1
+        $touchpad_enable = true
+        device {
+          name = elan-touchpad
+          enabled = $touchpad_enable
+        }
         general {
           layout = master
           cursor_inactive_timeout = 30
@@ -239,6 +244,11 @@ in {
         }
         bind=, XF86Sleep, exec, ${pkgs.systemd}/bin/systemctl suspend
         bind=, XF86AudioMute, exec, ${pkgs.pamixer}/bin/pamixer -t
+        bind=, XF86AudioStop, exec, ${pkgs.playerctl}/bin/playerctl stop
+        bind=, XF86AudioPlay, exec, ${pkgs.playerctl}/bin/playerctl play-pause
+        bind=, XF86AudioPrev, exec, ${pkgs.playerctl}/bin/playerctl previous
+        bind=, XF86AudioNext, exec, ${pkgs.playerctl}/bin/playerctl next
+
         bind=CTRL ALT, left, workspace, e-1
         bind=CTRL ALT, right, workspace, e+1
         bind=CTRL ALT SHIFT, left, movetoworkspace, e-1
