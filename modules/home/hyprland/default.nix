@@ -124,7 +124,6 @@ in {
           enabled = $touchpad_enable
         }
         general {
-          layout = master
           cursor_inactive_timeout = 30
           resize_on_border = yes
         }
@@ -268,6 +267,7 @@ in {
         }
         bind=$mod, F, fullscreen
         bind=$mod, R, submap, rearrange
+        bind=$mod SHIFT, F, pseudo
         # Close app
         bind=$mod, C, killactive
 
