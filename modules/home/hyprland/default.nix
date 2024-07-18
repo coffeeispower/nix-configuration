@@ -220,11 +220,6 @@ in {
           then "exec-once=${config.programs.eww.package}/bin/eww open bar"
           else ""
         }
-        ${
-          if (config.programs.vesktop.vencord.settings.plugins."WebRichPresence (arRPC)".enabled or false)
-          then "exec-once=${pkgs.arrpc}/bin/arrpc"
-          else ""
-        }
         exec-once=${hyprlandHandleEvents}
         exec-once=${pkgs.dex}/bin/dex -a
         binde=, XF86AudioLowerVolume, exec, ${pkgs.pamixer}/bin/pamixer --decrease 5
