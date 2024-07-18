@@ -120,6 +120,7 @@ in {
         monitor=,preferred,auto,1,mirror,eDP-1
         general {
           layout = master
+          cursor_inactive_timeout = 30
         }
         misc {
           disable_hyprland_logo = true
