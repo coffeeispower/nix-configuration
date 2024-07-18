@@ -1,47 +1,47 @@
 (defwidget bar []
   (centerbox :orientation "h"
-    (workspaces)
-    (box)
-    (indicators)))
+    (box :orientation "h" :space-evenly false :spacing 16 
+      (workspaces)
+      (submap_indicator)
+    )
+    (music)
+    (indicators)
+  )
+)
 (defwidget submap_indicator []
     (box :class {submap != "" ? "submap": ""} {submap != "" ? "󰘵 ${submap} mode" : ""})
 )
 (defwidget indicators []
   (box :class "indicators" :orientation "h" :space-evenly false :spacing 16 :halign "end"
-    (submap_indicator)
-    (music)
-    (box :class "wifi" :orientation "h"
-      (_network
-        :ssid net_ssid :strength net_strength
-        :offline "󰤮"
-        :excellent "󰤨" :good "󰤥" :okay "󰤢" :slow "󰤟"
-      )
+    (_network
+      :ssid net_ssid :strength net_strength
+      :offline "󰤮"
+      :excellent "󰤨" :good "󰤥" :okay "󰤢" :slow "󰤟"
     )
-    (box :class "volume" :orientation "h" (
-        metric
-        :label {(volume > 80 ? "󰕾" : (volume > 40 ? "󰖀" : (volume > 0 ? "󰕿" : "󰝟")))}
-        :value volume
-        :onchange "pamixer --set-volume {}"
-      )
+    (metric
+      :label {(volume > 80 ? "󰕾" : (volume > 40 ? "󰖀" : (volume > 0 ? "󰕿" : "󰝟")))}
+      :value volume
+      :onchange "pamixer --set-volume {}"
     )
-    (box :class "memory" :orientation "h" (metric :label "󰍛"
+    (metric :label "󰍛"
         :value {EWW_RAM.used_mem_perc}
-      :onchange ""))
-    (box :class "disk_usage" :orientation "h" (metric :label "󰋊"
+      :onchange "")
+    (metric :label "󰋊"
         :value {round((1 - (EWW_DISK["/"].free / EWW_DISK["/"].total)) * 100, 0)}
-      :onchange ""))
+      :onchange "")
     (box :class "battery" :class {EWW_BATTERY["BAT1"].status == "Charging" ? "battery_charging" : (EWW_BATTERY["BAT1"].capacity > 40 ? "battery_normal" : "battery_low")}
       :orientation "h"
       (metric
         :label {
-        EWW_BATTERY["BAT1"].status == "Discharging" ?
-        (
-          EWW_BATTERY["BAT1"].capacity > 40 ?
-          "󰁹" : "󰂃"
-        ): "󰂄"
-        }
+          EWW_BATTERY["BAT1"].status == "Discharging" ?
+            (
+              EWW_BATTERY["BAT1"].capacity > 40 ?
+              "󰁹" : "󰂃"
+            ): "󰂄"
+          }
         :value {EWW_BATTERY["BAT1"].capacity}
-      :onchange "")
+        :onchange ""
+      )
     )
     (box :class "time" :orientation "h" time)
   ))
@@ -59,7 +59,7 @@
     {("${strength == "" ? offline :
       strength < 26 ? slow :
       strength < 51 ? okay :
-    strength < 76 ? good : excellent} ${ssid == "" ? "Offline" : ssid}")}
+    strength < 76 ? good : excellent}  ${ssid == "" ? "Offline" : ssid}")}
   )
 )
 
@@ -84,16 +84,23 @@
 )
 
 (defwidget music []
-  (tooltip
-    (image :path '${musicArtUrl}' :image-width 300)
-    (box :class "music"
-        :orientation "h"
-        :space-evenly false
-        :halign "center"
-        :width 550
-      (label :limit-width 90 :text {music != "" ? " ${music}" : ""})
+  (box :orientation "h"
+      :space-evenly false
+      :halign "center"
+      :visible {musicStatus != "Stopped" && musicName != ""}
+      (tooltip
+        (image :path '${musicArtUrl}' :image-width 300)
+        (box :orientation "h"
+            :space-evenly false
+            :halign "center"
+          (label :limit-width 90 :text {"󰎇 ${musicName}"})
+        )
+      )
+      (button :onclick "playerctl previous" "󰒮")
+      (button :visible {musicStatus == "Playing"} :onclick "playerctl pause" "")
+      (button :visible {musicStatus == "Paused"} :onclick "playerctl play" "")
+      (button :onclick "playerctl next" "󰒭")
     )
-  )
 )
 
 
@@ -110,9 +117,9 @@
 
 
 
-(deflisten music :initial ""
+(deflisten musicName :initial ""
 "playerctl --follow metadata --format '{{ artist }} - {{ album }} - {{ title }}' || true")
-
+(deflisten musicStatus :initial "Stopped" "playerctl --follow status || true")
 (deflisten musicArtUrl :initial "" "getArtUrl")
 
 (defpoll volume :interval "400ms" "pamixer --get-volume")
