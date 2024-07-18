@@ -121,6 +121,7 @@ in {
         general {
           layout = master
           cursor_inactive_timeout = 30
+          resize_on_border = yes
         }
         misc {
           disable_hyprland_logo = true
