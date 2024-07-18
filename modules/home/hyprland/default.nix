@@ -141,6 +141,9 @@ in {
         }
         gestures {
             workspace_swipe = yes
+            workspace_swipe_forever = yes
+            workspace_swipe_min_speed_to_force = 10
+            workspace_swipe_cancel_ratio = 0.3
         }
         animations {
           enabled = true
