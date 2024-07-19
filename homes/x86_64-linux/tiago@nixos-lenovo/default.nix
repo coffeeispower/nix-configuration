@@ -33,6 +33,7 @@
   programs.vscode.enable = true;
   programs.zellij.enable = true;
   programs.zoxide.enable = true;
+  programs.fastfetch.enable = true;
   programs.vesktop.enable = true;
   programs.vesktop.stylixIntegration.enable = true;
   programs.vesktop.vencord.settings = {

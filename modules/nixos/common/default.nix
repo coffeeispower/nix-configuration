@@ -71,7 +71,7 @@
     pamixer
     libnotify
     pavucontrol
-    neofetch
+    fastfetch
     vlc
 
     # (pkgs.where-is-my-sddm-theme.override {
