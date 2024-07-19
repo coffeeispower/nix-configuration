@@ -123,8 +123,12 @@ in {
           name = elan-touchpad
           enabled = $touchpad_enable
         }
+        cursor {
+          inactive_timeout = 30
+          persistent_warps = yes
+          warp_on_change_workspace = yes
+        }
         general {
-          cursor_inactive_timeout = 30
           resize_on_border = yes
         }
         misc {
@@ -150,7 +154,6 @@ in {
         }
         gestures {
             workspace_swipe = yes
-            workspace_swipe_forever = yes
             workspace_swipe_min_speed_to_force = 10
             workspace_swipe_cancel_ratio = 0.3
         }

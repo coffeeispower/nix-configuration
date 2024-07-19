@@ -2,7 +2,7 @@
   stylix.image = ./wallpaper.png;
   stylix.cursor = {
     package = pkgs.catppuccin-cursors.frappeMauve;
-    name = "Catppuccin-Frappe-Mauve-Cursors";
+    name = "catppuccin-frappe-mauve-cursors";
     size = 8;
   };
   stylix.base16Scheme = {
