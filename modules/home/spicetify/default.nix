@@ -37,7 +37,7 @@ in
         main-transition = base01;
         main-elevated = base02;
         highlight = base03;
-        highlight-elevated = base0C;
+        highlight-elevated = base04;
         sidebar = base00;
         player = base00;
         card = base00;
@@ -46,7 +46,7 @@ in
         button = base0E;
         button-active = base0D;
         button-disabled = base01;
-        tab-active = base0C;
+        tab-active = base01;
         notification = base0E;
         notification-error = base08;
         misc = base0E;
