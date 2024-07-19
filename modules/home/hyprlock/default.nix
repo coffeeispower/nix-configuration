@@ -21,9 +21,8 @@ with lib; {
           path = screenshot
 
           # all these options are taken from hyprland, see https://wiki.hyprland.org/Configuring/Variables/#blur for explanations
-          blur_passes = 1 # 0 disables blurring
-          blur_size = 7
-          noise = 0.03
+          blur_passes = 5 # 0 disables blurring
+          blur_size = 1
       }
 
       input-field {

@@ -147,9 +147,8 @@ in {
             rounding = 10
             blur {
                 enabled = true
-                size = 5
-                passes = 1
-                vibrancy = 0.5
+                size = 1
+                passes = 5
             }
         }
         gestures {
