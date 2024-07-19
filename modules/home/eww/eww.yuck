@@ -132,7 +132,7 @@
   :monitor 0
   :geometry (geometry :x "0%"
     :y "0%"
-    :width "97%"
+    :width "98%"
     :height "20px"
   :anchor "top center")
   :reserve (struts :side "top" :distance "20px")
