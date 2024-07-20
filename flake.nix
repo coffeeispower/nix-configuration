@@ -44,6 +44,7 @@
     nixos-hardware = {
       url = "github:NixOS/nixos-hardware/master";
     };
+    ags.url = "github:Aylur/ags";
   };
 
   outputs = inputs:
@@ -55,6 +56,6 @@
       ];
       src = ./.;
       snowfall.namespace = "my-lib";
-      systems.modules.nixos = [inputs.stylix.nixosModules.stylix];
+      systems.modules.nixos = [ inputs.stylix.nixosModules.stylix ];
     };
 }

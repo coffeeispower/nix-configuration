@@ -293,7 +293,7 @@ in {
           then "    bind=, Escape,submap,reset"
           else ""
         }
-
+        ${if config.programs.ags.enable then "exec=${config.programs.ags.package}/bin/ags" else ""}
         # Rearrange mode keybinds
         submap=rearrange
             $rearrangeMod=SHIFT
