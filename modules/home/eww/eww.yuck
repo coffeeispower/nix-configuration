@@ -12,35 +12,37 @@
     (box :class {submap != "" ? "submap": ""} {submap != "" ? "󰘵 ${submap} mode" : ""})
 )
 (defwidget indicators []
-  (box :class "indicators" :orientation "h" :space-evenly false :spacing 16 :halign "end"
-    (_network
-      :ssid net_ssid :strength net_strength
-      :offline "󰤮"
-      :excellent "󰤨" :good "󰤥" :okay "󰤢" :slow "󰤟"
-    )
-    (metric
-      :label {(volume > 80 ? "󰕾" : (volume > 40 ? "󰖀" : (volume > 0 ? "󰕿" : "󰝟")))}
-      :value volume
-      :onchange "pamixer --set-volume {}"
-    )
-    (metric :label "󰍛"
-        :value {EWW_RAM.used_mem_perc}
-      :onchange "")
-    (metric :label "󰋊"
-        :value {round((1 - (EWW_DISK["/"].free / EWW_DISK["/"].total)) * 100, 0)}
-      :onchange "")
-    (box :class "battery" :class {EWW_BATTERY["BAT1"].status == "Charging" ? "battery_charging" : (EWW_BATTERY["BAT1"].capacity > 40 ? "battery_normal" : "battery_low")}
-      :orientation "h"
+  (box :orientation "h" :space-evenly false :spacing 16 :halign "end"
+    (box :class "indicators" :orientation "h" :space-evenly false :spacing 16 :halign "end"
+      (_network
+        :ssid net_ssid :strength net_strength
+        :offline "󰤮"
+        :excellent "󰤨" :good "󰤥" :okay "󰤢" :slow "󰤟"
+      )
       (metric
-        :label {
-          EWW_BATTERY["BAT1"].status == "Discharging" ?
-            (
-              EWW_BATTERY["BAT1"].capacity > 40 ?
-              "󰁹" : "󰂃"
-            ): "󰂄"
-          }
-        :value {EWW_BATTERY["BAT1"].capacity}
-        :onchange ""
+        :label {(volume > 80 ? "󰕾" : (volume > 40 ? "󰖀" : (volume > 0 ? "󰕿" : "󰝟")))}
+        :value volume
+        :onchange "pamixer --set-volume {}"
+      )
+      (metric :label "󰍛"
+          :value {EWW_RAM.used_mem_perc}
+        :onchange "")
+      (metric :label "󰋊"
+          :value {round((1 - (EWW_DISK["/"].free / EWW_DISK["/"].total)) * 100, 0)}
+        :onchange "")
+      (box :class "battery" :class {EWW_BATTERY["BAT1"].status == "Charging" ? "battery_charging" : (EWW_BATTERY["BAT1"].capacity > 40 ? "battery_normal" : "battery_low")}
+        :orientation "h"
+        (metric
+          :label {
+            EWW_BATTERY["BAT1"].status == "Discharging" ?
+              (
+                EWW_BATTERY["BAT1"].capacity > 40 ?
+                "󰁹" : "󰂃"
+              ): "󰂄"
+            }
+          :value {EWW_BATTERY["BAT1"].capacity}
+          :onchange ""
+        )
       )
     )
     (box :class "time" :orientation "h" time)
@@ -87,6 +89,7 @@
   (box :orientation "h"
       :space-evenly false
       :halign "center"
+      :class "music"
       :visible {musicStatus != "Stopped" && musicName != ""}
       (tooltip
         (image :path '${musicArtUrl}' :image-width 300)
@@ -131,7 +134,7 @@
 (defwindow bar
   :monitor 0
   :geometry (geometry :x "0%"
-    :y "0%"
+    :y "15px"
     :width "98%"
     :height "20px"
   :anchor "top center")

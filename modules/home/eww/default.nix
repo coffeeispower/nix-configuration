@@ -45,7 +45,7 @@
         lib.my-lib.mustache.template {
           inherit pkgs;
           name = "eww-config-scss";
-          templateFile = ./eww.template.scss;
+          templateFile = ./eww.scss.mustache;
           variables =
             config.stylix.base16Scheme
             // {
