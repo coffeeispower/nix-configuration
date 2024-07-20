@@ -46,9 +46,11 @@
       "editor.inlayHints.enabled" = "offUnlessPressed";
       "doppler.autocomplete.enable" = true;
       "doppler.hover.enable" = true;
+      "workbench.iconTheme" = "catppuccin-mocha";
     };
     extensions = with pkgs.vscode-extensions;
       [
+        catppuccin.catppuccin-vsc-icons
         dbaeumer.vscode-eslint
         esbenp.prettier-vscode
         jnoortheen.nix-ide
