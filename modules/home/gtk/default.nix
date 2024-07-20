@@ -1,8 +1,8 @@
 {pkgs, ...}: {
   gtk = {
     iconTheme = {
-      package = pkgs.gnome.adwaita-icon-theme;
-      name = "Adwaita";
+      package = pkgs.numix-icon-theme;
+      name = "Numix";
     };
     gtk3.extraConfig = {
       gtk-application-prefer-dark-theme = 1;
