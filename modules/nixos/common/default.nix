@@ -33,7 +33,12 @@
     enable = true;
     driSupport = true;
     driSupport32Bit = true;
+    extraPackages = with pkgs; [
+      intel-media-driver # LIBVA_DRIVER_NAME=iHD
+      libvdpau-va-gl
+    ];
   };
+  environment.sessionVariables = { LIBVA_DRIVER_NAME = "iHD"; }; # Force intel-media-driver
   boot.loader.efi.canTouchEfiVariables = true;
   networking.networkmanager.enable = true;
 
