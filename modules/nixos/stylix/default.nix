@@ -3,7 +3,7 @@
   stylix.cursor = {
     package = pkgs.catppuccin-cursors.frappeMauve;
     name = "catppuccin-frappe-mauve-cursors";
-    size = 8;
+    size = 32;
   };
   stylix.base16Scheme = 
     let
