@@ -78,7 +78,14 @@
     pavucontrol
     fastfetch
     vlc
-
+    
+    (pkgs.catppuccin-sddm.override {
+      flavor = "mocha";
+      background = "${config.stylix.image}";
+      font = config.stylix.fonts.sansSerif.name;
+      fontSize = builtins.toString config.stylix.fonts.sizes.desktop;
+      loginBackground = true;
+    })
     # (pkgs.where-is-my-sddm-theme.override {
     #   themeConfig.General = {
     #     background = "${config.stylix.image}";
@@ -97,13 +104,6 @@
     #     passwordInputRadius = 10;
     #   };
     # })
-#     (catppuccin-sddm.override {
-#       flavor = "macchiato";
-#       background = "${config.stylix.image}";
-#       font = config.stylix.fonts.sansSerif.name;
-# #      fontSize = "${config.stylix.fonts.sizes.desktop}";
-#       loginBackground = true;
-#     })
   ];
   environment.shells = [pkgs.nushell];
 
@@ -125,12 +125,13 @@
   security.doas.enable = true;
   security.sudo.enable = false;
 
-  # services.displayManager.sddm = {
-  #   enable = true;
-  #   wayland.enable = true;
-  #   theme = "catppuccin-macchiato";
-  # };
-  # services.displayManager.defaultSession = "hyprland";
+  services.displayManager.sddm = {
+    enable = true;
+    wayland.enable = true;
+    theme = "catppuccin-mocha";
+    package = pkgs.kdePackages.sddm;
+  };
+  services.displayManager.defaultSession = "hyprland";
 
   home-manager = {
     useGlobalPkgs = true;
