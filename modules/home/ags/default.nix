@@ -1,4 +1,6 @@
-{inputs, pkgs, ...}: {
+{inputs, pkgs, ...}: 
+  let unstable = (import inputs.nixpkgs-unstable {}); in
+{
   imports = [inputs.ags.homeManagerModules.default];
   programs.ags = {
     enable = true;
@@ -10,6 +12,6 @@
     ];
   };
   home.packages = [
-    pkgs.bun
+    unstable.bun
   ];
 }
