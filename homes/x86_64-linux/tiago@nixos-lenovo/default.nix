@@ -12,6 +12,8 @@
   services.hyprpaper.enable = true;
   services.hypridle.enable = true;
 
+  stylix.targets.kde.enable = false;
+
   gtk.enable = true;
   home.packages = with pkgs; [kdenlive stremio yt-dlp blender wl-clipboard];
   programs.hyprlock.enable = true;
