@@ -38,7 +38,7 @@
       libvdpau-va-gl
     ];
   };
-  environment.sessionVariables = { LIBVA_DRIVER_NAME = "iHD"; }; # Force intel-media-driver
+  environment.sessionVariables = { NIXOS_OZONE_WL = "1"; LIBVA_DRIVER_NAME = "iHD"; }; # Force intel-media-driver
   boot.loader.efi.canTouchEfiVariables = true;
   networking.networkmanager.enable = true;
 
