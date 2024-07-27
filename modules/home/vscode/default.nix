@@ -1,6 +1,11 @@
-{pkgs, ...}: {
+{pkgs, inputs, ...}:
+let
+  unstable = import inputs.nixpkgs-unstable { config.allowUnfree = true; };
+in
+{
   programs.vscode = {
     mutableExtensionsDir = false;
+    package = unstable.vscode;
     userSettings = {
       "editor.fontLigatures" = true;
       "git.confirmSync" = false;
@@ -48,8 +53,9 @@
       "doppler.hover.enable" = true;
       "workbench.iconTheme" = "catppuccin-mocha";
     };
-    extensions = with pkgs.vscode-extensions;
+    extensions = with unstable.vscode-extensions;
       [
+        biomejs.biome
         catppuccin.catppuccin-vsc-icons
         dbaeumer.vscode-eslint
         esbenp.prettier-vscode
@@ -72,12 +78,6 @@
         ms-vscode.cmake-tools
       ]
       ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [
-        {
-          publisher = "Wokwi";
-          name = "wokwi-vscode";
-          version = "2.4.3";
-          sha256 = "sha256-WDbukOWOyKfK6Q7Nq8J2cCfFSzDw4q0rvm3hD8SfJiA=";
-        }
         {
           publisher = "doppler";
           name = "doppler-vscode";
