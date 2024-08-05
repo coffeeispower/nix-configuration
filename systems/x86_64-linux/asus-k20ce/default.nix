@@ -1,9 +1,6 @@
 {
   config,
   pkgs,
-  lib,
-  system,
-  inputs,
   ...
 }: {
   imports = [
@@ -14,7 +11,7 @@
     enable = true;
     ports = [ 22 ];
     settings = {
-      PasswordAuthentication = true;
+      PasswordAuthentication = false;
       AllowUsers = ["tiago"];
       UseDns = true;
       X11Forwarding = false;
@@ -23,7 +20,7 @@
   };
   users.users.tiago = {
     isNormalUser = true;
-    extraGroups = ["wheel" "docker" "adbusers" "networkmanager"]; # Enable ‘sudo’ for the user.
+    extraGroups = ["wheel" "networkmanager"];
     hashedPassword = "$y$j9T$x4wYgVWjLlUp43gVSTvj61$XX50fudyvMCLx0kvm/EHAplZ.ev1Lxj1ZrRoB4itEMA";
     shell = pkgs.nushell;
   };
@@ -31,53 +28,19 @@
   security.doas.extraRules = [
     {
       users = ["tiago"];
-      keepEnv = true; # Optional, retains environment variables while running commands
-      persist = true; # Optional, only require password verification a single time
+      keepEnv = true;
+      persist = true;
     }
   ];
   boot.resumeDevice = (builtins.elemAt config.swapDevices 0).device;
   environment.systemPackages = with pkgs; [
-
-    # For virt manager
-    virtiofsd
-
-    # Some development tools I use
-
     ## Nix language server
     nil
 
-
-    ## C compilers
-    clang
-
-    ## C LSP
-    clang-tools
-
     ## Nix formatter
     alejandra
-
-    ## redis-cli
-    redis
-
-    ## Generate compile-commands.json
-    bear
-
-    ## Code lines counter
-    scc
-
-    # For samba
-    cifs-utils
-    # For controlling CPU power
-    glib
   ];
-  virtualisation.docker.enable = true;
-  virtualisation.docker.storageDriver = "btrfs";
-
-  # services.xserver.displayManager.sddm.settings.Autologin = {
-  #   Session = "hyprland.desktop";
-  #   User = "tiago";
-  # };
-
+  virtualisation.podman.enable = true;
 
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;
@@ -86,7 +49,20 @@
   boot.consoleLogLevel = 0;
     networking.firewall = {
     enable = true;
-    allowedTCPPorts = [25565 5001 22];
-    allowedUDPPortRanges = [];
+    allowedTCPPorts = [25565 22];
+    allowedUDPPorts = [ 5001 ];
+  };
+  virtualisation.oci-containers = {
+    backend = "podman";
+    containers = {
+      tequorld = {
+        image = "openjdk:17-alpine";
+        entrypoint = "java";
+        cmd = ["-jar" "server.jar"];
+        workdir = "/server";
+        volumes = ["/home/tiago/tequorld:/server"];
+        ports = [ "25565:25565" "5001:5001" ];
+      };
+    };
   };
 }
