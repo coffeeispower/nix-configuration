@@ -26,6 +26,7 @@
     }
   ];
   boot.resumeDevice = (builtins.elemAt config.swapDevices 0).device;
+  services.cpupower-gui.enable = true;
   programs.nix-ld.libraries = with pkgs;
     [
       zlib
@@ -58,7 +59,7 @@
       libXrandr
     ]);
   programs.nix-ld.enable = true;
-
+  services.displayManager.sddm.enable = true;
   environment.systemPackages = with pkgs; [
     # Custom packages
     my-lib.slides

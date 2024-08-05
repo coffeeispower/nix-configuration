@@ -8,8 +8,7 @@
   security.pam.services.hyprlock = {};
   # Enable plymouth
   boot.plymouth.enable = true;
-  services.cpupower-gui.enable = true;
-  # Enable GVFS to be able to mount and see removable devices in nautilus
+m # Enable GVFS to be able to mount and see removable devices in nautilus
   services.gvfs.enable = true;
   security.polkit.enable = true;
   systemd = {
@@ -79,13 +78,13 @@
     fastfetch
     vlc
     
-    (pkgs.catppuccin-sddm.override {
+    (lib.mkIf config.services.displayManager.sddm.enable (pkgs.catppuccin-sddm.override {
       flavor = "mocha";
       background = "${config.stylix.image}";
       font = config.stylix.fonts.sansSerif.name;
       fontSize = builtins.toString config.stylix.fonts.sizes.desktop;
       loginBackground = true;
-    })
+    }))
     # (pkgs.where-is-my-sddm-theme.override {
     #   themeConfig.General = {
     #     background = "${config.stylix.image}";
@@ -126,7 +125,6 @@
   security.sudo.enable = false;
 
   services.displayManager.sddm = {
-    enable = true;
     wayland.enable = true;
     theme = "catppuccin-mocha";
     package = pkgs.kdePackages.sddm;
