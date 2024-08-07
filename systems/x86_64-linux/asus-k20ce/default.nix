@@ -39,6 +39,8 @@
 
     ## Nix formatter
     alejandra
+    rcon
+    rlwrap
   ];
   virtualisation.podman.enable = true;
 
@@ -47,9 +49,9 @@
 
   boot.kernelParams = ["quiet" "splash"];
   boot.consoleLogLevel = 0;
-    networking.firewall = {
+  networking.firewall = {
     enable = true;
-    allowedTCPPorts = [25565 22];
+    allowedTCPPorts = [ 25565 22 ];
     allowedUDPPorts = [ 5001 ];
   };
   virtualisation.oci-containers = {
@@ -61,7 +63,7 @@
         cmd = ["-jar" "server.jar"];
         workdir = "/server";
         volumes = ["/home/tiago/tequorld:/server"];
-        ports = [ "25565:25565" "5001:5001" ];
+        ports = [ "25565:25565" "5001:5001" "1000:1000" ];
       };
     };
   };
