@@ -25,7 +25,7 @@
       persist = true; # Optional, only require password verification a single time
     }
   ];
-  boot.resumeDevice = (builtins.elemAt config.swapDevices 0).device;
+  # boot.resumeDevice = (builtins.elemAt config.swapDevices 0).device;
   services.cpupower-gui.enable = true;
   programs.nix-ld.libraries = with pkgs;
     [
