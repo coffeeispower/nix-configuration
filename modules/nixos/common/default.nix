@@ -37,7 +37,7 @@
       libvdpau-va-gl
     ];
   };
-  environment.sessionVariables = { NIXOS_OZONE_WL = "1"; LIBVA_DRIVER_NAME = "iHD"; }; # Force intel-media-driver
+  environment.sessionVariables = { NIXOS_OZONE_WL = "1"; LIBVA_DRIVER_NAME = "iHD"; };
   boot.loader.efi.canTouchEfiVariables = true;
   networking.networkmanager.enable = true;
 
@@ -54,9 +54,8 @@
     alsa.support32Bit = true;
     pulse.enable = true;
   };
-  # services.xserver.enable = true;
-  # services.xserver.desktopManager.xterm.enable = false;
-  # Enable touchpad support (enabled default in most desktopManager).
+
+    # Enable touchpad support (enabled default in most desktopManager).
   services.libinput.enable = true;
   programs.dconf.enable = true;
   programs.git.enable = true;
@@ -85,24 +84,6 @@
       fontSize = builtins.toString config.stylix.fonts.sizes.desktop;
       loginBackground = true;
     }))
-    # (pkgs.where-is-my-sddm-theme.override {
-    #   themeConfig.General = {
-    #     background = "${config.stylix.image}";
-    #     backgroundMode = "fill";
-    #     blurRadius = 10;
-    #     sessionsFontSize = 24;
-    #     usersFontSize = 48;
-    #     showSessionsByDefault = true;
-    #     cursorColor = "#${config.stylix.base16Scheme.base05}";
-
-    #     passwordInputCursorVisible = true;
-    #     passwordInputWidth = 0.25;        
-    #     passwordCharacter = "*";
-    #     passwordFontSize = 28;
-    #     passwordInputBackground = "#60ffffff";
-    #     passwordInputRadius = 10;
-    #   };
-    # })
   ];
   environment.shells = [pkgs.nushell];
 
@@ -140,24 +121,5 @@
   nix.settings = {
     substituters = ["https://hyprland.cachix.org"];
     trusted-public-keys = ["hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc="];
-  };
-  services.tlp = {
-    enable = true;
-    settings = {
-      CPU_SCALING_GOVERNOR_ON_AC = "performance";
-      CPU_SCALING_GOVERNOR_ON_BAT = "performance";
-
-      CPU_ENERGY_PERF_POLICY_ON_BAT = "performance";
-      CPU_ENERGY_PERF_POLICY_ON_AC = "performance";
-
-      CPU_MIN_PERF_ON_AC = 0;
-      CPU_MAX_PERF_ON_AC = 100;
-      CPU_MIN_PERF_ON_BAT = 0;
-      CPU_MAX_PERF_ON_BAT = 90;
-
-      #Optional helps save long term battery health
-      START_CHARGE_THRESH_BAT0 = 40; # 40 and bellow it starts to charge
-      STOP_CHARGE_THRESH_BAT0 = 80; # 80 and above it stops charging
-    };
   };
 }
