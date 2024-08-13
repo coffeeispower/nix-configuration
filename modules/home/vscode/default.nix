@@ -52,6 +52,7 @@ in
       "doppler.autocomplete.enable" = true;
       "doppler.hover.enable" = true;
       "workbench.iconTheme" = "catppuccin-mocha";
+      "remote.SSH.defaultExtensions" = [ "gitpod.gitpod-remote-ssh" ];
     };
     extensions = with unstable.vscode-extensions;
       [
@@ -74,10 +75,23 @@ in
         github.vscode-github-actions
         vadimcn.vscode-lldb
         ms-vscode-remote.remote-containers
+        ms-vscode-remote.remote-ssh
         bradlc.vscode-tailwindcss
         ms-vscode.cmake-tools
       ]
       ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [
+        {
+          publisher = "gitpod";
+          name = "gitpod-desktop";
+          version = "0.1.2024071815";
+          sha256 = "sha256-SXKPhdDDwJ2NIFGdZ9CwFDmFED3xN0vP6WYZ8UfgOrw=";
+        }
+        {
+          publisher = "gitpod";
+          name = "gitpod-remote-ssh";
+          version = "0.0.52";
+          sha256 = "sha256-idmcJ5aaquGDTskFuoWs7nL7jcubq7jIrZMZA1z9XgA=";
+        }
         {
           publisher = "doppler";
           name = "doppler-vscode";
