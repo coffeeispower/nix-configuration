@@ -63,7 +63,7 @@
         cmd = ["-jar" "server.jar"];
         workdir = "/server";
         volumes = ["/home/tiago/tequorld:/server"];
-        ports = [ "25565:25565" "5001:5001" "1000:1000" ];
+        ports = [ "25565:25565" "5001:5001/udp" "1000:1000" ];
       };
     };
   };
