@@ -58,7 +58,7 @@
     backend = "podman";
     containers = {
       tequorld = {
-        image = "openjdk:17-alpine";
+        image = "eclipse-temurin:21-jre-alpine";
         entrypoint = "java";
         cmd = ["-jar" "server.jar"];
         workdir = "/server";
