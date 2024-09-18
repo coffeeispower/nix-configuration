@@ -39,7 +39,9 @@
 
     ## Nix formatter
     alejandra
+
     rcon
+    rclone
     rlwrap
   ];
   virtualisation.podman.enable = true;
