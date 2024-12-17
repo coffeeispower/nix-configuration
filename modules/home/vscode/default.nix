@@ -4,7 +4,7 @@ let
 in
 {
   programs.vscode = {
-    mutableExtensionsDir = false;
+    mutableExtensionsDir = true;
     package = unstable.vscode;
     userSettings = {
       "editor.fontLigatures" = true;
