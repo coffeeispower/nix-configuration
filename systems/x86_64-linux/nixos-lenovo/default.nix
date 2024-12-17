@@ -57,6 +57,7 @@
   programs.nix-ld.enable = true;
   services.displayManager.sddm.enable = true;
   environment.systemPackages = with pkgs; [
+    keepassxc
     # Custom packages
     my-lib.slides
     my-lib.bombsquad

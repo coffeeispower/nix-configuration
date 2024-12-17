@@ -129,4 +129,5 @@
       };
     };
   };
+  services.syncthing.enable = true;
 }
