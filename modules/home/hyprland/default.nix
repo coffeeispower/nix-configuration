@@ -5,7 +5,7 @@
   system,
   ...
 }: let
-  hyprland = pkgs.hyprland;
+  hyprland = inputs.hyprland.packages.${system}.hyprland;
   hyprlandEventHandlers = pkgs.writeShellScript "hyprlandEventHandlers" ''
     update_active_workspace() {
       ${
@@ -99,6 +99,7 @@
 in {
   wayland.windowManager.hyprland = {
     package = hyprland;
+    plugins = [inputs.Hyprspace.packages.${pkgs.system}.Hyprspace];
     settings = {
       bind = (
         # Workspace keybind
@@ -115,6 +116,7 @@ in {
     };
     extraConfig =
       ''
+
         monitor=desc:Samsung Electric Company SME1920N H9FZA50833, 1366x768, -1366x0, 1
         monitor=eDP-1,preferred,0x0,1
         monitor=,preferred,auto,1,mirror,eDP-1
@@ -136,6 +138,8 @@ in {
           disable_splash_rendering = true
         }
         $mod = SUPER
+        bindr = $mod, SUPER_L, overview:toggle
+
         input {
             kb_layout = pt
             touchpad {
@@ -259,7 +263,7 @@ in {
         bind=$mod, W,exec,${inputs.woomer.packages.${system}.default}/bin/woomer
         ${
           if config.programs.rofi.enable
-          then "bind=$mod, D, exec, ${pkgs.rofi-wayland}/bin/rofi -show drun -show-icons"
+          then "bindr=$mod, D, exec, ${pkgs.rofi-wayland}/bin/rofi -show drun -show-icons || pkill rofi"
           else ""
         }
         ${
@@ -323,7 +327,16 @@ in {
             # Exit rearrange mode
             bind=, Escape, submap         , reset
         submap=reset
-
+        plugin {
+          overview {
+            onBottom = yes
+            centerAligned = yes
+            affectStrut = false
+            hideRealLayers = yes
+            hideTopLayers = yes
+            dragAlpha = 1.0
+          }
+        }
       '';
   };
 }

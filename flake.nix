@@ -45,6 +45,15 @@
     nixos-hardware = {
       url = "github:NixOS/nixos-hardware/master";
     };
+
+    Hyprspace = {
+      url = "github:KZDKM/Hyprspace";
+
+      # Hyprspace uses latest Hyprland. We declare this to keep them in sync.
+      inputs.hyprland.follows = "hyprland";
+    };
+    hyprland.url = "github:hyprwm/Hyprland";
+    # ags-config.url = "github:coffeeispower/ags-bar";
   };
 
   outputs = inputs:
