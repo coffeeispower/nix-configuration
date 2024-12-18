@@ -1,6 +1,6 @@
 name: Build NixOS ISO
 
-on: [ push ]
+on: [ workflow_dispatch ]
 
 jobs:
   build:
@@ -9,6 +9,8 @@ jobs:
     steps:
     - name: Checkout the code
       uses: actions/checkout@v3
+      with:
+        ref: flakes
 
     - name: Set up Nix
       uses: cachix/install-nix-action@v22
