@@ -1,4 +1,6 @@
-{pkgs, ...}: {
+{pkgs, inputs, system, ...}:
+let unstable = import inputs.nixpkgs-unstable { inherit system; }; in 
+{
   home.stateVersion = "24.05";
   programs.git = {
     enable = true;
@@ -15,7 +17,7 @@
   stylix.targets.kde.enable = false;
 
   gtk.enable = true;
-  home.packages = with pkgs; [kdenlive stremio yt-dlp blender wl-clipboard];
+  home.packages = with pkgs; [ kdenlive stremio yt-dlp blender wl-clipboard unstable.ddev ];
   programs.hyprlock.enable = true;
   programs.direnv.enable = true;
   programs.eww.enable = true;
@@ -34,10 +36,9 @@
   programs.nautilus.enable = true;
   programs.vscode.enable = true;
   programs.zellij.enable = true;
-  programs.zoxide.enable = true;
+  # programs.zoxide.enable = true;
   programs.fastfetch.enable = true;
   programs.vesktop.enable = true;
-  programs.vesktop.stylixIntegration.enable = true;
   programs.vesktop.vencord.settings = {
     plugins = {
       BadgeAPI = {

@@ -15,6 +15,7 @@ with lib; {
   config = let
     hyprlock = config.programs.hyprlock;
   in {
+    stylix.targets.hyprlock.enable = false;
     programs.hyprlock.extraConfig = mkIf hyprlock.enable ''
       background {
           monitor =

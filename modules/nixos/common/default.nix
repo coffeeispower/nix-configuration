@@ -28,10 +28,8 @@
   };
 
   boot.initrd.systemd.enable = true;
-  hardware.opengl = {
+  hardware.graphics = {
     enable = true;
-    driSupport = true;
-    driSupport32Bit = true;
     extraPackages = with pkgs; [
       intel-media-driver # LIBVA_DRIVER_NAME=iHD
       libvdpau-va-gl
@@ -45,7 +43,7 @@
   time.timeZone = "Europe/Lisbon";
 
   # Select internationalisation properties.
-  i18n.defaultLocale = "pt_PT.UTF-8";
+  i18n.defaultLocale = "ja_JP.UTF-8";
 
   security.rtkit.enable = true;
   services.pipewire = {
@@ -64,10 +62,10 @@
     # System monitor
     btop
     # Gnome disks for managing partitions
-    gnome.gnome-disk-utility
+    gnome-disk-utility
 
     # For opening compressed archives like zip, rar, tar.gz, etc...
-    gnome.file-roller
+    file-roller
 
     pinentry-rofi
 

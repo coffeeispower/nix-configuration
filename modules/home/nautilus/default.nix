@@ -19,7 +19,7 @@ with lib; {
     cfg = config.programs.nautilus;
   in {
     home.packages = [
-      (mkIf cfg.enable pkgs.gnome.nautilus)
+      (mkIf cfg.enable pkgs.nautilus)
     ];
     xdg.mimeApps = rec {
       enable = cfg.enable && config.programs.nautilus.defaultFileManager;

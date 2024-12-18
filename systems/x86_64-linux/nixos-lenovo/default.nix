@@ -111,7 +111,7 @@
     gimp
 
     ## Torrents
-    transmission-gtk
+    transmission_4-gtk
 
     inkscape
 
@@ -145,12 +145,13 @@
   };
   services.samba = {
     enable = true;
-    securityType = "user";
+    settings.global.security = "user";
   };
 
   # Enable japanese input with ibus
   i18n.inputMethod = {
-    enabled = "fcitx5";
+    enable = true;
+    type = "fcitx5";
     fcitx5.addons = [pkgs.fcitx5-mozc pkgs.fcitx5-gtk];
   };
   #  environment.variables = {
