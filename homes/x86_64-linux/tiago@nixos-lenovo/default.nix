@@ -7,7 +7,6 @@ let unstable = import inputs.nixpkgs-unstable { inherit system; }; in
     userName = "Tiago Dinis";
     userEmail = "tiagodinis33@proton.me";
   };
-  programs.ags.enable = true;
   services.gpg-agent.enable = true;
   services.fcitx5.enable = true;
   services.dunst.enable = true;

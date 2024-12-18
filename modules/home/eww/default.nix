@@ -47,7 +47,7 @@
           name = "eww-config-scss";
           templateFile = ./eww.scss.mustache;
           variables =
-            config.stylix.base16Scheme
+            config.lib.stylix.colors
             // {
               desktopOpacity = builtins.toString config.stylix.opacity.desktop;
               font = config.stylix.fonts.sansSerif.name;

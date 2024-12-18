@@ -5,15 +5,7 @@
     name = "catppuccin-frappe-mauve-cursors";
     size = 32;
   };
-  stylix.base16Scheme = 
-    let
-      jsonOutputDrv =
-        pkgs.runCommand
-          "from-yaml"
-          { nativeBuildInputs = [ pkgs.remarshal ]; }
-          "remarshal -if yaml -i \"${./colorscheme.yaml}\" -of json -o \"$out\"";
-    in
-    builtins.fromJSON (builtins.readFile jsonOutputDrv);
+  stylix.base16Scheme = builtins.toString ./colorscheme.yaml;
   stylix.polarity = "dark";
   stylix.fonts = rec {
     monospace = {

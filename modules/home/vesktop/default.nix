@@ -43,8 +43,8 @@ with lib; let
       skippedUpdate = "1.5.0";
       staticTitle = true;
       appBadge = false;
-      splashColor = "#${config.stylix.base16Scheme.base0A}";
-      splashBackground = "#${config.stylix.base16Scheme.base00}";
+      splashColor = "#${config.lib.stylix.colors.base0A}";
+      splashBackground = "#${config.lib.stylix.colors.base00}";
       splashTheming = true;
     }
   config.programs.vesktop.settings;

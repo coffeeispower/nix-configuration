@@ -9,7 +9,6 @@
   programs.direnv.enable = true;
   programs.hyprlock.enable = true;
   programs.eww.enable = true;
-  programs.ags.enable = true;
   programs.feh.enable = true;
   programs.feh.mimeApps.defaultAssociation.enable = true;
   programs.firefox.enable = true;
