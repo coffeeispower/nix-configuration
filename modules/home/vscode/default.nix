@@ -53,6 +53,9 @@ in
       "doppler.hover.enable" = true;
       "workbench.iconTheme" = "catppuccin-mocha";
       "remote.SSH.defaultExtensions" = [ "gitpod.gitpod-remote-ssh" ];
+      "remote.SSH.remotePlatform" = {
+        "*.gitpod.io" = "linux";
+      };
     };
     extensions = with unstable.vscode-extensions;
       [
