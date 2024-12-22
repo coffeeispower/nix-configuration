@@ -6,100 +6,14 @@
   ...
 }: let
   hyprland = inputs.hyprland.packages.${system}.hyprland;
-  hyprlandEventHandlers = pkgs.writeShellScript "hyprlandEventHandlers" ''
-    update_active_workspace() {
-      ${
-      if config.programs.eww.enable
-      then "eww update currentworkspace=$WORKSPACENAME"
-      else ":"
-    }
-    }
-    event_workspace() {
-      update_active_workspace
-    }
-
-    event_focusedmon() {
-      update_active_workspace
-      # MONNAME WORKSPACENAME
-    }
-
-    event_activewindow() {
-      : # WINDOWCLASS WINDOWTITLE
-    }
-
-    event_activewindowv2() {
-      : # WINDOWADDRESS
-    }
-
-    event_fullscreen() {
-      : # ENTER (0 if leaving fullscreen, 1 if entering)
-    }
-
-    event_monitorremoved() {
-      : # MONITORNAME
-    }
-
-    event_monitoradded() {
-      : # MONITORNAME
-    }
-
-    event_createworkspace() {
-      : # WORKSPACENAME
-    }
-
-    event_destroyworkspace() {
-      : # WORKSPACENAME
-    }
-
-    event_moveworkspace() {
-      : # WORKSPACENAME MONNAME
-    }
-
-    event_activelayout() {
-      : # KEYBOARDNAME LAYOUTNAME
-    }
-
-    event_openwindow() {
-      : # WINDOWADDRESS WORKSPACENAME WINDOWCLASS WINDOWTITLE
-    }
-
-    event_closewindow() {
-      : # WINDOWADDRESS
-    }
-
-    event_movewindow() {
-      : # WINDOWADDRESS WORKSPACENAME
-    }
-
-    event_windowtitle() {
-      : # WINDOWADDRESS
-    }
-
-    event_openlayer() {
-      : # NAMESPACE
-    }
-
-    event_closelayer() {
-      : # NAMESPACE
-    }
-
-    event_submap() {
-      # SUBMAPNAME
-      ${
-      if config.programs.eww.enable
-      then "eww update submap=$SUBMAPNAME"
-      else ":"
-    }
-    }
-  '';
-  hyprlandHandleEvents = pkgs.writeShellScript "hyprlandHandleEvents" ''
-    ${pkgs.socat}/bin/socat -u UNIX-CONNECT:$XDG_RUNTIME_DIR/hypr/$HYPRLAND_INSTANCE_SIGNATURE/.socket2.sock \
-      EXEC:"${inputs.hyprland-contrib.packages.${system}.shellevents}/bin/shellevents ${hyprlandEventHandlers}",nofork
-  '';
 in {
   wayland.windowManager.hyprland = {
     package = hyprland;
-    plugins = [inputs.Hyprspace.packages.${pkgs.system}.Hyprspace];
+    plugins = with inputs.hyprland-plugins.packages.${pkgs.system}; [
+      hyprexpo
+      # This plugin is broken... :(
+      # hyprbars
+    ];
     settings = {
       bind = (
         # Workspace keybind
@@ -121,14 +35,13 @@ in {
         monitor=eDP-1,preferred,0x0,1
         monitor=,preferred,auto,1,mirror,eDP-1
         $touchpad_enable = true
+        exec=ags-desktop
         device {
           name = elan-touchpad
           enabled = $touchpad_enable
         }
         cursor {
           inactive_timeout = 30
-          persistent_warps = yes
-          warp_on_change_workspace = yes
         }
         general {
           resize_on_border = yes
@@ -136,9 +49,10 @@ in {
         misc {
           disable_hyprland_logo = true
           disable_splash_rendering = true
+          middle_click_paste = false
         }
         $mod = SUPER
-        bindr = $mod, SUPER_L, overview:toggle
+        bind = $mod, A, hyprexpo:expo, toggle
 
         input {
             kb_layout = pt
@@ -182,8 +96,7 @@ in {
         windowrulev2=opaque,title:(.*)( - YouTube — Mozilla Firefox)$
         windowrulev2=noanim,title:(woomer)$
         # Disable animation for screenshots
-        layerrule = noanim, selection
-        layerrule = ignorezero, bar
+        layerrule = noanim, .*
       ''
       + (
         if config.programs.pyprland.enable
@@ -219,34 +132,17 @@ in {
 
 
 
-        layerrule=blur,(bar)
-        layerrule=blur,(rofi)
-        ${
-          if config.programs.eww.enable
-          then "exec-once=${config.programs.eww.package}/bin/eww open bar"
-          else ""
-        }
         ${
           if (config.programs.vesktop.vencord.settings.plugins."WebRichPresence (arRPC)".enabled or false)
           then "exec-once=${pkgs.arrpc}/bin/arrpc"
           else ""
         }
-        exec-once=${hyprlandHandleEvents}
         exec-once=${pkgs.dex}/bin/dex -a
         binde=, XF86AudioLowerVolume, exec, ${pkgs.pamixer}/bin/pamixer --decrease 5
         binde=, XF86AudioRaiseVolume, exec, ${pkgs.pamixer}/bin/pamixer --increase 5
         binde=, XF86MonBrightnessUp, exec, ${pkgs.brightnessctl}/bin/brightnessctl s +5%
         binde=, XF86MonBrightnessDown, exec, ${pkgs.brightnessctl}/bin/brightnessctl s 5%-
-        ${
-          if config.programs.eww.enable
-          then "bind=$mod, S, exec, ${config.programs.eww.package}/bin/eww open shutdown"
-          else ""
-        }
-        ${
-          if config.programs.eww.enable
-          then "bind=$mod, S, submap, shutdown-menu"
-          else ""
-        }
+        
         bind=, XF86Sleep, exec, ${pkgs.systemd}/bin/systemctl suspend
         bind=, XF86AudioMute, exec, ${pkgs.pamixer}/bin/pamixer -t
         bind=, XF86AudioStop, exec, ${pkgs.playerctl}/bin/playerctl stop
@@ -261,11 +157,8 @@ in {
         bind=SHIFT, Print,exec,${pkgs.grim}/bin/grim -c - | ${pkgs.swappy}/bin/swappy -f -
         bind=,Print,exec,${pkgs.grim}/bin/grim -c -g "$(${pkgs.slurp}/bin/slurp)" - | ${pkgs.swappy}/bin/swappy -f -
         bind=$mod, W,exec,${inputs.woomer.packages.${system}.default}/bin/woomer
-        ${
-          if config.programs.rofi.enable
-          then "bindr=$mod, D, exec, ${pkgs.rofi-wayland}/bin/rofi -show drun -show-icons || pkill rofi"
-          else ""
-        }
+        bindr=$mod, SUPER_L, exec, ${inputs.ags.packages.${system}.default}/bin/ags request start-menu
+        
         ${
           if config.programs.kitty.enable
           then "bind=$mod, T, exec, ${pkgs.kitty}/bin/kitty"
@@ -287,21 +180,6 @@ in {
         # Mouse bindings
         bindm=$mod,mouse:272,movewindow
         bindm=$mod,mouse:273,resizewindow
-        ${
-          if config.programs.eww.enable
-          then "submap=shutdown-menu"
-          else ""
-        }
-        ${
-          if config.programs.eww.enable
-          then "    bind=, Escape, exec, ${config.programs.eww.package}/bin/eww close shutdown"
-          else ""
-        }
-        ${
-          if config.programs.eww.enable
-          then "    bind=, Escape,submap,reset"
-          else ""
-        }
         # Rearrange mode keybinds
         submap=rearrange
             $rearrangeMod=SHIFT
@@ -328,13 +206,16 @@ in {
             bind=, Escape, submap         , reset
         submap=reset
         plugin {
-          overview {
-            onBottom = yes
-            centerAligned = yes
-            affectStrut = false
-            hideRealLayers = yes
-            hideTopLayers = yes
-            dragAlpha = 1.0
+          hyprexpo {
+              columns = 3
+              gap_size = 5
+              bg_col = rgb(${config.lib.stylix.colors.base00})
+              workspace_method = center current # [center/first] [workspace] e.g. first 1 or center m+1
+
+              enable_gesture = true # laptop touchpad
+              gesture_fingers = 3  # 3 or 4
+              gesture_distance = 300 # how far is the "max"
+              gesture_positive = false # positive = swipe down. Negative = swipe up.
           }
         }
       '';

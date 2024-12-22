@@ -25,6 +25,10 @@
       url = "github:hyprwm/contrib";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    hyprland-plugins = {
+      url = "github:hyprwm/hyprland-plugins";
+      inputs.hyprland.follows = "hyprland";
+    };
     nix-rice = {url = "github:bertof/nix-rice";};
     slides = {
       url = "github:maaslalani/slides";
@@ -45,15 +49,15 @@
     nixos-hardware = {
       url = "github:NixOS/nixos-hardware/master";
     };
-
-    Hyprspace = {
-      url = "github:KZDKM/Hyprspace";
-
-      # Hyprspace uses latest Hyprland. We declare this to keep them in sync.
-      inputs.hyprland.follows = "hyprland";
-    };
     hyprland.url = "github:hyprwm/Hyprland";
-    # ags-config.url = "github:coffeeispower/ags-bar";
+    ags.url = "github:aylur/ags"; 
+    ags-desktop= {
+      url = "github:coffeeispower/ags-desktop";
+      inputs= {
+        nixpkgs.follows = "nixpkgs";
+        ags.follows = "ags";
+      };
+    };
   };
 
   outputs = inputs:

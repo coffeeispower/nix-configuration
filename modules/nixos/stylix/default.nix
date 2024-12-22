@@ -3,7 +3,7 @@
   stylix.cursor = {
     package = pkgs.catppuccin-cursors.frappeMauve;
     name = "catppuccin-frappe-mauve-cursors";
-    size = 32;
+    size = 16;
   };
   stylix.base16Scheme = builtins.toString ./colorscheme.yaml;
   stylix.polarity = "dark";

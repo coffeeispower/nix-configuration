@@ -1,5 +1,7 @@
 {pkgs, inputs, system, ...}:
-let unstable = import inputs.nixpkgs-unstable { inherit system; }; in 
+let
+  unstable = import inputs.nixpkgs-unstable { inherit system; };
+in 
 {
   home.stateVersion = "24.05";
   programs.git = {
@@ -16,10 +18,9 @@ let unstable = import inputs.nixpkgs-unstable { inherit system; }; in
   stylix.targets.kde.enable = false;
 
   gtk.enable = true;
-  home.packages = with pkgs; [ kdenlive stremio yt-dlp blender wl-clipboard unstable.ddev ];
+  home.packages = with pkgs; [ kdenlive stremio yt-dlp blender wl-clipboard unstable.ddev inputs.ags-desktop.packages.${system}.default showmethekey ];
   programs.hyprlock.enable = true;
   programs.direnv.enable = true;
-  programs.eww.enable = true;
   programs.feh.enable = true;
   programs.feh.mimeApps.defaultAssociation.enable = true;
   programs.firefox.enable = true;
