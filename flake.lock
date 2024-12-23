@@ -29,11 +29,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1734859624,
-        "narHash": "sha256-ZSJydyzd8bkvCLPtrdYnAr6iglDWFLbZGnteOGEH9D0=",
+        "lastModified": 1734963324,
+        "narHash": "sha256-wfejrNDVZTVrRw/orHtwadx0B6i4oo5CH7fr2vlAmTE=",
         "owner": "coffeeispower",
         "repo": "ags-desktop",
-        "rev": "a01177cd710ba70bbd4536f5a5b4590895028d61",
+        "rev": "2e5dde1e34cec6510854d9c2ae4b934124db34d1",
         "type": "github"
       },
       "original": {
