@@ -76,25 +76,36 @@ in {
             workspace_swipe_min_speed_to_force = 10
             workspace_swipe_cancel_ratio = 0.3
         }
+        
         animations {
           enabled = true
           bezier = easeout, 0,0,.50,1
           bezier = easein, 0,0,1,1
           bezier = easeinout, 1,0,0,1
+          bezier = easeInOutCubic, 0.65, 0, 0.35, 1
+
+          animation = layers, 1, 4, easeinout
 
           animation = windowsIn, 1, 4, easeinout
           animation = windowsOut, 1, 4, easeinout
-          animation = windowsMove, 1, 1, easein
+          animation = windowsMove, 1, 1, easeInOutCubic
 
-          animation = fadeIn, 1, 4, easeinout
-          animation = fadeOut, 1, 4, easeinout
+          animation = fadeIn, 1, 4, easeout
+          animation = fadeOut, 1, 4, easeout
 
           animation = workspaces, 1, 2, easein
         }
         windowrulev2=opaque,title:(.*)( - YouTube — Mozilla Firefox)$
         windowrulev2=noanim,title:(woomer)$
-        # Disable animation for screenshots
-        layerrule = noanim, .*
+        # Disable animation for start menu and bar
+        layerrule = noanim, (start-menu|bar)$
+        # Animate dashboard
+        layerrule = animation slide top, dashboard
+        # Add blur to the dashboard
+        layerrule = blur, dashboard
+        # Make sure the dashboard appears behind the bar
+        layerrule = order 2, dashboard
+        layerrule = order 1, bar
         ${
           if (config.programs.vesktop.vencord.settings.plugins."WebRichPresence (arRPC)".enabled or false)
           then "exec-once=${pkgs.arrpc}/bin/arrpc"
