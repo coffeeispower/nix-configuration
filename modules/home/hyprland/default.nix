@@ -95,41 +95,6 @@ in {
         windowrulev2=noanim,title:(woomer)$
         # Disable animation for screenshots
         layerrule = noanim, .*
-      ''
-      + (
-        if config.programs.pyprland.enable
-        then ''
-          $pavucontrol = class:^(pavucontrol)$
-          windowrulev2 = float,$pavucontrol
-          windowrulev2 = size 86% 40%,$pavucontrol
-          windowrulev2 = move 6% 50%,$pavucontrol
-          windowrulev2 = workspace special silent,$pavucontrol
-          windowrulev2 = opacity 0.80,$pavucontrol
-
-          $cpupower-gui = class:^(cpupower-gui)$
-          windowrulev2 = float,$cpupower-gui
-          windowrulev2 = size 40% 86%,$cpupower-gui
-          windowrulev2 = move 50% 6%,$cpupower-gui
-          windowrulev2 = workspace special silent,$cpupower-gui
-          windowrulev2 = opacity 0.80,$cpupower-gui
-
-          $scratchpadsize = size 80% 85%
-          $scratchpad = class:^(scratchpad)$
-          windowrulev2 = float,$scratchpad
-          windowrulev2 = $scratchpadsize,$scratchpad
-          windowrulev2 = workspace special silent,$scratchpad
-          windowrulev2 = center,$scratchpad
-
-          bind=$mod, SPACE, exec, ${config.programs.pyprland.package}/bin/pypr toggle kitty && hyprctl dispatch bringactivetotop
-          bind=$mod, V, exec, ${config.programs.pyprland.package}/bin/pypr toggle pavucontrol && hyprctl dispatch bringactivetotop
-          bind=$mod, P, exec, ${config.programs.pyprland.package}/bin/pypr toggle cpupower-gui && hyprctl dispatch bringactivetotop
-        ''
-        else ""
-      )
-      + ''
-
-
-
         ${
           if (config.programs.vesktop.vencord.settings.plugins."WebRichPresence (arRPC)".enabled or false)
           then "exec-once=${pkgs.arrpc}/bin/arrpc"
