@@ -1,5 +1,5 @@
 {pkgs, ...}: {
-  stylix.image = ./wallpaper.png;
+  stylix.image = ../../home/hyprland/wallpapers/shinjuku-tokyo-japan-night.jpg;
   stylix.cursor = {
     package = pkgs.catppuccin-cursors.frappeMauve;
     name = "catppuccin-frappe-mauve-cursors";
@@ -31,6 +31,9 @@
     terminal = 0.5;
     desktop = 0.5;
   };
-  stylix.targets.plymouth.logo = "${pkgs.nixos-icons}/share/icons/hicolor/48x48/apps/nix-snowflake-white.png";
+  stylix.targets.plymouth = {
+    logo = "${pkgs.nixos-icons}/share/icons/hicolor/48x48/apps/nix-snowflake-white.png";
+    logoAnimated = false;
+  };
   stylix.enable = true;
 }

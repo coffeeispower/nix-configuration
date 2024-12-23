@@ -7,6 +7,7 @@
 }: let
   hyprland = inputs.hyprland.packages.${system}.hyprland;
 in {
+  stylix.targets.hyprland.hyprpaper.enable = false;
   wayland.windowManager.hyprland = {
     package = hyprland;
     plugins = with inputs.hyprland-plugins.packages.${pkgs.system}; [
@@ -30,12 +31,13 @@ in {
     };
     extraConfig =
       ''
-
         monitor=desc:Samsung Electric Company SME1920N H9FZA50833, 1366x768, -1366x0, 1
         monitor=eDP-1,preferred,0x0,1
         monitor=,preferred,auto,1,mirror,eDP-1
         $touchpad_enable = true
         exec=ags-desktop
+        exec-once=${pkgs.swww}/bin/swww-daemon
+        exec-once=${../../../wallpaper-slideshow.nu} -w ${./wallpapers}
         device {
           name = elan-touchpad
           enabled = $touchpad_enable
@@ -76,23 +78,19 @@ in {
         }
         animations {
           enabled = true
-          bezier = exponential, .84,.02,.31,.95
-          bezier = workspacesBezier, .44,.59,0,1.27
-          bezier = easeout, 0,0,.58,1
-          bezier = easein, .42,0,1,1
-          animation = global, 1, 6, exponential
-          animation = layers, 1, 4, easeout, popin 80%
+          bezier = easeout, 0,0,.50,1
+          bezier = easein, 0,0,1,1
+          bezier = easeinout, 1,0,0,1
 
-          animation = windowsIn, 1, 4, easeout, popin 80%
-          animation = windowsOut, 1, 4, easein, popin 80%
+          animation = windowsIn, 1, 4, easeinout
+          animation = windowsOut, 1, 4, easeinout
+          animation = windowsMove, 1, 1, easein
 
-          animation = fadeIn, 1, 2, easeout
-          animation = fadeOut, 1, 2, easein
+          animation = fadeIn, 1, 4, easeinout
+          animation = fadeOut, 1, 4, easeinout
 
-          animation = windowsMove, 1, 4, exponential
-          animation = workspaces, 1, 4, workspacesBezier, slidefade
+          animation = workspaces, 1, 2, easein
         }
-        windowrulev2=opacity ${builtins.toString config.stylix.opacity.applications},class:(vesktop|nautilus|firefox|Spotify|Code)$
         windowrulev2=opaque,title:(.*)( - YouTube — Mozilla Firefox)$
         windowrulev2=noanim,title:(woomer)$
         # Disable animation for screenshots

@@ -12,13 +12,22 @@ in
   services.gpg-agent.enable = true;
   services.fcitx5.enable = true;
   services.dunst.enable = true;
-  services.hyprpaper.enable = true;
   services.hypridle.enable = true;
 
   stylix.targets.kde.enable = false;
 
   gtk.enable = true;
-  home.packages = with pkgs; [ kdenlive stremio yt-dlp blender wl-clipboard unstable.ddev inputs.ags-desktop.packages.${system}.default showmethekey ];
+  home.packages = with pkgs; [
+    kdenlive
+    stremio
+    yt-dlp
+    blender
+    wl-clipboard
+    unstable.ddev
+    showmethekey
+    inputs.ags-desktop.packages.${system}.default
+    swww
+  ];
   programs.hyprlock.enable = true;
   programs.direnv.enable = true;
   programs.feh.enable = true;

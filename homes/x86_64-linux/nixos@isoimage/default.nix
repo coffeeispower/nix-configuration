@@ -3,12 +3,10 @@
   services.gpg-agent.enable = true;
   services.fcitx5.enable = false;
   services.dunst.enable = true;
-  services.hyprpaper.enable = true;
   services.hypridle.enable = true;
   gtk.enable = true;
   programs.direnv.enable = true;
   programs.hyprlock.enable = true;
-  programs.eww.enable = true;
   programs.feh.enable = true;
   programs.feh.mimeApps.defaultAssociation.enable = true;
   programs.firefox.enable = true;

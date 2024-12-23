@@ -49,14 +49,21 @@
     nixos-hardware = {
       url = "github:NixOS/nixos-hardware/master";
     };
-    hyprland.url = "github:hyprwm/Hyprland";
+    hyprland = {
+      url = "github:hyprwm/Hyprland";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     ags.url = "github:aylur/ags"; 
     ags-desktop= {
       url = "github:coffeeispower/ags-desktop";
-      inputs= {
+      inputs = {
         nixpkgs.follows = "nixpkgs";
         ags.follows = "ags";
       };
+    };
+    swww = {
+      url = "github:LGFae/swww";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
   };
 
