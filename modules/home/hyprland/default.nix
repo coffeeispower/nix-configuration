@@ -84,7 +84,7 @@ in {
           bezier = easeinout, 1,0,0,1
           bezier = easeInOutCubic, 0.65, 0, 0.35, 1
 
-          animation = layers, 1, 4, easeinout
+          animation = layers, 1, 4, easeinout, slide top
 
           animation = windowsIn, 1, 4, easeinout
           animation = windowsOut, 1, 4, easeinout
@@ -98,14 +98,14 @@ in {
         windowrulev2=opaque,title:(.*)( - YouTube — Mozilla Firefox)$
         windowrulev2=noanim,title:(woomer)$
         # Disable animation for start menu and bar
-        layerrule = noanim, (start-menu|bar)$
         # Animate dashboard
-        layerrule = animation slide top, dashboard
+        layerrule = animation slide top, (bar|dashboard|start-menu)$
         # Add blur to the dashboard
         layerrule = blur, dashboard
         # Make sure the dashboard appears behind the bar
-        layerrule = order 2, dashboard
         layerrule = order 1, bar
+        layerrule = order 2, start-menu
+        layerrule = order 3, dashboard
         ${
           if (config.programs.vesktop.vencord.settings.plugins."WebRichPresence (arRPC)".enabled or false)
           then "exec-once=${pkgs.arrpc}/bin/arrpc"
@@ -131,7 +131,8 @@ in {
         bind=SHIFT, Print,exec,${pkgs.grim}/bin/grim -c - | ${pkgs.swappy}/bin/swappy -f -
         bind=,Print,exec,${pkgs.grim}/bin/grim -c -g "$(${pkgs.slurp}/bin/slurp)" - | ${pkgs.swappy}/bin/swappy -f -
         bind=$mod, W,exec,${inputs.woomer.packages.${system}.default}/bin/woomer
-        bindr=$mod, SUPER_L, exec, ${inputs.ags.packages.${system}.default}/bin/ags request start-menu
+        bindr=$mod, SUPER_L, exec, ${inputs.ags.packages.${system}.default}/bin/ags toggle start-menu
+        bind=$mod, D, exec, ${inputs.ags.packages.${system}.default}/bin/ags toggle dashboard
         
         ${
           if config.programs.kitty.enable
