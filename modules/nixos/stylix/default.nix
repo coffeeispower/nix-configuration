@@ -1,11 +1,11 @@
 {pkgs, ...}: {
-  stylix.image = ../../home/hyprland/wallpapers/shinjuku-tokyo-japan-night.jpg;
+  stylix.image = ../../home/hyprland/wallpapers/japan/shinjuku-tokyo-japan-night.jpg;
   stylix.cursor = {
     package = pkgs.catppuccin-cursors.frappeMauve;
     name = "catppuccin-frappe-mauve-cursors";
     size = 16;
   };
-  stylix.base16Scheme = builtins.toString ./colorscheme.yaml;
+  stylix.base16Scheme = ./colorscheme.yaml;
   stylix.polarity = "dark";
   stylix.fonts = rec {
     monospace = {
