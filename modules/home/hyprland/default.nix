@@ -37,7 +37,7 @@ in {
         $touchpad_enable = true
         exec=ags-desktop
         exec-once=${pkgs.swww}/bin/swww-daemon
-        exec-once=${../../../wallpaper-slideshow.nu} -w ${./wallpapers}
+        exec-once=${../../../wallpaper-slideshow.nu} -w ${./wallpapers} -i 30sec
         device {
           name = elan-touchpad
           enabled = $touchpad_enable

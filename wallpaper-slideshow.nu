@@ -2,11 +2,12 @@
 
 
 def main [
-    --default_wallpapers_path (-w): path # If the wallpapers folder is empty, copy the wallpapers from this folder
+    --default_wallpapers_path (-w): path, # If the wallpapers folder is empty, copy the wallpapers from this folder
+    --interval (-i): duration
 ] {
     loop {
         mkdir ~/wallpapers
-        let files = ls ~/wallpapers/ | get name | shuffle;
+        let files = ^find -type f | split row "\n" | each {|relpath| "~/wallpapers" | path join $relpath | path expand } | shuffle;
         
         if ($files | is-empty) {
             print "No wallpapers"
@@ -19,7 +20,7 @@ def main [
         } else {
             for image in $files {
                 swww img $image --transition-fps 60 -t wave --transition-duration 4;
-                sleep 30sec;
+                sleep $interval;
             }
         }
     }
