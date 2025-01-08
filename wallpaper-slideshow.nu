@@ -7,6 +7,7 @@ def main [
 ] {
     loop {
         mkdir ~/wallpapers
+        cd ~/wallpapers
         let files = ^find -type f | split row "\n" | each {|relpath| "~/wallpapers" | path join $relpath | path expand } | shuffle;
         
         if ($files | is-empty) {
