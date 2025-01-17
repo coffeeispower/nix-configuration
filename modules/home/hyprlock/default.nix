@@ -62,7 +62,7 @@ with lib; {
           color = rgb(${config.lib.stylix.colors.base05})
           font_size = 55
           font_family = sans-serif
-          position = -100, -40
+          position = -100, 50
           halign = right
           valign = bottom
           shadow_passes = 5
