@@ -31,9 +31,10 @@ in {
     };
     extraConfig =
       ''
-        monitor=desc:Samsung Electric Company SME1920N H9FZA50833, 1366x768, -1366x0, 1
-        monitor=eDP-1,preferred,0x0,1
-        monitor=,preferred,auto,1,mirror,eDP-1
+        # monitor=desc:Samsung Electric Company SME1920N H9FZA50833, 1366x768, -1366x0, 1
+        # monitor=eDP-1,preferred,0x0,1
+        # monitor=,preferred,auto,1,mirror,eDP-1
+        monitor = , preferred, auto, 1
         $touchpad_enable = true
         exec=ags-desktop
         exec-once=${pkgs.swww}/bin/swww-daemon
