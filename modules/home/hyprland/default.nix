@@ -10,16 +10,13 @@ in {
   stylix.targets.hyprland.hyprpaper.enable = false;
   wayland.windowManager.hyprland = {
     package = hyprland;
-    plugins = with inputs.hyprland-plugins.packages.${pkgs.system}; [
-      hyprexpo
-      # This plugin is broken... :(
+    # The plugins are broken... :(
+    # plugins = with inputs.hyprland-plugins.packages.${pkgs.system}; [
+      # hyprexpo
       # hyprbars
-    ];
+    # ];
     settings = {
       bind = (
-        # Workspace keybind
-        # $mod + {1..10} to workspace {1..10}
-        # $mod + shift + {1..10} to move to workspace {1..10}
         builtins.concatLists (builtins.genList (x: let
             ws = let c = (x + 1) / 10; in builtins.toString (x + 1 - (c * 10));
           in [
@@ -55,7 +52,7 @@ in {
           middle_click_paste = false
         }
         $mod = SUPER
-        bind = $mod, A, hyprexpo:expo, toggle
+        # bind = $mod, A, hyprexpo:expo, toggle
 
         input {
             kb_layout = pt

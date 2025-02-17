@@ -1,6 +1,8 @@
 {
   pkgs,
   lib,
+  inputs,
+  system,
   ...
 }: {
   imports = [
@@ -58,6 +60,7 @@
   programs.nix-ld.enable = true;
   services.displayManager.sddm.enable = true;
   environment.systemPackages = with pkgs; [
+    anki
     keepassxc
     # Custom packages
     my-lib.slides
@@ -133,6 +136,7 @@
   programs.virt-manager.enable = true;
   virtualisation.libvirtd.enable = true;
   programs.hyprland.enable = true;
+  programs.hyprland.package = inputs.hyprland.packages.${system}.hyprland;
   # services.xserver.displayManager.sddm.settings.Autologin = {
   #   Session = "hyprland.desktop";
   #   User = "tiago";

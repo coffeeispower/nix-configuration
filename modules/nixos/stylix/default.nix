@@ -9,7 +9,7 @@
   stylix.polarity = "dark";
   stylix.fonts = rec {
     monospace = {
-      package = pkgs.nerdfonts.override {fonts = ["FiraCode"];};
+      package = pkgs.nerd-fonts.fira-code;
       name = "FiraCodeNerdFontMono";
     };
     sansSerif = {

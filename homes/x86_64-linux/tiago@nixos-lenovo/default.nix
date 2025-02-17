@@ -27,6 +27,7 @@ in
     showmethekey
     inputs.ags-desktop.packages.${system}.default
     swww
+    jetbrains.webstorm
   ];
   programs.hyprlock.enable = true;
   programs.direnv.enable = true;
