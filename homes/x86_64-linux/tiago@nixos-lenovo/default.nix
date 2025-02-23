@@ -28,6 +28,7 @@ in
     inputs.ags-desktop.packages.${system}.default
     swww
     jetbrains.webstorm
+    bun
   ];
   programs.hyprlock.enable = true;
   programs.direnv.enable = true;
