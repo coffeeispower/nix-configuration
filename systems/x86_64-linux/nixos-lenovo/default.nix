@@ -60,6 +60,7 @@
   programs.nix-ld.enable = true;
   services.displayManager.sddm.enable = true;
   environment.systemPackages = with pkgs; [
+    wl-screenrec
     anki
     keepassxc
     # Custom packages
