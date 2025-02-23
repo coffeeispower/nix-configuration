@@ -9,10 +9,13 @@
   stylix.polarity = "dark";
   stylix.fonts = rec {
     monospace = {
-      package = pkgs.nerd-fonts.fira-code;
-      name = "FiraCodeNerdFontMono";
+      package = pkgs.nerd-fonts.ubuntu-sans;
+      name = "UbuntuSansMonoNerdFontMono";
     };
-    sansSerif = monospace;
+    sansSerif = {
+      package = pkgs.nerd-fonts.ubuntu-sans;
+      name = "UbuntuSansNerdFont";
+    };
     serif = sansSerif;
   };
 
