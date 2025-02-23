@@ -12,10 +12,7 @@
       package = pkgs.nerd-fonts.fira-code;
       name = "FiraCodeNerdFontMono";
     };
-    sansSerif = {
-      package = pkgs.inter;
-      name = "InterVariable";
-    };
+    sansSerif = monospace;
     serif = sansSerif;
   };
 
@@ -23,7 +20,7 @@
   fonts = {
     fontDir.enable = true;
     enableDefaultPackages = true;
-    packages = with pkgs; [ ipafont ];
+    packages = with pkgs; [ rictydiminished-with-firacode ];
   };
   stylix.opacity = {
     applications = 0.9;
