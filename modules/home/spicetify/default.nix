@@ -11,14 +11,7 @@ in
     imports = [inputs.spicetify-nix.homeManagerModules.default];
     stylix.targets.spicetify.enable = !config.programs.spicetify.enable;
     programs.spicetify = {
-      theme = {
-        name = "Comfy";
-        src = inputs.comfy-theme-spicetify;
-        injectCss = true;
-        replaceColors = true;
-        overwriteAssets = true;
-        sidebarConfig = true;
-      };
+      theme = spicePkgs.themes.sleek;
       enabledExtensions = with spicePkgs.extensions; [
         fullAppDisplay
         trashbin
@@ -32,13 +25,13 @@ in
       ];
       colorScheme = "custom";
       customColorScheme = {
-        subtext = base0F;
+        subtext = "${base05}7f";
         text = base05;
         main = base00;
         main-transition = base01;
         main-elevated = base02;
-        highlight = base03;
-        highlight-elevated = base04;
+        highlight = base02;
+        highlight-elevated = base01;
         sidebar = base00;
         player = base00;
         card = base00;
