@@ -50,6 +50,7 @@ in
   programs.zoxide.enable = true;
   programs.fastfetch.enable = true;
   programs.vesktop.enable = true;
+  stylix.targets.vesktop.enable = false;
   programs.vesktop.vencord.settings = {
     plugins = {
       BadgeAPI = {
