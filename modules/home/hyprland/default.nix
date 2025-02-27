@@ -62,11 +62,17 @@ in {
             }
         }
         decoration {
-            rounding = 10
+            rounding = 8
             blur {
                 enabled = true
                 size = 1
                 passes = 5
+            }
+            shadow {
+              enabled = true
+              color = 0x661a1a1a
+              range = 50
+              render_power = 4
             }
         }
         gestures {
