@@ -8,7 +8,11 @@
   imports = [
     # Include the results of the hardware scan.
     /tmp/hardware-configuration.nix
+    inputs.tibs.nixosModules.tibs
   ];
+  specialisation.tibs.configuration.tibs.enable = true;
+  specialisation.tibs.configuration.boot.plymouth.enable = lib.mkForce false;
+  specialisation.tibs.configuration.services.displayManager.sddm.enable = lib.mkForce false;
   virtualisation.waydroid.enable = true;
   users.users.tiago = {
     isNormalUser = true;
@@ -60,6 +64,14 @@
   programs.nix-ld.enable = true;
   services.displayManager.sddm.enable = true;
   environment.systemPackages = with pkgs; [
+    shortwave
+    gst_all_1.gstreamer
+    gst_all_1.gst-plugins-base
+    gst_all_1.gst-plugins-good
+    gst_all_1.gst-plugins-bad
+    gst_all_1.gst-plugins-ugly
+    gst_all_1.gst-libav
+    gst_all_1.gst-vaapi
     wl-screenrec
     anki
     keepassxc
@@ -179,8 +191,8 @@
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;
 
-  boot.kernelParams = ["quiet" "splash"];
-  boot.consoleLogLevel = 0;
+  # boot.kernelParams = ["quiet" "splash"];
+  # boot.consoleLogLevel = 0;
   networking.firewall = {
     enable = true;
     allowedTCPPorts = [25565 3000 5173];

@@ -27,7 +27,7 @@
     };
   };
 
-  boot.initrd.systemd.enable = true;
+  # boot.initrd.systemd.enable = true;
   hardware.graphics = {
     enable = true;
     extraPackages = with pkgs; [

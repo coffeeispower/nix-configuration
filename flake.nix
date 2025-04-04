@@ -65,6 +65,7 @@
       url = "github:LGFae/swww";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    tibs.url = "github:coffeeispower/tibs";
   };
 
   outputs = inputs:
