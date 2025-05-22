@@ -111,7 +111,7 @@ in {
         layerrule = order 2, start-menu
         layerrule = order 3, dashboard
         ${
-          if (config.programs.vesktop.vencord.settings.plugins."WebRichPresence (arRPC)".enabled or false)
+          if (config.programs.custom.vesktop.vencord.settings.plugins."WebRichPresence (arRPC)".enabled or false)
           then "exec-once=${pkgs.arrpc}/bin/arrpc"
           else ""
         }

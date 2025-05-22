@@ -73,7 +73,7 @@
       inherit inputs;
       channels-config.allowUnfree = true;
       channels-config.permittedInsecurePackages = [
-        "electron-25.9.0"
+        "beekeeper-studio-5.2.9"
       ];
       src = ./.;
       snowfall.namespace = "my-lib";

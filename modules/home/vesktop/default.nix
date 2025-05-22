@@ -31,12 +31,12 @@ with lib; let
         logLimit = 50;
       };
     }
-    (optionalAttrs config.programs.vesktop.stylixIntegration.enable {
+    (optionalAttrs config.programs.custom.vesktop.stylixIntegration.enable {
       enabledThemes = [
         "Stylix.theme.css"
       ];
     }))
-  config.programs.vesktop.vencord.settings;
+  config.programs.custom.vesktop.vencord.settings;
   # settings.json file
   mergedVesktopSettings = recursiveUpdate (recursiveUpdate
     {
@@ -47,14 +47,14 @@ with lib; let
       staticTitle = true;
       appBadge = false;
     }
-    (optionalAttrs config.programs.vesktop.stylixIntegration.enable {
+    (optionalAttrs config.programs.custom.vesktop.stylixIntegration.enable {
       splashColor = "#${config.lib.stylix.colors.base0A}";
       splashBackground = "#${config.lib.stylix.colors.base00}";
       splashTheming = true;
     }))
-  config.programs.vesktop.settings;
+  config.programs.custom.vesktop.settings;
 in {
-  options.programs.vesktop = {
+  options.programs.custom.vesktop = {
     enable = mkEnableOption "vesktop";
     stylixIntegration.enable = mkOption {
       type = types.bool;
@@ -73,8 +73,8 @@ in {
     };
   };
   config = {
-    home.packages = [(mkIf config.programs.vesktop.enable pkgs.vesktop)];
-    home.activation.vencordCP = mkIf config.programs.vesktop.enable (
+    home.packages = [(mkIf config.programs.custom.vesktop.enable pkgs.vesktop)];
+    home.activation.vencordCP = mkIf config.programs.custom.vesktop.enable (
       inputs.home-manager.lib.hm.dag.entryAfter ["writeBoundary"] ''
         mkdir -p $HOME/.config/vesktop/settings/
         cat ${jsonFormat.generate "vencord-config" mergedVencordSettings} > $HOME/.config/vesktop/settings/settings.json
@@ -82,7 +82,7 @@ in {
       ''
     );
     xdg.configFile."vesktop/themes/Stylix.theme.css" = {
-      enable = config.programs.vesktop.stylixIntegration.enable;
+      enable = config.programs.custom.vesktop.stylixIntegration.enable;
       source = with config.lib.stylix.colors; let
         inherit (inputs.nix-rice.lib.nix-rice) color;
         base09Rgba = color.hexToRgba "#${base09}";

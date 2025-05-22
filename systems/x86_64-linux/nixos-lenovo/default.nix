@@ -10,7 +10,14 @@
     /tmp/hardware-configuration.nix
     inputs.tibs.nixosModules.tibs
   ];
+  # services.udev.extraRules = ''
+    # ACTION=="add|change", ATTRS{name}=="Elan Touchpad", ENV{LIBINPUT_IGNORE_DEVICE}="1"
+  # '';
+  services.preload.enable = true;
+  hardware.firmware = with pkgs; [ linux-firmware ];
   specialisation.tibs.configuration.tibs.enable = true;
+  specialisation.tibs.configuration.tibs.tibsPath = "/home/tiago/Projects/tibs/target/debug/tibs";
+  specialisation.tibs.configuration.tibs.assetsDir = "/home/tiago/Projects/tibs/assets";
   specialisation.tibs.configuration.boot.plymouth.enable = lib.mkForce false;
   specialisation.tibs.configuration.services.displayManager.sddm.enable = lib.mkForce false;
   virtualisation.waydroid.enable = true;
@@ -170,7 +177,7 @@
   i18n.inputMethod = {
     enable = true;
     type = "fcitx5";
-    fcitx5.addons = [pkgs.fcitx5-mozc pkgs.fcitx5-gtk];
+    fcitx5.addons = [pkgs.fcitx5-mozc pkgs.fcitx5-gtk pkgs.fcitx5-hangul];
   };
    environment.variables = {
      GTK_IM_MODULE = lib.mkForce "";

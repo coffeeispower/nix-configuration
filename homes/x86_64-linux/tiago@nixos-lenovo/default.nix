@@ -18,16 +18,15 @@ in
 
   gtk.enable = true;
   home.packages = with pkgs; [
-    kdenlive
+    unstable.zed-editor
+    kdePackages.kdenlive
     stremio
     yt-dlp
     blender
     wl-clipboard
-    unstable.ddev
     showmethekey
     inputs.ags-desktop.packages.${system}.default
     swww
-    jetbrains.webstorm
     bun
   ];
   programs.hyprlock.enable = true;
@@ -45,11 +44,11 @@ in
   programs.rofi.enable = true;
   programs.spicetify.enable = true;
   programs.nautilus.enable = true;
-  programs.vscode.enable = true;
+  programs.vscode.enable = false;
   programs.zellij.enable = true;
   programs.zoxide.enable = true;
   programs.fastfetch.enable = true;
-  programs.vesktop.enable = true;
+  programs.custom.vesktop.enable = true;
   stylix.targets.vesktop.enable = false;
   programs.vesktop.vencord.settings = {
     plugins = {

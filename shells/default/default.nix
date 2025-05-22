@@ -6,5 +6,6 @@ pkgs.mkShell {
     just
     alejandra
     nushell
+    nixd
   ];
 }
