@@ -1,6 +1,7 @@
 {
   inputs,
   system,
+  pkgs,
   ...
 }: {
   programs.firefox = {
@@ -20,5 +21,8 @@
         firefox-ext.proton-pass
       ];
     };
+    nativeMessagingHosts = with pkgs.kdePackages; [
+      plasma-browser-integration
+    ];
   };
 }

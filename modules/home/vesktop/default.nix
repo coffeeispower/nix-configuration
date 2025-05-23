@@ -92,12 +92,11 @@ in {
           inherit pkgs;
           name = "vesktop-stylix-theme";
           templateFile = ./Stylix.theme.css.mustache;
-          variables =
-            {
-              splitBase09 = "${builtins.toString (builtins.floor base09Rgba.r)}, ${builtins.toString (builtins.floor base09Rgba.g)}, ${builtins.toString (builtins.floor base09Rgba.b)}";
-              splitBase0A = "${builtins.toString (builtins.floor base0ARgba.r)}, ${builtins.toString (builtins.floor base0ARgba.g)}, ${builtins.toString (builtins.floor base0ARgba.b)}";
-              inherit (config.lib.stylix.colors) base00 base01 base02 base03 base04 base05 base06 base07 base08 base09 base0A base0B base0C base0D base0E base0F;
-            };
+          variables = {
+            splitBase09 = "${builtins.toString (builtins.floor base09Rgba.r)}, ${builtins.toString (builtins.floor base09Rgba.g)}, ${builtins.toString (builtins.floor base09Rgba.b)}";
+            splitBase0A = "${builtins.toString (builtins.floor base0ARgba.r)}, ${builtins.toString (builtins.floor base0ARgba.g)}, ${builtins.toString (builtins.floor base0ARgba.b)}";
+            inherit (config.lib.stylix.colors) base00 base01 base02 base03 base04 base05 base06 base07 base08 base09 base0A base0B base0C base0D base0E base0F;
+          };
         };
     };
   };

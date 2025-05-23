@@ -1,8 +1,10 @@
-{pkgs, inputs, ...}:
-let
-  unstable = import inputs.nixpkgs-unstable { config.allowUnfree = true; };
-in
 {
+  pkgs,
+  inputs,
+  ...
+}: let
+  unstable = import inputs.nixpkgs-unstable {config.allowUnfree = true;};
+in {
   programs.vscode = {
     mutableExtensionsDir = true;
     package = unstable.vscode;
@@ -52,7 +54,7 @@ in
       "doppler.autocomplete.enable" = true;
       "doppler.hover.enable" = true;
       "workbench.iconTheme" = "catppuccin-mocha";
-      "remote.SSH.defaultExtensions" = [ "gitpod.gitpod-remote-ssh" ];
+      "remote.SSH.defaultExtensions" = ["gitpod.gitpod-remote-ssh"];
       "remote.SSH.remotePlatform" = {
         "*.gitpod.io" = "linux";
       };

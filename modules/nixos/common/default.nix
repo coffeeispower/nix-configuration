@@ -37,7 +37,7 @@
   };
   boot.initrd.kernelModules = ["i915"];
 
-  environment.sessionVariables = { LIBVA_DRIVER_NAME = "iHD"; };
+  environment.sessionVariables = {LIBVA_DRIVER_NAME = "iHD";};
   boot.loader.efi.canTouchEfiVariables = true;
   networking.networkmanager.enable = true;
 
@@ -55,7 +55,7 @@
     pulse.enable = true;
   };
 
-    # Enable touchpad support (enabled default in most desktopManager).
+  # Enable touchpad support (enabled default in most desktopManager).
   services.libinput.enable = true;
   programs.dconf.enable = true;
   programs.git.enable = true;
@@ -76,7 +76,7 @@
     pavucontrol
     fastfetch
     vlc
-    
+
     (lib.mkIf config.services.displayManager.sddm.enable (pkgs.catppuccin-sddm.override {
       flavor = "mocha";
       background = "${config.stylix.image}";
@@ -91,7 +91,6 @@
   hardware.bluetooth.enable = true; # enables support for Bluetooth
   hardware.bluetooth.powerOnBoot =
     true; # powers up the default Bluetooth controller on boot
-  services.blueman.enable = true;
 
   programs.gnupg.agent = {
     enable = true;
@@ -108,14 +107,12 @@
   services.displayManager.sddm = {
     wayland.enable = true;
     theme = "catppuccin-mocha";
-    package = pkgs.kdePackages.sddm;
   };
-  services.displayManager.defaultSession = "hyprland";
+  services.displayManager.defaultSession = "plasma";
 
   home-manager = {
     useGlobalPkgs = true;
     useUserPackages = true;
-    backupFileExtension = ".bkp";
   };
   system.stateVersion = "24.05";
   nix.settings = {

@@ -10,16 +10,21 @@
     /tmp/hardware-configuration.nix
     inputs.tibs.nixosModules.tibs
   ];
-  # services.udev.extraRules = ''
-    # ACTION=="add|change", ATTRS{name}=="Elan Touchpad", ENV{LIBINPUT_IGNORE_DEVICE}="1"
-  # '';
+
   services.preload.enable = true;
-  hardware.firmware = with pkgs; [ linux-firmware ];
-  specialisation.tibs.configuration.tibs.enable = true;
-  specialisation.tibs.configuration.tibs.tibsPath = "/home/tiago/Projects/tibs/target/debug/tibs";
-  specialisation.tibs.configuration.tibs.assetsDir = "/home/tiago/Projects/tibs/assets";
-  specialisation.tibs.configuration.boot.plymouth.enable = lib.mkForce false;
-  specialisation.tibs.configuration.services.displayManager.sddm.enable = lib.mkForce false;
+  hardware.firmware = with pkgs; [linux-firmware];
+  # specialisation.tibs = {
+  #   configuration = {
+  #     tibs = {
+  #     	enable = true;
+  # tibsPath = "/home/tiago/Projects/tibs/target/debug/tibs";
+  # assetsDir = "/home/tiago/Projects/tibs/assets";
+  #     };
+  #     boot.plymouth.enable = lib.mkForce false;
+  #     services.displayManager.sddm.enable = lib.mkForce false;
+  #   };
+  # };
+
   virtualisation.waydroid.enable = true;
   users.users.tiago = {
     isNormalUser = true;
@@ -69,9 +74,11 @@
       libXrandr
     ]);
   programs.nix-ld.enable = true;
-  services.displayManager.sddm.enable = true;
   environment.systemPackages = with pkgs; [
-    shortwave
+  	inputs.woomer.packages.${system}.default
+    inputs.kwin-effects-forceblur.packages.${pkgs.system}.default
+    kdePackages.plasma-browser-integration
+    kdePackages.krohnkite
     gst_all_1.gstreamer
     gst_all_1.gst-plugins-base
     gst_all_1.gst-plugins-good
@@ -83,13 +90,9 @@
     anki
     keepassxc
     # Custom packages
-    my-lib.slides
-    my-lib.bombsquad
 
     # For virt manager
     virtiofsd
-
-    # Some development tools I use
 
     ## Nix language server
     nil
@@ -155,7 +158,7 @@
 
   programs.virt-manager.enable = true;
   virtualisation.libvirtd.enable = true;
-  programs.hyprland.enable = true;
+  programs.hyprland.enable = false;
   programs.hyprland.package = inputs.hyprland.packages.${system}.hyprland;
   # services.xserver.displayManager.sddm.settings.Autologin = {
   #   Session = "hyprland.desktop";
@@ -182,6 +185,7 @@
    environment.variables = {
      GTK_IM_MODULE = lib.mkForce "";
      QT_IM_MODULE = lib.mkForce "";
+     NIXOS_OZONE_WL = "1";
    };
   # Enable steam
   programs.steam = {
@@ -211,4 +215,9 @@
     ];
   };
   services.upower.enable = true;
+
+  services.xserver.enable = true;
+  services.displayManager.sddm.enable = true;
+  services.displayManager.sddm.wayland.enable = true;
+  services.desktopManager.plasma6.enable = true;
 }

@@ -9,7 +9,7 @@
   ];
   services.openssh = {
     enable = true;
-    ports = [ 22 ];
+    ports = [22];
     settings = {
       PasswordAuthentication = false;
       AllowUsers = ["tiago"];
@@ -53,8 +53,8 @@
   boot.consoleLogLevel = 0;
   networking.firewall = {
     enable = true;
-    allowedTCPPorts = [ 25565 22 ];
-    allowedUDPPorts = [ 5001 ];
+    allowedTCPPorts = [25565 22];
+    allowedUDPPorts = [5001];
   };
   virtualisation.oci-containers = {
     backend = "podman";
@@ -65,7 +65,7 @@
         cmd = ["-jar" "server.jar"];
         workdir = "/server";
         volumes = ["/home/tiago/tequorld:/server"];
-        ports = [ "25565:25565" "5001:5001/udp" "1000:1000" ];
+        ports = ["25565:25565" "5001:5001/udp" "1000:1000"];
       };
     };
   };

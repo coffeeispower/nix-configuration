@@ -1,8 +1,12 @@
-{pkgs, inputs, system, ...}:
-let
-  unstable = import inputs.nixpkgs-unstable { inherit system; };
-in 
 {
+  pkgs,
+  inputs,
+  system,
+  ...
+}: let
+  unstable = import inputs.nixpkgs-unstable {inherit system;};
+in {
+
   home.stateVersion = "24.05";
   programs.git = {
     enable = true;
@@ -10,11 +14,11 @@ in
     userEmail = "tiagodinis33@proton.me";
   };
   services.gpg-agent.enable = true;
-  services.fcitx5.enable = true;
-  services.dunst.enable = true;
-  services.hypridle.enable = true;
+  services.fcitx5.enable = false;
+  services.dunst.enable = false;
+  services.hypridle.enable = false;
 
-  stylix.targets.kde.enable = false;
+  stylix.targets.kde.enable = true;
 
   gtk.enable = true;
   home.packages = with pkgs; [

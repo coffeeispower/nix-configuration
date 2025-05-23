@@ -21,5 +21,5 @@
   };
   nixpkgs.hostPlatform = "x86_64-linux";
   programs.hyprland.enable = true;
-  environment.systemPackages = with pkgs; [ git ];
+  environment.systemPackages = with pkgs; [git];
 }

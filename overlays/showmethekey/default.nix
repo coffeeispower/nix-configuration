@@ -1,6 +1,4 @@
-{...}:
-
-final: prev: {
+{...}: final: prev: {
   showmethekey = prev.showmethekey.overrideAttrs (old: {
     src = prev.fetchFromGitHub {
       owner = "coffeeispower";
@@ -9,6 +7,6 @@ final: prev: {
       sha256 = "sha256-Pgz0MS62nCdSCJ/CeFjXaqnqnJfV6PztORMcAzaD8wE=";
     };
 
-    nativeBuildInputs = old.nativeBuildInputs ++ [ prev.gtk4-layer-shell ];
+    nativeBuildInputs = old.nativeBuildInputs ++ [prev.gtk4-layer-shell];
   });
 }

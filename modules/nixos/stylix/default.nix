@@ -1,9 +1,17 @@
-{pkgs, config, ...}: {
+{
+  pkgs,
+  config,
+  ...
+}: {
   stylix.image = ../../home/hyprland/wallpapers/japan/shinjuku-tokyo-japan-night.jpg;
   stylix.cursor = {
     package = pkgs.catppuccin-cursors.frappeMauve;
     name = "catppuccin-frappe-mauve-cursors";
     size = 24;
+  };
+  environment.variables = {
+    XCURSOR_THEME = config.stylix.cursor.name;
+    XCURSOR_SIZE = builtins.toString config.stylix.cursor.size;
   };
   stylix.base16Scheme = ./colorscheme.yaml;
   stylix.polarity = "dark";
@@ -23,7 +31,7 @@
   fonts = {
     fontDir.enable = true;
     enableDefaultPackages = true;
-    packages = with pkgs; [ rictydiminished-with-firacode noto-fonts-cjk-sans ];
+    packages = with pkgs; [rictydiminished-with-firacode noto-fonts-cjk-sans];
   };
   stylix.opacity = {
     applications = 0.9;
@@ -35,5 +43,5 @@
     logo = "${pkgs.nixos-icons}/share/icons/hicolor/48x48/apps/nix-snowflake-white.png";
     logoAnimated = false;
   };
-  stylix.enable = true;
+  stylix.enable = true; 
 }
