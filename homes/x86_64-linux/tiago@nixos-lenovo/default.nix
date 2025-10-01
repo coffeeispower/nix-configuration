@@ -8,6 +8,7 @@
 in {
 
   home.stateVersion = "24.05";
+  programs.zed-editor.enable = true;
   programs.git = {
     enable = true;
     userName = "Tiago Dinis";
@@ -23,31 +24,27 @@ in {
   gtk.enable = true;
   home.packages = with pkgs; [
     unstable.zed-editor
-    kdePackages.kdenlive
     stremio
     yt-dlp
     blender
     wl-clipboard
     showmethekey
-    inputs.ags-desktop.packages.${system}.default
-    swww
     bun
   ];
   programs.hyprlock.enable = true;
   programs.direnv.enable = true;
   programs.feh.enable = true;
   programs.feh.mimeApps.defaultAssociation.enable = true;
-  programs.firefox.enable = true;
   programs.gh.enable = true;
   programs.helix.enable = true;
-  wayland.windowManager.hyprland.enable = true;
+  wayland.windowManager.hyprland.enable = false;
   programs.kitty.enable = true;
   programs.lazygit.enable = true;
   programs.networkmanager-dmenu.enable = true;
   programs.nushell.enable = true;
   programs.rofi.enable = true;
   programs.spicetify.enable = true;
-  programs.nautilus.enable = true;
+  programs.nautilus.enable = false;
   programs.vscode.enable = false;
   programs.zellij.enable = true;
   programs.zoxide.enable = true;
@@ -116,4 +113,12 @@ in {
   };
 
   services.syncthing.enable = true;
+  programs.zen-browser = {
+    enable = true;
+    nativeMessagingHosts = [pkgs.kdePackages.plasma-browser-integration];
+    policies = {
+      DisableAppUpdate = true;
+      DisableTelemetry = true;
+    };
+  };
 }

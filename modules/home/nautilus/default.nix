@@ -21,8 +21,8 @@ with lib; {
     home.packages = [
       (mkIf cfg.enable pkgs.nautilus)
     ];
-    xdg.mimeApps = rec {
-      enable = cfg.enable && config.programs.nautilus.defaultFileManager;
+    xdg.mimeApps = mkIf cfg.enable rec {
+      enable = config.programs.nautilus.defaultFileManager;
       associations.added = optionalAttrs enable {"inode/directory" = ["nautilus.desktop"];};
       defaultApplications = optionalAttrs enable {"inode/directory" = ["nautilus.desktop"];};
     };

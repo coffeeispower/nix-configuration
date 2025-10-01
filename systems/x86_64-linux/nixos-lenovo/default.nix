@@ -10,7 +10,7 @@
     /tmp/hardware-configuration.nix
     inputs.tibs.nixosModules.tibs
   ];
-
+  networking.wireguard.enable = true;
   services.preload.enable = true;
   hardware.firmware = with pkgs; [linux-firmware];
   # specialisation.tibs = {
@@ -75,7 +75,10 @@
     ]);
   programs.nix-ld.enable = true;
   environment.systemPackages = with pkgs; [
-  	inputs.woomer.packages.${system}.default
+    wireguard-tools
+    kdePackages.kdenlive
+    gpu-screen-recorder
+    gpu-screen-recorder-gtk
     inputs.kwin-effects-forceblur.packages.${pkgs.system}.default
     kdePackages.plasma-browser-integration
     kdePackages.krohnkite

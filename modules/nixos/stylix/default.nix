@@ -31,7 +31,7 @@
   fonts = {
     fontDir.enable = true;
     enableDefaultPackages = true;
-    packages = with pkgs; [rictydiminished-with-firacode noto-fonts-cjk-sans];
+    packages = with pkgs; [noto-fonts-cjk-sans noto-fonts-emoji];
   };
   stylix.opacity = {
     applications = 0.9;

@@ -133,7 +133,6 @@ in {
       bind=CTRL ALT SHIFT, right, movetoworkspace, e+1
       bind=SHIFT, Print,exec,${pkgs.grim}/bin/grim -c - | ${pkgs.swappy}/bin/swappy -f -
       bind=,Print,exec,${pkgs.grim}/bin/grim -c -g "$(${pkgs.slurp}/bin/slurp)" - | ${pkgs.swappy}/bin/swappy -f -
-      bind=$mod, W,exec,${inputs.woomer.packages.${system}.default}/bin/woomer
       bindr=$mod, SUPER_L, exec, ${inputs.ags.packages.${system}.default}/bin/ags toggle start-menu
       bind=$mod, D, exec, ${inputs.ags.packages.${system}.default}/bin/ags toggle dashboard
 

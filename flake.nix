@@ -6,6 +6,12 @@
       url = "github:taj-ny/kwin-effects-forceblur";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    zen-browser = {
+      url = "github:0xc000022070/zen-browser-flake";
+      # IMPORTANT: we're using "libgbm" and is only available in unstable so ensure
+      # to have it up-to-date or simply don't specify the nixpkgs input  
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
+    };
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -77,10 +83,11 @@
       inherit inputs;
       channels-config.allowUnfree = true;
       channels-config.permittedInsecurePackages = [
-        "beekeeper-studio-5.2.9"
+        "beekeeper-studio-5.2.12"
       ];
       src = ./.;
       snowfall.namespace = "my-lib";
       systems.modules.nixos = [inputs.stylix.nixosModules.stylix];
+      homes.modules = [inputs.zen-browser.homeModules.twilight-official];
     };
 }
